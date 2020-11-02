@@ -25,20 +25,11 @@ const Routes = () => {
         <Switch>
           <ThemeProvider theme={{ Theme }}>
             <GlobalStyle />
-            <Container>
-              <FontAwesomeIcon
-                icon={faCheckCircle}
-                spin
-                size="6x"
-                color="red"
-              />
-              Hello Aircnb!!!
-              <Route exact path="/nav" component={Nav} />
-              <Route exact path="/main" component={Main} />
-              <Route exact path="/homebooking" component={HomeBooking} />
-              <Route exact path="/homedetails" component={HomeDetails} />
-              <Route exact path="/homelist" component={HomeList} />
-            </Container>
+            <Route exact path="/nav" component={Nav} />
+            <Route exact path="/main" component={Main} />
+            <Route exact path="/homebooking" component={HomeBooking} />
+            <Route exact path="/homedetails" component={HomeDetails} />
+            <Route exact path="/homelist" component={HomeList} />
           </ThemeProvider>
         </Switch>
       </Router>
@@ -47,14 +38,5 @@ const Routes = () => {
 };
 
 // 반드시 대문자로 styled component 쓰는법
-const Container = styled.div`
-  position: absolute;
-  display: flex;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
 
 export default Routes;
