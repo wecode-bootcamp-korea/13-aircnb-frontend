@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Link, BrowserRouter as Router } from "react-router-dom";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 
 import HomeBooking from "./Pages/HomeBooking/HomeBooking";
 import HomeDetails from "./Pages/HomeDetails/HomeDetails";
@@ -22,18 +22,25 @@ const Routes = () => {
   return (
     <Fragment>
       <Router>
-        <ThemeProvider theme={{ Theme }}>
-          <GlobalStyle />
-          <Container>
-            <FontAwesomeIcon icon={faCheckCircle} spin size="6x" color="red" />
-            Hello Aircnb!!!
-            <Link exact to="/nav" component={Nav} />
-            <Link exact to="/main" component={Main} />
-            <Link exact to="/homebooking" component={HomeBooking} />
-            <Link exact to="/homedetails" component={HomeDetails} />
-            <Link exact to="/homelist" component={HomeList} />
-          </Container>
-        </ThemeProvider>
+        <Switch>
+          <ThemeProvider theme={{ Theme }}>
+            <GlobalStyle />
+            <Container>
+              <FontAwesomeIcon
+                icon={faCheckCircle}
+                spin
+                size="6x"
+                color="red"
+              />
+              Hello Aircnb!!!
+              <Route exact path="/nav" component={Nav} />
+              <Route exact path="/main" component={Main} />
+              <Route exact path="/homebooking" component={HomeBooking} />
+              <Route exact path="/homedetails" component={HomeDetails} />
+              <Route exact path="/homelist" component={HomeList} />
+            </Container>
+          </ThemeProvider>
+        </Switch>
       </Router>
     </Fragment>
   );
