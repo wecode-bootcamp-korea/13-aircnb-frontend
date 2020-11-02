@@ -1,0 +1,293 @@
+{
+  "stay": [
+    {
+      "id": 1,
+      "name": "편안한 느낌의 제주시 감성숙소",
+      "province": "제주특별자치도",
+      "city": "제주시",
+      "address1": "애월읍",
+      "address2": "한동리 1002",
+      "latitude": 37.506674,
+      "longitude": 127.053459,
+      "price": 120000.0,
+      "discountPrice": 90000.0,
+      "subcategory": "아파트",
+      "capacity": 2,
+      "beds": 2,
+      "rooms": 2,
+      "bathrooms": 1,
+      "bedType": [
+        {
+        "icon": "https://www.flaticon.com/svg/static/icons/svg/3030/3030336.svg",
+        "rooms": "1번 침실",
+        "beds": 1
+        },
+        {
+          "icon": "https://www.flaticon.com/svg/static/icons/svg/3030/3030336.svg",
+          "rooms": "1번 침실",
+          "beds": 1
+        }
+      ],
+      "imgUrl": [
+        "https://a0.muscache.com/im/pictures/2f3f3e94-976b-4eba-86da-5a2222f76783.jpg?aki_policy=xx_large",
+        "https://a0.muscache.com/im/pictures/91351c61-1fab-4709-83fc-aff26e08d327.jpg?aki_policy=large",
+        "https://a0.muscache.com/im/pictures/9b2cd826-e58b-441c-8040-470e76eba528.jpg?aki_policy=large",
+        "https://a0.muscache.com/im/pictures/d8e199bf-a26f-4f87-8ccd-f1f1d0b300eb.jpg?aki_policy=large",
+        "https://a0.muscache.com/im/pictures/be6e7eb5-efa0-48ca-b19e-3491146f5d52.jpg?aki_policy=large"
+      ],
+      "houseRules": [
+        {
+          "icon": "https://www.flaticon.com/svg/static/icons/svg/2948/2948025.svg",
+          "title": "집 전체",
+          "desc": "아파트 전체를 단독으로 사용하시게 됩니다"
+        },
+        {
+          "icon": "https://www.flaticon.com/svg/static/icons/svg/1825/1825540.svg",
+          "title": "청결 강화",
+          "desc": "에어비앤비의 강화된 5단계 청소 절차를 준수하겠다고 동의한 호스트입니다"
+        },
+        {
+          "icon": "https://www.flaticon.com/svg/static/icons/svg/1828/1828427.svg",
+          "title": "셀프 체크인",
+          "desc": "열쇠 보관함을 이용해 체크인하세요"
+        },
+        {
+          "icon": "https://www.flaticon.com/svg/static/icons/svg/876/876754.svg",
+          "title": "12월 6일 3:00 PM까지 무료 취소 가능",
+          "desc": "11월 17일 12:00 PM 전에 예약을 취소하면 총 숙박 요금의 50% 및 서비스 수수료 전액이 환불됩니다."
+        },
+        {
+          "icon": "https://www.flaticon.com/svg/static/icons/svg/709/709957.svg",
+          "title": "숙소 이용규칙",
+          "desc": "반려동물 동반이나 흡연이 금지되는 숙소입니다."
+        }
+      ],
+      "desc": "제주도 서귀포시 하원마을 윗쪽 언덕 귤밭 사이에 편안하고 아늑하게 쉬면서 힐링하는 자연친화적 숙소, 스테이 월든이 있습니다. 모던 빈티지 스타일의 스테이 월든은 숲속 작은 산장마을의 느낌을 구현하였습니다. 스테이 월든에서는 돌담이 늘어선 골목길을 지나 작은 문을 열고 내가 묵을 작은 캐빈이 있는 프라이빗 정원으로 들어서게 됩니다. 아담한 정원의 의자에 앉아 언덕너머 빨갛게 물드는 노을을 보며 힐링을 느껴보세요.",
+      "facilities": [
+        {
+          "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+          "amenity": "주방"
+        },
+        {
+          "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+          "amenity": "건물 내 무료 주차"
+        },
+        {
+          "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+          "amenity": "노트북 작업 공간"
+        },
+        {
+          "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+          "amenity": "세탁기"
+        },
+        {
+          "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+          "amenity": "난방"
+        },
+        {
+          "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+          "amenity": "무선 인터넷"
+        },
+        {
+          "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+          "amenity": "헤어드라이어"
+        },
+        {
+          "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+          "amenity": "옷걸이"
+        },
+        {
+          "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+          "amenity": "TV"
+        },
+        {
+          "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+          "amenity": "필수품목"
+        }
+      ],
+      "review": {
+        "avr_score": 4.6587,
+        "reviews": 62,
+        "userReviews": [
+          {
+            "userImg": "https://a0.muscache.com/im/pictures/user/cbaf3116-e588-43bc-80e8-5c2268dfc618.jpg?im_w=240",
+            "userName": "jinseong",
+            "date": "2020-09-12",
+            "detail": "위하여 되는 설산에서 같지 인류의 끓는다. 우는 광야에서 창공에 구하지 귀는 그들의 교향악이다. 가는 열매를 인류의 있을 싹이 대중을 이것이다. 굳세게 가는 청춘이 가진 군영과 청춘을 무한한 아니한 방황하였으며, 봄바람이다. 자신과 얼마나 얼마나 위하여서, 전인 우리의 반짝이는 이것이다."
+          },
+          {
+            "userImg": "https://a0.muscache.com/im/pictures/user/408db4e6-968e-4faf-96f7-af98d9aa5d44.jpg?im_w=240",
+            "userName": "JinSoo",
+            "date": "2020-09-21",
+            "detail": "위하여 되는 설산에서 같지 인류의 끓는다. 우는 광야에서 창공에 구하지 귀는 그들의 교향악이다. 가는 열매를 인류의 있을 싹이 대중을 이것이다. 굳세게 가는 청춘이 가진 군영과 청춘을 무한한 아니한 방황하였으며, 봄바람이다. 자신과 얼마나 얼마나 위하여서, 전인 우리의 반짝이는 이것이다."
+          },
+          {
+            "userImg": "https://a0.muscache.com/im/pictures/user/f1fe8eb0-2f16-46f9-a250-b9018fc7eb72.jpg?im_w=240",
+            "userName": "소연",
+            "date": "2020-09-11",
+            "detail": "위하여 되는 설산에서 같지 인류의 끓는다. 우는 광야에서 창공에 구하지 귀는 그들의 교향악이다. 가는 열매를 인류의 있을 싹이 대중을 이것이다. 굳세게 가는 청춘이 가진 군영과 청춘을 무한한 아니한 방황하였으며, 봄바람이다. 자신과 얼마나 얼마나 위하여서, 전인 우리의 반짝이는 이것이다."
+          },
+          {
+            "userImg": "https://a0.muscache.com/im/pictures/user/f1fe8eb0-2f16-46f9-a250-b9018fc7eb72.jpg?im_w=240",
+            "userName": "소연",
+            "date": "2020-09-11",
+            "detail": "위하여 되는 설산에서 같지 인류의 끓는다. 우는 광야에서 창공에 구하지 귀는 그들의 교향악이다. 가는 열매를 인류의 있을 싹이 대중을 이것이다. 굳세게 가는 청춘이 가진 군영과 청춘을 무한한 아니한 방황하였으며, 봄바람이다. 자신과 얼마나 얼마나 위하여서, 전인 우리의 반짝이는 이것이다."
+          },
+          {
+            "userImg": "https://a0.muscache.com/im/pictures/user/f1fe8eb0-2f16-46f9-a250-b9018fc7eb72.jpg?im_w=240",
+            "userName": "소연",
+            "date": "2020-09-11",
+            "detail": "위하여 되는 설산에서 같지 인류의 끓는다. 우는 광야에서 창공에 구하지 귀는 그들의 교향악이다. 가는 열매를 인류의 있을 싹이 대중을 이것이다. 굳세게 가는 청춘이 가진 군영과 청춘을 무한한 아니한 방황하였으며, 봄바람이다. 자신과 얼마나 얼마나 위하여서, 전인 우리의 반짝이는 이것이다."
+          },
+          {
+            "userImg": "https://a0.muscache.com/im/pictures/user/f1fe8eb0-2f16-46f9-a250-b9018fc7eb72.jpg?im_w=240",
+            "userName": "소연",
+            "date": "2020-09-11",
+            "detail": "위하여 되는 설산에서 같지 인류의 끓는다. 우는 광야에서 창공에 구하지 귀는 그들의 교향악이다. 가는 열매를 인류의 있을 싹이 대중을 이것이다. 굳세게 가는 청춘이 가진 군영과 청춘을 무한한 아니한 방황하였으며, 봄바람이다. 자신과 얼마나 얼마나 위하여서, 전인 우리의 반짝이는 이것이다."
+          }
+        ]
+      },
+      "hostInfo": {
+        "img": "https://a0.muscache.com/im/pictures/user/f782ce9e-0141-40ff-9744-5bbfd1747723.jpg?im_w=240",
+        "name": "Ryu ji",
+        "hostId": 1,
+        "signUpDate": "2018-04-22T13:37:47.3988",
+        "superHost": true,
+        "varified": true,
+        "introduction": "안녕하세요. 제주도 서귀포시에서 숙소를 운영중이에요. 저희 숙소는 먼 바다가 내려다보이고 귤밭으로 둘러싸인 숲속 언덕 위에 있어요. 작은 마당이 딸린 독채형 객실에서 편안한 힐링 스테이를 즐기실 수 있어요."
+      }
+    },
+    {
+      "id": 1,
+      "name": "편안한 느낌의 제주시 감성숙소",
+      "province": "제주특별자치도",
+      "city": "제주시",
+      "address1": "애월읍",
+      "address2": "한동리 1002",
+      "latitude": 37.506674,
+      "longitude": 127.053459,
+      "price": 120000.0,
+      "discountPrice": 90000.0,
+      "subcategory": "아파트",
+      "capacity": 2,
+      "beds": 2,
+      "rooms": 2,
+      "bathrooms": 1,
+      "bedTypes": {
+        "icon": "https://www.flaticon.com/svg/static/icons/svg/3030/3030336.svg",
+        "rooms": "1번 침실",
+        "beds": 1
+      },
+      "imgUrl": [
+        "https://a0.muscache.com/im/pictures/2f3f3e94-976b-4eba-86da-5a2222f76783.jpg?aki_policy=xx_large",
+        "https://a0.muscache.com/im/pictures/91351c61-1fab-4709-83fc-aff26e08d327.jpg?aki_policy=large",
+        "https://a0.muscache.com/im/pictures/9b2cd826-e58b-441c-8040-470e76eba528.jpg?aki_policy=large",
+        "https://a0.muscache.com/im/pictures/d8e199bf-a26f-4f87-8ccd-f1f1d0b300eb.jpg?aki_policy=large",
+        "https://a0.muscache.com/im/pictures/be6e7eb5-efa0-48ca-b19e-3491146f5d52.jpg?aki_policy=large"
+      ],
+      "houseRules": [
+        {
+          "icon": "https://www.flaticon.com/svg/static/icons/svg/2948/2948025.svg",
+          "title": "집 전체",
+          "desc": "아파트 전체를 단독으로 사용하시게 됩니다"
+        },
+        {
+          "icon": "https://www.flaticon.com/svg/static/icons/svg/1825/1825540.svg",
+          "title": "청결 강화",
+          "desc": "에어비앤비의 강화된 5단계 청소 절차를 준수하겠다고 동의한 호스트입니다"
+        },
+        {
+          "icon": "https://www.flaticon.com/svg/static/icons/svg/1828/1828427.svg",
+          "title": "셀프 체크인",
+          "desc": "열쇠 보관함을 이용해 체크인하세요"
+        },
+        {
+          "icon": "https://www.flaticon.com/svg/static/icons/svg/876/876754.svg",
+          "title": "12월 6일 3:00 PM까지 무료 취소 가능",
+          "desc": "11월 17일 12:00 PM 전에 예약을 취소하면 총 숙박 요금의 50% 및 서비스 수수료 전액이 환불됩니다."
+        },
+        {
+          "icon": "https://www.flaticon.com/svg/static/icons/svg/709/709957.svg",
+          "title": "숙소 이용규칙",
+          "desc": "반려동물 동반이나 흡연이 금지되는 숙소입니다."
+        }
+      ],
+      "desc": "blabla blabla",
+      "facilities": [
+        {
+          "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+          "amenity": "주방"
+        },
+        {
+          "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+          "amenity": "건물 내 무료 주차"
+        },
+        {
+          "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+          "amenity": "노트북 작업 공간"
+        },
+        {
+          "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+          "amenity": "세탁기"
+        },
+        {
+          "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+          "amenity": "난방"
+        },
+        {
+          "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+          "amenity": "무선 인터넷"
+        },
+        {
+          "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+          "amenity": "헤어드라이어"
+        },
+        {
+          "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+          "amenity": "옷걸이"
+        },
+        {
+          "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+          "amenity": "TV"
+        },
+        {
+          "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+          "amenity": "필수품목"
+        }
+      ],
+      "review": {
+        "avr_score": { "checkin_star__avg": 4.6587 },
+        "reviews": 62,
+        "userReviews": [
+          {
+            "userImg": "https://a0.muscache.com/im/pictures/user/cbaf3116-e588-43bc-80e8-5c2268dfc618.jpg?im_w=240",
+            "userName": "jinseong",
+            "date": "2020-09-12",
+            "detail": "위하여 되는 설산에서 같지 인류의 끓는다. 우는 광야에서 창공에 구하지 귀는 그들의 교향악이다. 가는 열매를 인류의 있을 싹이 대중을 이것이다. 굳세게 가는 청춘이 가진 군영과 청춘을 무한한 아니한 방황하였으며, 봄바람이다. 자신과 얼마나 얼마나 위하여서, 전인 우리의 반짝이는 이것이다."
+          },
+          {
+            "userImg": "https://a0.muscache.com/im/pictures/user/408db4e6-968e-4faf-96f7-af98d9aa5d44.jpg?im_w=240",
+            "userName": "JinSoo",
+            "date": "2020-09-21",
+            "detail": "위하여 되는 설산에서 같지 인류의 끓는다. 우는 광야에서 창공에 구하지 귀는 그들의 교향악이다. 가는 열매를 인류의 있을 싹이 대중을 이것이다. 굳세게 가는 청춘이 가진 군영과 청춘을 무한한 아니한 방황하였으며, 봄바람이다. 자신과 얼마나 얼마나 위하여서, 전인 우리의 반짝이는 이것이다."
+          },
+          {
+            "userImg": "https://a0.muscache.com/im/pictures/user/f1fe8eb0-2f16-46f9-a250-b9018fc7eb72.jpg?im_w=240",
+            "userName": "소연",
+            "date": "2020-09-11",
+            "detail": "위하여 되는 설산에서 같지 인류의 끓는다. 우는 광야에서 창공에 구하지 귀는 그들의 교향악이다. 가는 열매를 인류의 있을 싹이 대중을 이것이다. 굳세게 가는 청춘이 가진 군영과 청춘을 무한한 아니한 방황하였으며, 봄바람이다. 자신과 얼마나 얼마나 위하여서, 전인 우리의 반짝이는 이것이다."
+          }
+        ]
+      },
+      "hostInfo": {
+        "img": "https://a0.muscache.com/im/pictures/user/f782ce9e-0141-40ff-9744-5bbfd1747723.jpg?im_w=240",
+        "name": "Ryu ji",
+        "hostId": 1,
+        "signUpDate": "2018-04-22T13:37:47.3988",
+        "superHost": true,
+        "varified": true,
+        "introduction": "안녕하세요. 제주도 서귀포시에서 숙소를 운영중이에요. 저희 숙소는 먼 바다가 내려다보이고 귤밭으로 둘러싸인 숲속 언덕 위에 있어요. 작은 마당이 딸린 독채형 객실에서 편안한 힐링 스테이를 즐기실 수 있어요."
+      }
+    }
+  ]
+}

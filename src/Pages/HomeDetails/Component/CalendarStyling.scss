@@ -1,0 +1,128 @@
+.DateRangePickerInput__withBorder {
+  border: 1px solid #b0b0b0;
+  border-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.DateRangePickerInput_arrow {
+  display: none;
+}
+
+.DateInput {
+  border-radius: 12px !important;
+  border-top-right-radius: 12px;
+}
+
+.DateInput_input_1 {
+  border-radius: 12px !important;
+  border-top-right-radius: 12px;
+}
+
+.DateInput_input {
+  font-size: 16px;
+  border-radius: 12px !important;
+  border-top-right-radius: 12px;
+}
+
+.CalendarDay {
+  vertical-align: middle !important;
+}
+
+.DateInput_input__focused {
+  border: 2px solid gray;
+  text-align: center;
+}
+
+.CalendarMonth_caption {
+  font-weight: 600;
+}
+
+.DayPicker__withBorder {
+  box-shadow: none;
+}
+
+.DayPickerNavigation_button__default {
+  border: none;
+}
+
+.DateInput_fangStroke {
+  display: none;
+}
+
+.DateRangePicker {
+  &_picker {
+    border-radius: 30px;
+    .DayPicker {
+      > div {
+        > div {
+          .CalendarMonthGrid {
+            .CalendarMonth_caption {
+              padding-top: 8px;
+              padding-bottom: 49px;
+              font-size: 16px;
+              font-weight: 700;
+            }
+          }
+        }
+      }
+      .DayPickerNavigation {
+        display: flex;
+        justify-content: space-between;
+      }
+      &_weekHeader {
+        top: 50px;
+      }
+      .CalendarDay {
+        border: none;
+        line-height: 42px;
+        font-size: 14px;
+        font-weight: 600;
+        &__default {
+          &:hover {
+            background: #ff7352;
+            color: rgb(247, 247, 247);
+            border-radius: 50%;
+          }
+        }
+        &__selected {
+          &:hover {
+            background: #ff7352;
+            border-radius: 50%;
+          }
+          &_start,
+          &_end {
+            background: #ff7352;
+            border-radius: 50%;
+          }
+          &_span {
+            background: rgb(247, 247, 247);
+            color: black;
+            &:hover {
+              background: #ff7352;
+              color: rgb(247, 247, 247);
+              border-radius: 50%;
+            }
+          }
+        }
+        &__hovered {
+          &_span {
+            background: rgb(247, 247, 247);
+            color: black;
+            &:hover {
+              background: #ff7352;
+              color: rgb(247, 247, 247);
+              border-radius: 50%;
+            }
+          }
+        }
+        &__blocked_out_of_range {
+          text-decoration: line-through;
+          &:hover {
+            background: #fff;
+            color: #cacccd;
+          }
+        }
+      }
+    }
+  }
+}

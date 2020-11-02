@@ -1,323 +1,277 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
+import { withRouter } from "react-router-dom";
+import "react-dates/initialize";
+import { DateRangePicker } from "react-dates";
+import "react-dates/lib/css/_datepicker.css";
+import "moment/locale/ko";
+import "react-bootstrap";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "@fortawesome/fontawesome-free/js/all.js";
+import {
+  faStar,
+  faMedal,
+  faShareSquare,
+} from "@fortawesome/free-solid-svg-icons";
+
+import BookingBox from "./Component/BookingBox";
+import Facilities from "./Component/Facilities";
+import BedType from "./Component/BedType";
+import HomeImgCon from "./Component/HomeImgCon";
+import Reviews from "./Component/Reviews";
+import HostInfo from "./Component/HostInfo";
+import MapContent from "./Component/MapContent";
+import Notices from "./Component/Notices";
+import WishListCon from "./Component/WishListCon";
+import ModalPortal from "./Component/ModalPortal";
 
 import Rule from "./Component/Rule";
-import RULES_DATA from "./Data/RULES_DATA";
 
-const HomeDetails = () => {
+const HomeDetails = (props) => {
+  const [stay, setStay] = useState([]);
+  const [checkDates, setCheckDates] = useState(["2020-11-20", "2020-11-23"]);
+  const [isLiked, setIsLiked] = useState(false);
+  const [wishListIsVisible, setWishListIsVisible] = useState(false);
+
+  // const API = `http://10.58.1.225:8000/stay/${props.match.params.id}`;
+  // const API = "/data/detail_data.json";
+  const API = `http://10.58.1.225:8000/stay/1`;
+
+  async function fetchData() {
+    const res = await fetch(API);
+    res.json().then((res) => setStay(res.stay));
+  }
+
+  useEffect(() => {
+    fetchData();
+    console.log(stay);
+  }, []);
+
+  console.log(stay);
   return (
-    <Details>
+    <StyledHomeDetails>
       <Container>
         <Header>
-          <h2>편안한 느낌의 제주시 감성숙소</h2>
-          <div className="detail">
-            <span>Hallim-eub, Cheju, 제주도, 한국</span>
-            <div className="icons">
-              <Icon>
-                <img
-                  alt="shareIcon"
-                  src="https://www.flaticon.com/svg/static/icons/svg/2089/2089736.svg"
-                />
-                <span>공유하기</span>
-              </Icon>
-              <Icon>
-                <img
-                  alt="saveIcon"
-                  src="https://www.flaticon.com/svg/static/icons/svg/1077/1077035.svg"
-                />
-                <span>저장</span>
-              </Icon>
-            </div>
-          </div>
+          <h2>{stay && stay[0]?.name}</h2>
+          <Detail>
+            <IconGroup>
+              <span>
+                {" "}
+                <FontAwesomeIcon icon={faStar} className="colorIcon" />
+                {stay[0]?.review.avr_score?.toFixed(2)}{" "}
+                {`(${stay[0]?.review.reviews})`}
+              </span>
+              <span>.</span>
+              {stay[0]?.hostInfo?.superHost ? (
+                <span>
+                  <FontAwesomeIcon icon={faMedal} className="colorIcon" /> 슈퍼
+                  호스트
+                </span>
+              ) : null}
+              {stay[0]?.hostInfo.superHost ? <span>.</span> : null}
+
+              <span className="underline">{`${stay && stay[0]?.city}, ${
+                stay && stay[0]?.address1
+              } ${stay[0]?.address2}`}</span>
+            </IconGroup>
+            <RightIconGroup active={isLiked}>
+              <div>
+                <div className="IconCon">
+                  <FontAwesomeIcon icon={faShareSquare} className="shareIcon" />
+                </div>
+
+                <span className="underline">공유하기</span>
+              </div>
+              <div>
+                <div
+                  className="IconCon"
+                  onClick={() => (
+                    setWishListIsVisible(true), setIsLiked(!isLiked)
+                  )}
+                >
+                  <i className="fas fa-heart fullHeart"></i>
+                  <i className="far fa-heart hollowHeart"></i>
+                </div>
+                <span className="underline">저장</span>
+              </div>
+            </RightIconGroup>
+          </Detail>
+          <ModalPortal>
+            <WishListCon
+              active={wishListIsVisible}
+              handleModal={setWishListIsVisible}
+            />
+          </ModalPortal>
         </Header>
-        <ImgCon>
-          <img
-            alt="home"
-            className="mainImg"
-            src="https://a0.muscache.com/im/pictures/2f3f3e94-976b-4eba-86da-5a2222f76783.jpg?aki_policy=xx_large"
-          />
-          <div className="imageGroup">
-            <img
-              className="detailImg"
-              alt="home"
-              src="https://a0.muscache.com/im/pictures/91351c61-1fab-4709-83fc-aff26e08d327.jpg?aki_policy=large"
-            />
-            <img
-              className="detailImg"
-              alt="home"
-              src="https://a0.muscache.com/im/pictures/9b2cd826-e58b-441c-8040-470e76eba528.jpg?aki_policy=large"
-            />
-          </div>
-          <div className="imageGroup">
-            <img
-              className="detailImg"
-              alt="home"
-              src="https://a0.muscache.com/im/pictures/d8e199bf-a26f-4f87-8ccd-f1f1d0b300eb.jpg?aki_policy=large"
-            />
-            <img
-              className="detailImg"
-              alt="home"
-              src="https://a0.muscache.com/im/pictures/be6e7eb5-efa0-48ca-b19e-3491146f5d52.jpg?aki_policy=large"
-            />
-          </div>
-        </ImgCon>
+        <HomeImgCon data={stay && stay[0]?.imgUrl} />
         <ContentCon>
           <HomeInfo>
             <div className="infoTitle">
-              <h3>시은님이 호스팅하는 아파트 전체</h3>
-              <span>최대 인원 2명 . 침실 3개. 침대 2개. 욕실 1개</span>
+              <h3>{`${stay && stay[0]?.hostInfo.name}님이 호스팅하는 ${
+                stay && stay[0]?.subcategory
+              } 전체`}</h3>
+              <span>
+                {`최대인원 ${stay[0]?.capacity}명 . 침실 ${stay[0]?.rooms}개 . 침대 ${stay[0]?.beds}개 . 욕실 ${stay[0]?.bathrooms}개`}
+              </span>
             </div>
             <div className="rules">
-              {RULES_DATA.map((rule) => (
-                <Rule icon={rule.icon} title={rule.title} desc={rule.desc} />
-              ))}
+              {stay &&
+                stay[0]?.houseRules.map((rule, idx) => (
+                  <Rule
+                    key={idx}
+                    icon={rule.icon}
+                    title={rule.title}
+                    desc={rule.desc}
+                  />
+                ))}
             </div>
-            <div className="textDesc">
-              <p>
-                "Lorem Ipsum is simply dummy text of the printing and
-                typesetting industry. Lorem Ipsum has been the industry's
-                standard dummy text ever since the 1500s, when an unknown
-                printer took a galley of type and scrambled it to make a type
-                specimen book. It has survived not only five centuries, but also
-                the leap into electronic typesetting, remaining essentially
-                unchanged. It was popularised in the 1960s with the release of
-                Letraset sheets containing Lorem Ipsum passages, and more
-                recently with desktop publishing software like Aldus PageMaker
-                including versions of Lorem Ipsum."
-              </p>
-              <br></br>
-              <p>
-                "Lorem Ipsum is simply dummy text of the printing and
-                typesetting industry. Lorem Ipsum has been the industry's
-                standard dummy text ever since the 1500s, when an unknown
-                printer took a galley of type and scrambled it to make a type
-                specimen book. It has survived not only five centuries, but also
-                the leap into electronic typesetting, remaining essentially
-                unchanged. It was popularised in the 1960s with the release of
-                Letraset sheets containing Lorem Ipsum passages, and more
-                recently with desktop publishing software like Aldus PageMaker
-                including versions of Lorem Ipsum."
-              </p>
-            </div>
-            <Bed>
-              <h3>침대/침구 유형</h3>
-              <div className="article">
-                <img
-                  alt="bed"
-                  src="https://www.flaticon.com/svg/static/icons/svg/3030/3030336.svg"
-                />
-                <span>1번 침실</span>
-                <span>더블 침대 1개</span>
-              </div>
-            </Bed>
-            <Facilities>
-              <h3>편의시설</h3>
-              <div className="facilityCon">
-                <div></div>
-                <div></div>
-              </div>
-            </Facilities>
-            <Calender>
+            <TextDesc>{stay[0]?.desc}</TextDesc>
+            <BedType data={stay && stay[0]?.bedType} />
+            <Facilities data={stay && stay[0]?.facilities} />
+            {/* <Calender>
               <h3>Halilim-eub, Cheju에서 4박</h3>
               <span>2020년 12월 7일 - 2020년 12월 11일</span>
-            </Calender>
+              <div>
+                <DateRangePicker />
+              </div>
+            </Calender> */}
           </HomeInfo>
           <Aside>
             <div className="boxCon">
-              <div className="bookingBox">
-                <div className="infoCon">
-                  <div className="pricePerDay">
-                    <span>136,192</span>
-                    <span> /박</span>
-                  </div>
-                  <div className="infoBox">
-                    <div className="line">
-                      <div>
-                        <span>체크인</span>
-                        <span>2020.11.18</span>
-                      </div>
-                      <div className="right">
-                        <span>체크아웃</span>
-                        <span>2020.11.21</span>
-                      </div>
-                    </div>
-                    <div className="line">
-                      <div>
-                        <span>인원</span>
-                        <span>게스트 1명</span>
-                      </div>
-                      <img
-                        alt="downArrow"
-                        src="https://www.flaticon.com/svg/static/icons/svg/32/32195.svg"
-                      />
-                    </div>
-                    <BookingPeople></BookingPeople>
-                  </div>
-                  <button>예약하기</button>
-                </div>
-
-                <span className="notice">
-                  예약 확정 전에는 요금이 청구되지 않습니다
-                </span>
-                <PriceBox>
-                  <Price>
-                    <span>₩120,000 X 4박</span>
-                    <span>₩480,000</span>
-                  </Price>
-                  <Price>
-                    <span>서비스 수수료</span>
-                    <span>₩67,765</span>
-                  </Price>
-                  <Price>
-                    <span>숙박세와 수수료</span>
-                    <span>₩6,776</span>
-                  </Price>
-                </PriceBox>
-                <TotalPrice>
-                  <span>총 합계</span>
-                  <span>₩450,560</span>
-                </TotalPrice>
-              </div>
+              <BookingBox
+                price={stay && stay[0]?.price}
+                discountPrice={stay && stay[0]?.discountPrice}
+                setCheckDates={setCheckDates}
+                history={props.history}
+                id={stay && stay[0]?.id}
+              ></BookingBox>
             </div>
           </Aside>
         </ContentCon>
-        <Review>
-          <span>4.80점(후기 5개)</span>
-        </Review>
+        <Reviews data={stay && stay[0]?.review} />
         <Location>
           <span>위치</span>
+          <MapContent
+            latitude={stay[0]?.latitude}
+            longitude={stay[0]?.longitude}
+          />
         </Location>
-        <HostInfo>
-          <div className="top">
-            <img
-              alt="hostImg"
-              src="https://a0.muscache.com/im/pictures/user/cbaf3116-e588-43bc-80e8-5c2268dfc618.jpg?im_w=240"
-            />
-            <div className="info">
-              <span>호스트: Dusan님</span>
-              <br></br>
-              <span>회원 가입일: 2018년 8월</span>
-            </div>
-          </div>
-          <div className="bottom"></div>
-        </HostInfo>
-        <Notices>
-          <span>알아두어야 할 사항</span>
-          <div className="noticeCon">
-            <Notice></Notice>
-            <Notice></Notice>
-            <Notice></Notice>
-          </div>
-        </Notices>
+        <HostInfo data={stay && stay[0]?.hostInfo} />
+        <Notices />
       </Container>
-    </Details>
+    </StyledHomeDetails>
   );
 };
 
-export default HomeDetails;
+export default withRouter(HomeDetails);
 
-const Details = styled.div`
+const StyledHomeDetails = styled.div`
   display: flex;
   justify-content: center;
 `;
 
 const Container = styled.div`
-  /* border: 2px solid black; */
   min-width: 750px;
   max-width: 1100px;
-  margin: 80px auto;
+  margin: 80px 0 200px 0;
 `;
 
 const HeaderSpan = css`
-  /* margin-top: 8px; */
+  margin-top: 6px;
   font-size: 14px;
   font-weight: 500;
-  color: #717171;
   line-height: 20px;
 `;
 
 const Header = styled.div`
-  /* border: 1px solid red; */
   height: 86px;
   margin-top: 24px;
   color: black;
+  position: relative;
+  z-index: 3;
 
   h2 {
     font-size: 26px;
     font-weight: 700;
     line-height: 30px;
   }
+`;
 
-  span {
-    ${HeaderSpan}
-    margin-top: 8px;
+const Detail = styled.div`
+  ${HeaderSpan}
+  display: flex;
+  justify-content: space-between;
+  line-height: 20px;
+`;
+
+const IconGroup = styled.div`
+  display: flex;
+  justify-content: space-between;
+  color: #717171;
+
+  .colorIcon {
+    color: #fe5131;
   }
 
-  .detail {
-    /* border: 1px solid red; */
-    display: flex;
-    justify-content: space-between;
+  span {
+    margin-right: 10px;
+  }
 
-    .icons {
-      display: flex;
-    }
+  .underline {
+    text-decoration: underline;
   }
 `;
 
-const Icon = styled.div`
-  margin-left: 10px;
-  padding-top: 8px;
+const RightIconGroup = styled.div`
+  display: flex;
+  justify-content: space-between;
+  color: black;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+  }
 
   span {
-    ${HeaderSpan}
-    margin-left: 10px;
+    color: #222222;
+    margin: 0 4px;
+  }
+
+  .underline {
     text-decoration: underline;
   }
 
-  img {
-    height: 16px;
-  }
-`;
-
-const ImgCon = styled.div`
-  display: flex;
-  border-radius: 12px;
-  overflow: hidden;
-
-  .mainImg {
-    width: 50%;
-    height: 314px;
+  .IconCon {
+    padding-top: 2px;
   }
 
-  .imageGroup {
-    display: flex;
-    flex-direction: column;
-    width: 25%;
+  .hollowHeart {
+    visibility: ${(props) => (props.acitve ? "hidden" : "visible")};
+  }
 
-    .detailImg {
-      height: 157px;
-      padding-left: 8px;
-
-      &:first-child {
-        padding-bottom: 8px;
-      }
-    }
+  .fullHeart {
+    position: relative;
+    border-color: #ff385c;
+    color: #ff385c;
+    left: 14px;
+    visibility: ${(props) => (props.active ? "visible" : "hidden")};
   }
 `;
 
 const ContentCon = styled.div`
-  /* border: 1px solid blue; */
+  position: relative;
+  z-index: 1;
   display: flex;
-  width: 100%;
+  min-width: 750px;
+  max-width: 1200px;
 `;
 
 const HomeInfo = styled.section`
-  /* border: 1px solid green; */
   width: 58.333%;
   position: relative;
 
   .infoTitle {
-    /* border: 1px solid red; */
     padding: 48px 0 24px 0;
 
     h3 {
@@ -336,84 +290,15 @@ const HomeInfo = styled.section`
 
   .rules {
     border-top: 1px solid #d3d3d3;
-    /* border-bottom: 1px solid #d3d3d3; */
     padding: 32px 0;
   }
-
-  .textDesc {
-    padding: 32px 0 48px 0;
-    border-top: 1px solid #d3d3d3;
-    /* border-bottom: 1px solid gray; */
-  }
 `;
 
-const Bed = styled.div`
-  width: 100%;
-  padding: 48px 0;
+const TextDesc = styled.div`
+  padding: 32px 0 48px 0;
   border-top: 1px solid #d3d3d3;
-
-  h3 {
-    font-size: 22px;
-    font-weight: 600;
-    line-height: 26px;
-    margin-bottom: 20px;
-  }
-
-  .article {
-    width: 200px;
-    height: 143px;
-    padding: 24px;
-    border: 1px solid gray;
-    border-radius: 12px;
-
-    img {
-      width: 24px;
-      margin-bottom: 10px;
-    }
-
-    span {
-      display: block;
-
-      &:first-child {
-        font-size: 16px;
-        font-weight: 700;
-        line-height: 20px;
-        margin-bottom: 10px;
-      }
-
-      &:last-child {
-        font-size: 14px;
-        line-height: 20px;
-      }
-    }
-  }
-`;
-
-const Facilities = styled.div`
-  border-top: 1px solid #d3d3d3;
-  padding: 48px 0;
-  /* display: flex; */
-  width: 100%;
-
-  h3 {
-    display: block;
-    width: 100%;
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 20px;
-  }
-
-  .facilityCon {
-    border: 1px solid red;
-    display: flex;
-    width: 100%;
-
-    div {
-      border: 1px solid pink;
-      width: 50%;
-      height: 200px;
-    }
-  }
+  font-size: 14px;
+  line-height: 20px;
 `;
 
 const Calender = styled.div`
@@ -434,25 +319,7 @@ const Calender = styled.div`
   }
 `;
 
-const checkInOut = css`
-  span {
-    display: block;
-
-    &:first-child {
-      font-size: 10px;
-      font-weight: 700;
-      line-height: 12px;
-    }
-
-    &:last-child {
-      font-size: 14px;
-      line-height: 18px;
-    }
-  }
-`;
-
 const Aside = styled.div`
-  /* border: 1px solid orange; */
   width: 33.333%;
   margin-left: 8.333%;
 
@@ -464,200 +331,13 @@ const Aside = styled.div`
     right: 1px;
     padding: 44px 0 48px 0;
     color: #222222;
-
-    .bookingBox {
-      background-color: white;
-      border: 1px solid #d3d3d3;
-      width: 100%;
-      padding: 24px;
-      border-radius: 12px;
-      box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
-
-      .infoCon {
-        /* height: 226px; */
-        /* border: 1px solid pink; */
-
-        .pricePerDay {
-          height: 50px;
-
-          span:first-child {
-            font-size: 22px;
-            line-height: 26px;
-          }
-        }
-
-        .infoBox {
-          border: 1px solid gray;
-          width: 100%;
-          height: 112px;
-          border-radius: 12px;
-
-          .line {
-            display: flex;
-            justify-content: space-between;
-            height: 50%;
-            ${checkInOut}
-
-            &:first-child {
-              border-bottom: 1px solid gray;
-            }
-
-            .right {
-              border-left: 1px solid gray;
-            }
-
-            img {
-              width: 16px;
-              margin-right: 20px;
-            }
-
-            div {
-              width: 50%;
-              padding: 10px 0 0 10px;
-              ${checkInOut}
-            }
-          }
-        }
-
-        button {
-          width: 100%;
-          height: 48px;
-          border: none;
-          border-radius: 12px;
-          margin-top: 20px;
-          background-color: #ea225c;
-          color: white;
-          font-size: 16px;
-          font-weight: 600;
-        }
-      }
-
-      .notice {
-        display: block;
-        margin: 15px auto 30px;
-        text-align: center;
-        font-size: 14px;
-        line-height: 18px;
-      }
-    }
   }
-`;
-
-const BookingPeople = styled.div`
-  background-color: white;
-  position: relative;
-  border: 1px solid red;
-  border-radius: 4px;
-  width: 100%;
-  height: 250px;
-  z-index: 10;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 6px;
-  display: none;
-`;
-
-const PriceBox = styled.ul`
-  margin-top: 15px;
-  padding: 0 4px 6px;
-  border-bottom: 1px solid #d3d3d3;
-`;
-
-const Price = styled.li`
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 12px;
-  font-size: 16px;
-  line-height: 20px;
-
-  span:first-child {
-    text-decoration: underline;
-  }
-`;
-
-const TotalPrice = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 24px 4px 0 4px;
-  font-size: 16px;
-  font-weight: 800;
-  line-height: 20px;
-`;
-
-const Review = styled.div`
-  height: 250px;
-  padding: 48px 0;
-  color: #222222;
-  font-size: 24px;
-  font-weight: 600;
-  border-top: 1px solid #d3d3d3;
-  /* line-height: 20px; */
 `;
 
 const Location = styled.div`
-  /* border: 1px solid green; */
   border-top: 1px solid #d3d3d3;
-  height: 200px;
   padding: 48px 0;
   color: #222222;
   font-size: 24px;
   font-weight: 600;
-`;
-
-const HostInfo = styled.div`
-  border-top: 1px solid #d3d3d3;
-  padding: 48px 0;
-
-  .top {
-    display: flex;
-
-    img {
-      width: 56px;
-      border-radius: 50px;
-    }
-
-    .info {
-      border: 1px solid orange;
-      margin-left: 10px;
-
-      span:first-child {
-        color: #222222;
-        font-size: 24px;
-        font-weight: 500;
-      }
-
-      span:last-child {
-        color: #717171;
-        font-size: 14px;
-        line-height: 18px;
-        padding-top: 8px;
-      }
-    }
-  }
-
-  .bottom {
-    height: 150px;
-  }
-`;
-
-const Notices = styled.div`
-  border-top: 1px solid #d3d3d3;
-  /* border: 1px solid pink; */
-  color: #222222;
-  font-size: 24px;
-  font-weight: 600;
-  padding: 48px 0;
-
-  span {
-    display: block;
-    margin-bottom: 20px;
-  }
-
-  .noticeCon {
-    display: flex;
-  }
-`;
-
-const Notice = styled.ul`
-  width: 33.3333%;
-  height: 150px;
-  border: 1px solid red;
 `;
