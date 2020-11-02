@@ -11,4 +11,8 @@ export const flexSet = (justifyContent, alignItems, flexDirection) => css`
   flex-direction: ${flexDirection};
 `;
 
+export const displayNone = css`
+  display: none !important;
+`;
+
 export default theme;
