@@ -1,7 +1,12 @@
 import React from "react";
+import styled from "styled-components";
 
 const Nav = () => {
-  return <div>Nav</div>;
+  return <Navbar>Nav</Navbar>;
 };
+
+const Navbar = styled.nav`
+  color: ${(props) => props.theme.primaryColor};
+`;
 
 export default Nav;
