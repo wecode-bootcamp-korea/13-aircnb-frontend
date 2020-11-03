@@ -2,6 +2,7 @@ import { css } from "styled-components";
 
 const theme = {
   primaryColor: "#fe5131",
+  borderColor: "#ddd",
 };
 
 export const flexSet = (justifyContent, alignItems, flexDirection) => css`
