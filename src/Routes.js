@@ -6,6 +6,7 @@ import HomeDetails from "./Pages/HomeDetails/HomeDetails";
 import HomeList from "./Pages/HomeList/HomeList";
 import Main from "./Pages/Main/Main";
 import Nav from "./Pages/Nav/Nav";
+import calendar from "./Pages/HomeBooking/Calendar";
 
 import styled, { ThemeProvider } from "styled-components";
 import GlobalStyle from "./Styles/GlobalStyle";
@@ -28,6 +29,7 @@ const Routes = () => {
             <Route exact path="/nav" component={Nav} />
             <Route exact path="/main" component={Main} />
             <Route exact path="/homebooking" component={HomeBooking} />
+            <Route exact path="/calendar" component={calendar} />
             <Route exact path="/homedetails" component={HomeDetails} />
             <Route exact path="/homelist" component={HomeList} />
           </ThemeProvider>

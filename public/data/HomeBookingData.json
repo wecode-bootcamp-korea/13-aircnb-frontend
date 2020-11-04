@@ -1,0 +1,236 @@
+{
+    "Stay": [
+      {
+        "id": 1,
+        "name": "편안한 느낌의 제주시 감성숙소",
+        "province": "제주특별자치도",
+        "city": "제주시",
+        "address": "애월읍 한동리 1002",
+        "latitude": "33.010394",
+        "longitude": "123.3342",
+        "price": 394800,
+        "subcategory": "아파트",
+        "imgUrl": [
+          "https://a0.muscache.com/im/pictures/2f3f3e94-976b-4eba-86da-5a2222f76783.jpg?aki_policy=xx_large",
+          "https://a0.muscache.com/im/pictures/91351c61-1fab-4709-83fc-aff26e08d327.jpg?aki_policy=large",
+          "https://a0.muscache.com/im/pictures/9b2cd826-e58b-441c-8040-470e76eba528.jpg?aki_policy=large",
+          "https://a0.muscache.com/im/pictures/d8e199bf-a26f-4f87-8ccd-f1f1d0b300eb.jpg?aki_policy=large",
+          "https://a0.muscache.com/im/pictures/be6e7eb5-efa0-48ca-b19e-3491146f5d52.jpg?aki_policy=large"
+        ],
+        "houseRules": [
+          {
+            "icon": "https://www.flaticon.com/svg/static/icons/svg/2948/2948025.svg",
+            "title": "집 전체",
+            "desc": "아파트 전체를 단독으로 사용하시게 됩니다"
+          },
+          {
+            "icon": "https://www.flaticon.com/svg/static/icons/svg/1825/1825540.svg",
+            "title": "청결 강화",
+            "desc": "에어비앤비의 강화된 5단계 청소 절차를 준수하겠다고 동의한 호스트입니다"
+          },
+          {
+            "icon": "https://www.flaticon.com/svg/static/icons/svg/1828/1828427.svg",
+            "title": "셀프 체크인",
+            "desc": "열쇠 보관함을 이용해 체크인하세요"
+          },
+          {
+            "icon": "https://www.flaticon.com/svg/static/icons/svg/876/876754.svg",
+            "title": "12월 6일 3:00 PM까지 무료 취소 가능",
+            "desc": "11월 17일 12:00 PM 전에 예약을 취소하면 총 숙박 요금의 50% 및 서비스 수수료 전액이 환불됩니다."
+          },
+          {
+            "icon": "https://www.flaticon.com/svg/static/icons/svg/709/709957.svg",
+            "title": "숙소 이용규칙",
+            "desc": "반려동물 동반이나 흡연이 금지되는 숙소입니다."
+          }
+        ],
+        "desc": "blabla blabla",
+        "facilities": [
+          {
+            "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+            "type": "주방"
+          },
+          {
+            "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+            "type": "건물 내 무료 주차"
+          },
+          {
+            "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+            "type": "노트북 작업 공간"
+          },
+          {
+            "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+            "type": "세탁기"
+          },
+          {
+            "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+            "type": "난방"
+          },
+          {
+            "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+            "type": "무선 인터넷"
+          },
+          {
+            "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+            "type": "헤어드라이어"
+          },
+          {
+            "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+            "type": "옷걸이"
+          },
+          {
+            "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+            "type": "TV"
+          },
+          {
+            "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+            "type": "필수품목"
+          }
+        ],
+        "review": {
+          "avr_score": 4.65,
+          "reviews": 62,
+          "userReviews": [
+            {
+              "userImg": "https://a0.muscache.com/im/pictures/user/cbaf3116-e588-43bc-80e8-5c2268dfc618.jpg?im_w=240",
+              "userName": "jinseong",
+              "date": "2020년 9월",
+              "detail": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown"
+            },
+            {
+              "userImg": "https://a0.muscache.com/im/pictures/user/cbaf3116-e588-43bc-80e8-5c2268dfc618.jpg?im_w=240",
+              "userName": "jinseong",
+              "date": "2020년 9월",
+              "detail": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown"
+            },
+            {
+              "userImg": "https://a0.muscache.com/im/pictures/user/cbaf3116-e588-43bc-80e8-5c2268dfc618.jpg?im_w=240",
+              "userName": "jinseong",
+              "date": "2020년 9월",
+              "detail": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown"
+            }
+          ]
+        },
+        "hostInfo": {
+          "img": "https://a0.muscache.com/im/pictures/user/cbaf3116-e588-43bc-80e8-5c2268dfc618.jpg?im_w=240",
+          "name": "Ryu ji",
+          "hostId": 1,
+          "signUpDate": "2018년 4월",
+          "superHost": true,
+          "introduction": "안녕하세요. 제주도 서귀포시에서 숙소를 운영중이에요. 저희 숙소는 먼 바다가 내려다보이고 귤밭으로 둘러싸인 숲속 언덕 위에 있어요. 작은 마당이 딸린 독채형 객실에서 편안한 힐링 스테이를 즐기실 수 있어요."
+        }
+      },
+      {
+        "id": 1,
+        "name": "편안한 느낌의 제주시 감성숙소",
+        "province": "제주특별자치도",
+        "city": "제주시",
+        "address": "애월읍 한동리 1002",
+        "latitude": "33.010394",
+        "longitude": "123.3342",
+        "price": 394859,
+        "houseRules": [
+          {
+            "icon": "https://www.flaticon.com/svg/static/icons/svg/2948/2948025.svg",
+            "title": "집 전체",
+            "desc": "아파트 전체를 단독으로 사용하시게 됩니다"
+          },
+          {
+            "icon": "https://www.flaticon.com/svg/static/icons/svg/1825/1825540.svg",
+            "title": "청결 강화",
+            "desc": "에어비앤비의 강화된 5단계 청소 절차를 준수하겠다고 동의한 호스트입니다"
+          },
+          {
+            "icon": "https://www.flaticon.com/svg/static/icons/svg/1828/1828427.svg",
+            "title": "셀프 체크인",
+            "desc": "열쇠 보관함을 이용해 체크인하세요"
+          },
+          {
+            "icon": "https://www.flaticon.com/svg/static/icons/svg/876/876754.svg",
+            "title": "12월 6일 3:00 PM까지 무료 취소 가능",
+            "desc": "11월 17일 12:00 PM 전에 예약을 취소하면 총 숙박 요금의 50% 및 서비스 수수료 전액이 환불됩니다."
+          },
+          {
+            "icon": "https://www.flaticon.com/svg/static/icons/svg/709/709957.svg",
+            "title": "숙소 이용규칙",
+            "desc": "반려동물 동반이나 흡연이 금지되는 숙소입니다."
+          }
+        ],
+        "desc": "blabla blabla",
+        "facilities": [
+          {
+            "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+            "type": "주방"
+          },
+          {
+            "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+            "type": "주방"
+          },
+          {
+            "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+            "type": "주방"
+          },
+          {
+            "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+            "type": "주방"
+          },
+          {
+            "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+            "type": "주방"
+          },
+          {
+            "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+            "type": "주방"
+          },
+          {
+            "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+            "type": "주방"
+          },
+          {
+            "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+            "type": "주방"
+          },
+          {
+            "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+            "type": "주방"
+          },
+          {
+            "img": "https://www.flaticon.com/svg/static/icons/svg/649/649266.svg",
+            "type": "주방"
+          }
+        ],
+        "review": {
+          "avr_score": 4.65,
+          "reviews": 62,
+          "userReviews": [
+            {
+              "userImg": "https://a0.muscache.com/im/pictures/user/cbaf3116-e588-43bc-80e8-5c2268dfc618.jpg?im_w=240",
+              "userName": "jinseong",
+              "date": "2020년 9월",
+              "detail": "깔끔하고 좋아요"
+            },
+            {
+              "userImg": "https://a0.muscache.com/im/pictures/user/cbaf3116-e588-43bc-80e8-5c2268dfc618.jpg?im_w=240",
+              "userName": "jinseong",
+              "date": "2020년 9월",
+              "detail": "깔끔하고 좋아요"
+            },
+            {
+              "userImg": "https://a0.muscache.com/im/pictures/user/cbaf3116-e588-43bc-80e8-5c2268dfc618.jpg?im_w=240",
+              "userName": "jinseong",
+              "date": "2020년 9월",
+              "detail": "깔끔하고 좋아요"
+            }
+          ]
+        },
+        "hostInfo": {
+          "img": "https://a0.muscache.com/im/pictures/user/cbaf3116-e588-43bc-80e8-5c2268dfc618.jpg?im_w=240",
+          "name": "Ryu ji",
+          "hostId": 1,
+          "signUpDate": "2018년 4월",
+          "superHost": true,
+          "introduction": "안녕하세요. 제주도 서귀포시에서 숙소를 운영중이에요. 저희 숙소는 먼 바다가 내려다보이고 귤밭으로 둘러싸인 숲속 언덕 위에 있어요. 작은 마당이 딸린 독채형 객실에서 편안한 힐링 스테이를 즐기실 수 있어요."
+        }
+      }
+    ]
+  }
