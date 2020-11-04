@@ -503,19 +503,18 @@ const Aside = styled.div`
             }
 
             .right {
-                border-left: 1px solid gray;
-              }
+              border-left: 1px solid gray;
+            }
 
-              img {
-                width: 16px;
-                margin-right: 20px;
-              }
+            img {
+              width: 16px;
+              margin-right: 20px;
+            }
 
             div {
               width: 50%;
               padding: 10px 0 0 10px;
               ${checkInOut}
-              }
             }
           }
         }
