@@ -100,9 +100,12 @@ const HomeDetails = () => {
               </p>
             </div>
             <Bed>
-              <span>침대/침구 유형</span>
+              <h3>침대/침구 유형</h3>
               <div className="article">
-                <img />
+                <img
+                  alt="bed"
+                  src="https://www.flaticon.com/svg/static/icons/svg/3030/3030336.svg"
+                />
                 <span>1번 침실</span>
                 <span>더블 침대 1개</span>
               </div>
@@ -133,15 +136,22 @@ const HomeDetails = () => {
                         <span>체크인</span>
                         <span>2020.11.18</span>
                       </div>
-                      <div>
+                      <div className="right">
                         <span>체크아웃</span>
                         <span>2020.11.21</span>
                       </div>
                     </div>
                     <div className="line">
-                      <span>체크아웃</span>
-                      <span>2020.11.21</span>
+                      <div>
+                        <span>인원</span>
+                        <span>게스트 1명</span>
+                      </div>
+                      <img
+                        alt="downArrow"
+                        src="https://www.flaticon.com/svg/static/icons/svg/32/32195.svg"
+                      />
                     </div>
+                    <BookingPeople></BookingPeople>
                   </div>
                   <button>예약하기</button>
                 </div>
@@ -326,41 +336,27 @@ const HomeInfo = styled.section`
 
   .rules {
     border-top: 1px solid #d3d3d3;
-    border-bottom: 1px solid #d3d3d3;
+    /* border-bottom: 1px solid #d3d3d3; */
     padding: 32px 0;
   }
 
   .textDesc {
     padding: 32px 0 48px 0;
-    border-bottom: 1px solid gray;
-  }
-`;
-
-const Calender = styled.div`
-  height: 550px;
-  padding: 48px 0;
-
-  h3 {
-    font-size: 22px;
-    line-height: 26px;
-  }
-
-  span {
-    font-size: 14px;
-    line-height: 18px;
-    color: #717171;
+    border-top: 1px solid #d3d3d3;
+    /* border-bottom: 1px solid gray; */
   }
 `;
 
 const Bed = styled.div`
   width: 100%;
-  height: 200px;
   padding: 48px 0;
+  border-top: 1px solid #d3d3d3;
 
-  span {
-    color: black;
+  h3 {
     font-size: 22px;
+    font-weight: 600;
     line-height: 26px;
+    margin-bottom: 20px;
   }
 
   .article {
@@ -370,13 +366,19 @@ const Bed = styled.div`
     border: 1px solid gray;
     border-radius: 12px;
 
+    img {
+      width: 24px;
+      margin-bottom: 10px;
+    }
+
     span {
       display: block;
 
       &:first-child {
         font-size: 16px;
-        font-weight: 600;
+        font-weight: 700;
         line-height: 20px;
+        margin-bottom: 10px;
       }
 
       &:last-child {
@@ -388,7 +390,7 @@ const Bed = styled.div`
 `;
 
 const Facilities = styled.div`
-  /* border: 1px solid red; */
+  border-top: 1px solid #d3d3d3;
   padding: 48px 0;
   /* display: flex; */
   width: 100%;
@@ -397,17 +399,54 @@ const Facilities = styled.div`
     display: block;
     width: 100%;
     font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
   }
 
   .facilityCon {
-    /* border: 1px solid red; */
+    border: 1px solid red;
     display: flex;
     width: 100%;
 
     div {
-      /* border: 1px solid pink; */
+      border: 1px solid pink;
       width: 50%;
       height: 200px;
+    }
+  }
+`;
+
+const Calender = styled.div`
+  height: 550px;
+  padding: 48px 0;
+  border-top: 1px solid #d3d3d3;
+
+  h3 {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 26px;
+  }
+
+  span {
+    font-size: 14px;
+    line-height: 18px;
+    color: #717171;
+  }
+`;
+
+const checkInOut = css`
+  span {
+    display: block;
+
+    &:first-child {
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 12px;
+    }
+
+    &:last-child {
+      font-size: 14px;
+      line-height: 18px;
     }
   }
 `;
@@ -455,33 +494,27 @@ const Aside = styled.div`
 
           .line {
             display: flex;
+            justify-content: space-between;
             height: 50%;
+            ${checkInOut}
 
             &:first-child {
               border-bottom: 1px solid gray;
             }
 
-            div {
-              width: 50%;
-              padding: 10px 0 0 10px;
-
-              &:last-child {
+            .right {
                 border-left: 1px solid gray;
               }
 
-              span {
-                display: block;
+              img {
+                width: 16px;
+                margin-right: 20px;
+              }
 
-                &:first-child {
-                  font-size: 10px;
-                  font-weight: 700;
-                  line-height: 12px;
-                }
-
-                &:last-child {
-                  font-size: 14px;
-                  line-height: 18px;
-                }
+            div {
+              width: 50%;
+              padding: 10px 0 0 10px;
+              ${checkInOut}
               }
             }
           }
@@ -509,6 +542,18 @@ const Aside = styled.div`
       }
     }
   }
+`;
+
+const BookingPeople = styled.div`
+  background-color: white;
+  position: relative;
+  border: 1px solid red;
+  border-radius: 4px;
+  width: 100%;
+  height: 250px;
+  z-index: 10;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 6px;
+  display: none;
 `;
 
 const PriceBox = styled.ul`
@@ -539,22 +584,29 @@ const TotalPrice = styled.div`
 `;
 
 const Review = styled.div`
-  margin: 20px 0;
   height: 250px;
+  padding: 48px 0;
   color: #222222;
   font-size: 24px;
+  font-weight: 600;
+  border-top: 1px solid #d3d3d3;
   /* line-height: 20px; */
 `;
 
 const Location = styled.div`
-  border: 1px solid green;
+  /* border: 1px solid green; */
+  border-top: 1px solid #d3d3d3;
   height: 200px;
-  margin: 48px auto;
+  padding: 48px 0;
   color: #222222;
   font-size: 24px;
+  font-weight: 600;
 `;
 
 const HostInfo = styled.div`
+  border-top: 1px solid #d3d3d3;
+  padding: 48px 0;
+
   .top {
     display: flex;
 
@@ -570,6 +622,7 @@ const HostInfo = styled.div`
       span:first-child {
         color: #222222;
         font-size: 24px;
+        font-weight: 500;
       }
 
       span:last-child {
@@ -587,7 +640,8 @@ const HostInfo = styled.div`
 `;
 
 const Notices = styled.div`
-  border: 1px solid pink;
+  border-top: 1px solid #d3d3d3;
+  /* border: 1px solid pink; */
   color: #222222;
   font-size: 24px;
   font-weight: 600;
