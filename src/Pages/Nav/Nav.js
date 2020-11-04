@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAirbnb } from "@fortawesome/free-brands-svg-icons";
 import {
@@ -8,19 +9,18 @@ import {
   faBars,
   faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
-import { flexSet, displayNone } from "../../Styles/Theme";
+import {
+  flexSet,
+  displayNone,
+  buttonStyle,
+  visibilityHidden,
+} from "../../Styles/Theme";
+
+import Search from "../../Components/Search/Search";
 
 const Nav = () => {
   const [isProfileActive, setIsProfileActive] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false);
-
-  // const handleSearch = (e) => {
-  //   console.log(e.target.dataset.name);
-  //   e.target.dataset.name === "searchTrigger" && setIsSearchActive(true);
-  //   // console.log(e.target.firstElementChild.children[1]);
-  //   // const searchTrigger = e.target.firstElementChild.children[1];
-  //   // e === searchTrigger && setIsSearchActive(true);
-  // };
 
   return (
     <>
@@ -49,7 +49,7 @@ const Nav = () => {
               </div>
             </SearchTrigger>
             <ProfileTrigger
-              onClick={() => setIsProfileActive(true)}
+              onFocus={() => setIsProfileActive(true)}
               onBlur={() => setIsProfileActive(false)}
               active={isProfileActive}
               tabIndex="0"
@@ -67,54 +67,7 @@ const Nav = () => {
             </ProfileTrigger>
           </div>
         </section>
-        <SearchMenu>
-          <div>
-            <form>
-              <fieldset>
-                <span>숙소</span>
-              </fieldset>
-              <div>
-                <div>
-                  <div>
-                    <label htmlFor="location">
-                      <div>
-                        <div>위치</div>
-                        <input
-                          type="text"
-                          id="location"
-                          name="location"
-                          placeholder="어디로 여행가세요?"
-                        />
-                      </div>
-                    </label>
-                  </div>
-                </div>
-                <div>
-                  <div>체크인</div>
-                  <div>날짜추가</div>
-                </div>
-                <div>
-                  <div>체크아웃</div>
-                  <div>날짜추가</div>
-                </div>
-                <div>
-                  <div>
-                    <div>인원</div>
-                    <div>게스트추가</div>
-                  </div>
-                  <button>
-                    <div>
-                      <span>
-                        <FontAwesomeIcon icon={faSearch} />
-                      </span>
-                      <span>검색</span>
-                    </div>
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </SearchMenu>
+        <Search />
         <ProfileMenu active={isProfileActive}>
           <div>
             <ul>
@@ -254,35 +207,6 @@ const ProfileTrigger = styled.div`
         }
         &:last-child {
           font-size: 30px;
-        }
-      }
-    }
-  }
-`;
-
-const SearchMenu = styled.div`
-  width: 100%;
-
-  > div {
-    padding: 0 80px 16px 80px;
-
-    form {
-      margin: 0 auto;
-      width: 850px;
-
-      fieldset {
-        ${flexSet("center", "center")}
-        height: 80px;
-        span {
-          &::before {
-            content: "";
-            height: 2px;
-            background-color: #000;
-            border-radius: 1px;
-            position: absolute;
-            top: 60px;
-            width: 18px;
-          }
         }
       }
     }

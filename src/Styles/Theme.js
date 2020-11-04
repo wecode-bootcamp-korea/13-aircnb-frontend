@@ -16,4 +16,8 @@ export const displayNone = css`
   display: none !important;
 `;
 
+export const visibilityHidden = css`
+  visibility: hidden !important;
+`;
+
 export default theme;
