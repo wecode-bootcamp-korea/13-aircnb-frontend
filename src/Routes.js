@@ -9,7 +9,7 @@ import Nav from "./Pages/Nav/Nav";
 
 import styled, { ThemeProvider } from "styled-components";
 import GlobalStyle from "./Styles/GlobalStyle";
-import Theme from "./Styles/Theme";
+import theme, { flexSet } from "./Styles/Theme";
 
 // fontawesome 아이콘
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
@@ -23,7 +23,7 @@ const Routes = () => {
     <Fragment>
       <Router>
         <Switch>
-          <ThemeProvider theme={{ Theme }}>
+          <ThemeProvider theme={theme}>
             <GlobalStyle />
             <Route exact path="/nav" component={Nav} />
             <Route exact path="/main" component={Main} />

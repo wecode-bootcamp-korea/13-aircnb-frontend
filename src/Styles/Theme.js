@@ -1,13 +1,18 @@
 import { css } from "styled-components";
 
-const Theme = css`
-  :root {
-    --primary-color: #fe5131;
-  }
+const theme = {
+  primaryColor: "#fe5131",
+};
 
-  .display-none {
-    display: none !important;
-  }
+export const flexSet = (justifyContent, alignItems, flexDirection) => css`
+  display: flex;
+  justify-content: ${justifyContent};
+  align-items: ${alignItems};
+  flex-direction: ${flexDirection};
 `;
 
-export default Theme;
+export const displayNone = css`
+  display: none !important;
+`;
+
+export default theme;
