@@ -7,7 +7,7 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
     &:focus {
-      outline: none;
+      outline: 0;
     }
   }
   
@@ -25,10 +25,16 @@ const GlobalStyle = createGlobalStyle`
 
   a {
       text-decoration: none;
+      &:hover{
+        text-decoration: none;  
+      }
   }
 
   button {
-    outline: none;
+    outline: 0;
+    &:focus{
+      outline:0;
+    }
   }
 `;
 

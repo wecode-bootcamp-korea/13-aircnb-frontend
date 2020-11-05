@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
+// LINK components
+import Search from "../../Components/Search/Search";
+
+// LINK style item
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAirbnb } from "@fortawesome/free-brands-svg-icons";
 import {
@@ -11,104 +15,112 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { flexSet, displayNone } from "../../Styles/Theme";
 
-import Search from "../../Components/Search/Search";
-
 const Nav = () => {
   const [isProfileActive, setIsProfileActive] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [isSearchHover, setIsSearchHover] = useState(false);
+  console.log("------------nav-------------");
+
+  // REVIEW ref declare
+  const nav = useRef();
 
   const closeSearch = (e) => {
-    !e.currentTarget.contains(e.relatedTarget) && setIsSearchActive(false);
+    // !nav.current.contains(e.target) &&
+    //   isSearchActive &&
+    //   setIsSearchActive(false);
   };
 
+  useEffect(() => {
+    window.addEventListener("click", closeSearch);
+    return () => {
+      window.removeEventListener("click", closeSearch);
+    };
+  }, [isSearchActive]);
+
   return (
-    <>
-      <Navbar active={isSearchActive} onBlur={closeSearch} tabIndex="0">
-        <section>
-          <div>
-            <LogoSet>
-              <Link to="/">
-                <div>
-                  <span>
-                    <FontAwesomeIcon icon={faAirbnb} />
-                  </span>
-                  <span>aircnb</span>
-                </div>
-              </Link>
-            </LogoSet>
-            <SearchTrigger
-              active={isSearchActive}
-              hover={isSearchHover}
-              tabIndex="0"
-            >
+    <Navbar ref={nav} data-name="nav">
+      <section>
+        <div>
+          <LogoSet>
+            <Link to="/">
               <div>
-                <button tabIndex="0">
-                  <span>검색 시작하기</span>
-                  <span>
-                    <FontAwesomeIcon icon={faSearch} />
-                  </span>
-                </button>
+                <span>
+                  <FontAwesomeIcon icon={faAirbnb} />
+                </span>
+                <span>aircnb</span>
               </div>
-            </SearchTrigger>
-            <SearchFake
-              onClick={() => setIsSearchActive(true)}
-              onMouseOver={() => setIsSearchHover(true)}
-              onMouseOut={() => setIsSearchHover(false)}
-              tabIndex="1"
-            />
-            <ProfileTrigger
-              onFocus={() => setIsProfileActive(true)}
-              onBlur={() => setIsProfileActive(false)}
-              active={isProfileActive}
-              tabIndex="0"
-            >
-              <button>
-                <div>
-                  <span>
-                    <FontAwesomeIcon icon={faBars} />
-                  </span>
-                  <span>
-                    <FontAwesomeIcon icon={faUserCircle} />
-                  </span>
-                </div>
+            </Link>
+          </LogoSet>
+
+          {/* SECTION search trigger */}
+          <SearchTrigger
+            onClick={() => setIsSearchActive(true)}
+            active={isSearchActive}
+          >
+            <div>
+              <button tabIndex="0">
+                <span>검색 시작하기</span>
+                <span>
+                  <FontAwesomeIcon icon={faSearch} />
+                </span>
               </button>
-            </ProfileTrigger>
-          </div>
-        </section>
-        <Search search={isSearchActive} />
-        <ProfileMenu active={isProfileActive}>
-          <div>
-            <ul>
-              <ProfileMenuGroup>
-                <li>
-                  <span>로그인</span>
-                </li>
-                <li>
-                  <span>회원 가입</span>
-                </li>
-              </ProfileMenuGroup>
-              <ProfileMenuGroup>
-                <li>
-                  <span>도움말</span>
-                </li>
-              </ProfileMenuGroup>
-            </ul>
-          </div>
-        </ProfileMenu>
-      </Navbar>
-    </>
+            </div>
+          </SearchTrigger>
+
+          {/* SECTION Profile trigger */}
+          <ProfileTrigger
+            onFocus={() => setIsProfileActive(true)}
+            onBlur={() => setIsProfileActive(false)}
+            active={isProfileActive}
+            tabIndex="0"
+          >
+            <button>
+              <div>
+                <span>
+                  <FontAwesomeIcon icon={faBars} />
+                </span>
+                <span>
+                  <FontAwesomeIcon icon={faUserCircle} />
+                </span>
+              </div>
+            </button>
+          </ProfileTrigger>
+        </div>
+      </section>
+      {/* SECTION triggered menu */}
+      <Search searchActive={isSearchActive} />
+      <ProfileMenu active={isProfileActive}>
+        <div>
+          <ul>
+            <ProfileMenuGroup>
+              <li>
+                <span>로그인</span>
+              </li>
+              <li>
+                <span>회원 가입</span>
+              </li>
+            </ProfileMenuGroup>
+            <ProfileMenuGroup>
+              <li>
+                <span>도움말</span>
+              </li>
+            </ProfileMenuGroup>
+          </ul>
+        </div>
+      </ProfileMenu>
+    </Navbar>
   );
 };
 
 const Navbar = styled.header`
-  > section {
-    height: 80px;
-    width: 100%;
-    z-index: 100;
-    position: fixed;
-    top: 0px;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  height: 80px;
+  z-index: 100;
 
+  > section {
+    height: 100%;
     > div {
       ${flexSet("space-between", "center")};
       height: 100%;
@@ -121,6 +133,8 @@ const LogoSet = styled.div`
   ${({ theme }) => {
     const primaryColor = theme.primaryColor;
     return css`
+      z-index: 200;
+
       & div {
         ${flexSet(null, "center")};
 
@@ -141,23 +155,14 @@ const LogoSet = styled.div`
   }}
 `;
 
-const SearchFake = styled.div`
-  position: absolute;
-  left: 50%;
-  transform: translateX(-44%);
-  width: 300px;
-  height: ${({ active }) => (active ? 0 : 48)}px;
-  z-index: 2;
-  cursor: pointer;
-`;
-
 const SearchTrigger = styled.div`
-  ${({ theme, active, hover }) => {
+  ${({ theme, active }) => {
     const primaryColor = theme.primaryColor;
     const borderColor = theme.borderColor;
 
     return css`
       padding: 0 24px;
+      z-index: 200;
 
       & > div {
         width: 100%;
@@ -167,20 +172,24 @@ const SearchTrigger = styled.div`
           position: absolute;
           top: 19%;
           left: 39%;
-          width: 300px;
+          width: ${active ? 600 : 300}px;
           height: 48px;
           background-color: #fff;
           border: 1px solid ${borderColor};
           border-radius: 24px;
           transition: 0.2s ease-in;
-          cursor: pointer;
-          box-shadow: ${hover && "0px 2px 4px 0.5px"} ${borderColor};
           opacity: ${active ? 0 : 1};
-          transform: translateY(${active && 30}px);
+          transform: translateY(${active && 40}px);
           transition: 0.2s ease;
+          cursor: pointer;
+
+          &:hover {
+            box-shadow: 0px 2px 4px 0.5px ${borderColor};
+          }
 
           span {
             &:first-child {
+              font-size: 14px;
               font-weight: 550;
               padding: 0 16px 0 24px;
               line-height: 18px;
@@ -202,6 +211,7 @@ const SearchTrigger = styled.div`
 `;
 
 const ProfileTrigger = styled.div`
+  z-index: 200;
   button {
     ${flexSet("center", "center")};
     width: 77px;
@@ -244,8 +254,8 @@ const ProfileMenu = styled.div`
   background-color: #fff;
   box-shadow: 0px 0px 15px 0.5px #ddd;
   border-radius: 10px;
-  z-index: 101;
   font-size: 14px;
+  z-index: 200;
 
   div {
     padding: 3px 0;

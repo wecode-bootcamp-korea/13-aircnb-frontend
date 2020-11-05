@@ -1,52 +1,114 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import styled, { css } from "styled-components";
+import axios from "axios";
 
+//LINK file
 import Location from "./Location/Location";
+import Calendar from "./Calendar/Calendar";
 
+//LINK others
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { flexSet, displayNone, visibilityHidden } from "../../Styles/Theme";
 
-const Search = ({ search }) => {
+//LINK Mockdata
+const API = "/data/Location/Location.json";
+
+const Search = ({ searchActive }) => {
   const [isDividerActive, setIsDividerActive] = useState(0);
-  const [isInputActive, setIsInputActive] = useState(1);
-  const [locationMessage, setLocationMessage] = useState("");
+  const [isInputActive, setIsInputActive] = useState(0);
   const [currentLocation, setCurrentLocation] = useState([]);
+  const [locationValue, setLocationValue] = useState("");
+  const [address, setAddress] = useState([]);
 
-  const hoverInput = (e) => {
-    const { id } = e.currentTarget.dataset;
-    setIsDividerActive(+id);
-  };
+  console.log("------------search-------------");
 
-  const hoverOutInput = (e) => {
-    !e.currentTarget.contains(e.relatedTarget) && setIsDividerActive(0);
-  };
+  //NOTE for hiding menu divider interactive
+  const hoverInput = useCallback(
+    (e) => {
+      const { id } = e.currentTarget.dataset;
+      isDividerActive !== +id && setIsDividerActive(+id);
+    },
+    [isDividerActive]
+  );
 
-  const activeInput = (e) => {
-    const { id } = e.currentTarget.dataset;
-    setIsInputActive(+id);
-  };
+  const hoverOutInput = useCallback(
+    (e) => {
+      const { id } = e.currentTarget.dataset;
+      const validation = isDividerActive !== 0 && isDividerActive !== +id;
+      validation &&
+        !e.currentTarget.contains(e.relatedTarget) &&
+        setIsDividerActive(0);
+    },
+    [isDividerActive]
+  );
+
+  //NOTE for active menu styling
+  const activeInput = useCallback(
+    (e) => {
+      const { id } = e.currentTarget.dataset;
+      isInputActive !== +id && setIsInputActive(+id);
+    },
+    [isInputActive]
+  );
+
+  const searchField = useRef();
 
   const deactiveInput = (e) => {
-    !e.currentTarget.contains(e.relatedTarget) && setIsInputActive(0);
+    !searchField.current.contains(e.target) &&
+      isInputActive &&
+      setIsInputActive(0);
+  };
+
+  const searchArea = useCallback(
+    (e) => {
+      const { value } = e.target;
+      // TODO will post with querystring
+      value ? getAddress() : setAddress([]);
+      locationValue !== value && setLocationValue(value);
+    },
+    [locationValue]
+  );
+
+  const getAddress = async () => {
+    try {
+      const response = await axios.get(API);
+      const validation = response && response.status === 200;
+      validation && new Error("cannot fetch the data");
+      const { location } = await response.data;
+      setAddress(location);
+    } catch (error) {
+      console.log("!!error fetch data!!");
+    }
+  };
+
+  const clearLocationValue = () => {
+    setLocationValue("");
+    setAddress([]);
+  };
+
+  const confirmCurrentAddress = (latitude, longitude) => {
+    setLocationValue("가까운 여행지 둘러보기");
+    setCurrentLocation([latitude, longitude]);
+    setIsInputActive(2);
+  };
+
+  const confirmAddress = (keyword, fullname) => {
+    setLocationValue(fullname);
+    setCurrentLocation([keyword]);
+    setIsInputActive(2);
   };
 
   const submitInfo = (e) => {
     e.preventDefault();
   };
 
-  const openSecondMenu = (latitude, longitude) => {
-    setLocationMessage("가까운 여행지 둘러보기");
-    setCurrentLocation([latitude, longitude]);
-    setIsInputActive(2);
-  };
-
   return (
     <>
       <SearchMenu
-        onBlur={deactiveInput}
+        searchActive={searchActive}
         active={isInputActive}
-        searchActive={search}
+        onClick={deactiveInput}
       >
         <div>
           <form>
@@ -54,34 +116,49 @@ const Search = ({ search }) => {
               <span>숙소</span>
             </fieldset>
             <div>
-              <div active={isInputActive} onBlur={hoverOutInput} tabIndex="0">
+              <div ref={searchField}>
                 <SearchInput
+                  searchActive={searchActive}
                   active={isInputActive}
-                  searchActive={search}
+                  input={locationValue}
+                  onClick={activeInput}
+                  onMouseOver={hoverInput}
+                  onMouseOut={hoverOutInput}
+                  data-id="1"
                   location
                 >
-                  <label
-                    onClick={activeInput}
-                    onMouseOver={hoverInput}
-                    data-id="1"
-                    htmlFor="location"
-                  >
+                  <label htmlFor="location">
                     <div>
                       <div>위치</div>
                       <input
                         type="text"
                         id="location"
                         placeholder="어디로 여행가세요?"
-                        defaultValue={locationMessage}
+                        value={locationValue}
+                        onChange={searchArea}
                       />
                     </div>
+                    <span onClick={clearLocationValue}>
+                      <FontAwesomeIcon icon={faTimesCircle} />
+                    </span>
                   </label>
                 </SearchInput>
+
+                {/* ANCHOR Location popup */}
+                {isInputActive === 1 && (
+                  <Location
+                    current={confirmCurrentAddress}
+                    address={confirmAddress}
+                    searchResult={address}
+                  />
+                )}
+
                 <SearchDivider active={isDividerActive} first />
                 <SearchInput
                   active={isInputActive}
-                  searchActive={search}
-                  onMouseEnter={hoverInput}
+                  searchActive={searchActive}
+                  onMouseOver={hoverInput}
+                  onMouseOut={hoverOutInput}
                   onClick={activeInput}
                   data-id="2"
                   checkin
@@ -96,8 +173,9 @@ const Search = ({ search }) => {
                 <SearchDivider active={isDividerActive} second />
                 <SearchInput
                   active={isInputActive}
-                  searchActive={search}
-                  onMouseEnter={hoverInput}
+                  searchActive={searchActive}
+                  onMouseOver={hoverInput}
+                  onMouseOut={hoverOutInput}
                   onClick={activeInput}
                   data-id="3"
                   checkout
@@ -109,11 +187,16 @@ const Search = ({ search }) => {
                     </div>
                   </div>
                 </SearchInput>
+
+                {/* ANCHOR Calendar */}
+                {isInputActive === 2 && <Calendar />}
+
                 <SearchDivider active={isDividerActive} third />
                 <SearchInput
                   active={isInputActive}
-                  searchActive={search}
-                  onMouseEnter={hoverInput}
+                  searchActive={searchActive}
+                  onMouseOver={hoverInput}
+                  onMouseOut={hoverOutInput}
                   onClick={activeInput}
                   data-id="4"
                   guest
@@ -138,16 +221,19 @@ const Search = ({ search }) => {
           </form>
         </div>
       </SearchMenu>
-      <Location
-        active={isInputActive}
-        search={search}
-        openSecond={openSecondMenu}
-      />
     </>
   );
 };
 
-const buttonStyle = (firstNode, secondNode, last, active, search) => css`
+// STUB button template
+const buttonStyle = (
+  firstNode,
+  secondNode,
+  last,
+  active,
+  search,
+  input = null
+) => css`
   width: 100%;
   > ${firstNode} {
     ${search && flexSet("space-between", "center")}
@@ -167,9 +253,9 @@ const buttonStyle = (firstNode, secondNode, last, active, search) => css`
     }
 
     > div {
-      /* ${!search && displayNone} */
       width: ${(secondNode === "input" && 204) || (last && 120)}px;
       transition: 0.2s ease;
+      font-size: 13px;
 
       > div {
         &:first-child {
@@ -183,7 +269,6 @@ const buttonStyle = (firstNode, secondNode, last, active, search) => css`
         css`
           &:last-child {
             color: #555;
-            font-size: 13px;
             line-height: 18px;
           }
         `}
@@ -203,16 +288,23 @@ const buttonStyle = (firstNode, secondNode, last, active, search) => css`
         }
       `}
     }
+    > span {
+      ${!input && displayNone}
+    }
   }
 `;
 
+// SECTION Styled
 const SearchMenu = styled.div`
   ${({ searchActive, active }) => {
     return css`
+      border: 1px solid red;
+      position: absolute;
+      top: 0px;
       width: 100%;
       transition: ease 0.3s;
       border: 1px solid blue;
-      z-index: 200;
+      z-index: 101;
 
       > div {
         padding: 0 80px;
@@ -270,13 +362,20 @@ const SearchMenu = styled.div`
 `;
 
 const SearchInput = styled.div`
-  ${({ active, checkin, checkout, guest, theme, searchActive }) => {
+  ${({ active, checkin, checkout, guest, theme, searchActive, input }) => {
     const isFirstActive = active === 1;
     const isSecondActive = active === 2;
     const isThirdActive = active === 3;
     const isForthActive = active === 4;
     return css`
-      ${buttonStyle("label", "input", false, isFirstActive, searchActive)};
+      ${buttonStyle(
+        "label",
+        "input",
+        false,
+        isFirstActive,
+        searchActive,
+        input
+      )};
       ${checkin &&
       buttonStyle("div", "div", false, isSecondActive, searchActive)}
       ${checkout &&
@@ -302,7 +401,7 @@ const SearchInput = styled.div`
             &:last-child {
               ${!active && displayNone};
               margin-left: 8px;
-              font-size: 16px;
+              font-size: 16 px;
               font-weight: 600;
               overflow: hidden;
               text-overflow: ellipsis;

@@ -1,46 +1,61 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import { flexSet, displayNone } from "../../../Styles/Theme";
-import map from "../../../Images/Search/map.svg";
+import { flexSet } from "../../../Styles/Theme";
 
-const Location = ({ active, search, openSecond }) => {
-  useEffect(() => {
-    if ("geolocation" in navigator) {
-      console.log("Available");
-    } else {
-      console.log("Not Available");
-    }
-    return;
-  });
+// LINK Icons
+import map from "../../../Images/Search/map.svg";
+import pin from "../../../Images/Search/pin.svg";
+
+const Location = ({ searchResult, current, address }) => {
+  console.log("------------location-------------");
 
   const getGeolocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       const { coords } = position;
-      openSecond(coords.latitude, coords.longitude);
+      current(coords.latitude, coords.longitude);
     });
   };
 
+  const getAddress = (e) => {
+    const { id, name } = e.currentTarget.dataset;
+    address(id, name);
+  };
+
   return (
-    <Map active={active} search={search}>
+    <Map>
       <ul>
-        <li onClick={getGeolocation}>
-          <div>
-            <img src={map} alt="" />
-          </div>
-          <div>가까운 여행지 둘러보기</div>
-        </li>
+        {searchResult.length ? (
+          searchResult.map((address, idx) => (
+            <li
+              key={idx}
+              data-id={address.id}
+              data-name={address.name}
+              onClick={getAddress}
+            >
+              <div>
+                <img src={pin} alt="" />
+              </div>
+              <div>{address.name}</div>
+            </li>
+          ))
+        ) : (
+          <li onClick={getGeolocation}>
+            <div>
+              <img src={map} alt="" />
+            </div>
+            <div>가까운 여행지 둘러보기</div>
+          </li>
+        )}
       </ul>
     </Map>
   );
 };
 
 const Map = styled.div`
-  ${({ active, search }) => (active === 1 && search ? "" : displayNone)}
   ${flexSet("flex-start", "center")}
+  position: absolute;
   width: 500px;
-  height: 112px;
-  margin-top: -22px;
-  margin-left: 180px;
+  top: 160px;
   padding: 16px 0;
   background-color: #fff;
   border-radius: 30px;
@@ -48,7 +63,6 @@ const Map = styled.div`
 
   > ul {
     width: 100%;
-    height: 64px;
 
     li {
       ${flexSet("flex-start", "center")};
