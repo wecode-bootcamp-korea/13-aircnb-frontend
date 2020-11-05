@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 
+import Location from "./Location/Location";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { flexSet, displayNone, visibilityHidden } from "../../Styles/Theme";
 
 const Search = ({ search }) => {
   const [isDividerActive, setIsDividerActive] = useState(0);
-  const [isInputActive, setIsInputActive] = useState(0);
+  const [isInputActive, setIsInputActive] = useState(1);
+  const [locationMessage, setLocationMessage] = useState("");
+  const [currentLocation, setCurrentLocation] = useState([]);
 
   const hoverInput = (e) => {
     const { id } = e.currentTarget.dataset;
@@ -31,101 +35,115 @@ const Search = ({ search }) => {
     e.preventDefault();
   };
 
+  const openSecondMenu = (latitude, longitude) => {
+    setLocationMessage("가까운 여행지 둘러보기");
+    setCurrentLocation([latitude, longitude]);
+    setIsInputActive(2);
+  };
+
   return (
-    <SearchMenu
-      onBlur={deactiveInput}
-      active={isInputActive}
-      searchActive={search}
-    >
-      <div>
-        <form>
-          <fieldset>
-            <span>숙소</span>
-          </fieldset>
-          <div>
-            <div active={isInputActive} onBlur={hoverOutInput} tabIndex="0">
-              <SearchInput
-                active={isInputActive}
-                searchActive={search}
-                location
-              >
-                <label
+    <>
+      <SearchMenu
+        onBlur={deactiveInput}
+        active={isInputActive}
+        searchActive={search}
+      >
+        <div>
+          <form>
+            <fieldset>
+              <span>숙소</span>
+            </fieldset>
+            <div>
+              <div active={isInputActive} onBlur={hoverOutInput} tabIndex="0">
+                <SearchInput
+                  active={isInputActive}
+                  searchActive={search}
+                  location
+                >
+                  <label
+                    onClick={activeInput}
+                    onMouseOver={hoverInput}
+                    data-id="1"
+                    htmlFor="location"
+                  >
+                    <div>
+                      <div>위치</div>
+                      <input
+                        type="text"
+                        id="location"
+                        placeholder="어디로 여행가세요?"
+                        defaultValue={locationMessage}
+                      />
+                    </div>
+                  </label>
+                </SearchInput>
+                <SearchDivider active={isDividerActive} first />
+                <SearchInput
+                  active={isInputActive}
+                  searchActive={search}
+                  onMouseEnter={hoverInput}
                   onClick={activeInput}
-                  onMouseOver={hoverInput}
-                  data-id="1"
-                  htmlFor="location"
+                  data-id="2"
+                  checkin
                 >
                   <div>
-                    <div>위치</div>
-                    <input
-                      type="text"
-                      id="location"
-                      placeholder="어디로 여행가세요?"
-                    />
-                  </div>
-                </label>
-              </SearchInput>
-              <SearchDivider active={isDividerActive} first />
-              <SearchInput
-                active={isInputActive}
-                searchActive={search}
-                onMouseEnter={hoverInput}
-                onClick={activeInput}
-                data-id="2"
-                checkin
-              >
-                <div>
-                  <div>
-                    <div>체크인</div>
-                    <div>날짜추가</div>
-                  </div>
-                </div>
-              </SearchInput>
-              <SearchDivider active={isDividerActive} second />
-              <SearchInput
-                active={isInputActive}
-                searchActive={search}
-                onMouseEnter={hoverInput}
-                onClick={activeInput}
-                data-id="3"
-                checkout
-              >
-                <div>
-                  <div>
-                    <div>체크아웃</div>
-                    <div>날짜추가</div>
-                  </div>
-                </div>
-              </SearchInput>
-              <SearchDivider active={isDividerActive} third />
-              <SearchInput
-                active={isInputActive}
-                searchActive={search}
-                onMouseEnter={hoverInput}
-                onClick={activeInput}
-                data-id="4"
-                guest
-              >
-                <div>
-                  <div>
-                    <div>인원</div>
-                    <div>게스트추가</div>
-                  </div>
-                  <button onClick={submitInfo}>
                     <div>
-                      <span>
-                        <FontAwesomeIcon icon={faSearch} />
-                      </span>
-                      <span>검색</span>
+                      <div>체크인</div>
+                      <div>날짜추가</div>
                     </div>
-                  </button>
-                </div>
-              </SearchInput>
+                  </div>
+                </SearchInput>
+                <SearchDivider active={isDividerActive} second />
+                <SearchInput
+                  active={isInputActive}
+                  searchActive={search}
+                  onMouseEnter={hoverInput}
+                  onClick={activeInput}
+                  data-id="3"
+                  checkout
+                >
+                  <div>
+                    <div>
+                      <div>체크아웃</div>
+                      <div>날짜추가</div>
+                    </div>
+                  </div>
+                </SearchInput>
+                <SearchDivider active={isDividerActive} third />
+                <SearchInput
+                  active={isInputActive}
+                  searchActive={search}
+                  onMouseEnter={hoverInput}
+                  onClick={activeInput}
+                  data-id="4"
+                  guest
+                >
+                  <div>
+                    <div>
+                      <div>인원</div>
+                      <div>게스트추가</div>
+                    </div>
+                    <button onClick={submitInfo}>
+                      <div>
+                        <span>
+                          <FontAwesomeIcon icon={faSearch} />
+                        </span>
+                        <span>검색</span>
+                      </div>
+                    </button>
+                  </div>
+                </SearchInput>
+              </div>
             </div>
-          </div>
-        </form>
-      </div>
-    </SearchMenu>
+          </form>
+        </div>
+      </SearchMenu>
+      <Location
+        active={isInputActive}
+        search={search}
+        openSecond={openSecondMenu}
+      />
+    </>
   );
 };
 
@@ -286,6 +304,8 @@ const SearchInput = styled.div`
               margin-left: 8px;
               font-size: 16px;
               font-weight: 600;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
           }
         }

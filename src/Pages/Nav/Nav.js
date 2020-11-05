@@ -9,7 +9,7 @@ import {
   faBars,
   faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
-import { flexSet, displayNone, visibilityHidden } from "../../Styles/Theme";
+import { flexSet, displayNone } from "../../Styles/Theme";
 
 import Search from "../../Components/Search/Search";
 
@@ -181,7 +181,7 @@ const SearchTrigger = styled.div`
 
           span {
             &:first-child {
-              font-weight: 600;
+              font-weight: 550;
               padding: 0 16px 0 24px;
               line-height: 18px;
             }
