@@ -9,22 +9,22 @@ import {
   faBars,
   faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
-import {
-  flexSet,
-  displayNone,
-  buttonStyle,
-  visibilityHidden,
-} from "../../Styles/Theme";
+import { flexSet, displayNone, visibilityHidden } from "../../Styles/Theme";
 
 import Search from "../../Components/Search/Search";
 
 const Nav = () => {
   const [isProfileActive, setIsProfileActive] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false);
+  const [isSearchHover, setIsSearchHover] = useState(false);
+
+  const closeSearch = (e) => {
+    !e.currentTarget.contains(e.relatedTarget) && setIsSearchActive(false);
+  };
 
   return (
     <>
-      <Navbar active={isSearchActive}>
+      <Navbar active={isSearchActive} onBlur={closeSearch} tabIndex="0">
         <section>
           <div>
             <LogoSet>
@@ -37,10 +37,13 @@ const Nav = () => {
                 </div>
               </Link>
             </LogoSet>
-
-            <SearchTrigger active={isSearchActive}>
+            <SearchTrigger
+              active={isSearchActive}
+              hover={isSearchHover}
+              tabIndex="0"
+            >
               <div>
-                <button onFocus={() => setIsSearchActive(true)} tabIndex="0">
+                <button tabIndex="0">
                   <span>검색 시작하기</span>
                   <span>
                     <FontAwesomeIcon icon={faSearch} />
@@ -48,6 +51,12 @@ const Nav = () => {
                 </button>
               </div>
             </SearchTrigger>
+            <SearchFake
+              onClick={() => setIsSearchActive(true)}
+              onMouseOver={() => setIsSearchHover(true)}
+              onMouseOut={() => setIsSearchHover(false)}
+              tabIndex="1"
+            />
             <ProfileTrigger
               onFocus={() => setIsProfileActive(true)}
               onBlur={() => setIsProfileActive(false)}
@@ -67,7 +76,7 @@ const Nav = () => {
             </ProfileTrigger>
           </div>
         </section>
-        <Search />
+        <Search search={isSearchActive} />
         <ProfileMenu active={isProfileActive}>
           <div>
             <ul>
@@ -99,7 +108,7 @@ const Navbar = styled.header`
     z-index: 100;
     position: fixed;
     top: 0px;
-    border: 1px solid red;
+
     > div {
       ${flexSet("space-between", "center")};
       height: 100%;
@@ -132,10 +141,21 @@ const LogoSet = styled.div`
   }}
 `;
 
+const SearchFake = styled.div`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-44%);
+  width: 300px;
+  height: ${({ active }) => (active ? 0 : 48)}px;
+  z-index: 2;
+  cursor: pointer;
+`;
+
 const SearchTrigger = styled.div`
-  ${({ theme, active }) => {
+  ${({ theme, active, hover }) => {
     const primaryColor = theme.primaryColor;
     const borderColor = theme.borderColor;
+
     return css`
       padding: 0 24px;
 
@@ -143,19 +163,21 @@ const SearchTrigger = styled.div`
         width: 100%;
 
         button {
-          ${active && displayNone}
           ${flexSet("space-between", "center")};
+          position: absolute;
+          top: 19%;
+          left: 39%;
           width: 300px;
           height: 48px;
           background-color: #fff;
           border: 1px solid ${borderColor};
           border-radius: 24px;
-          transition: ease 0.3s;
+          transition: 0.2s ease-in;
           cursor: pointer;
-
-          &:hover {
-            box-shadow: 0px 2px 4px 0.5px ${borderColor};
-          }
+          box-shadow: ${hover && "0px 2px 4px 0.5px"} ${borderColor};
+          opacity: ${active ? 0 : 1};
+          transform: translateY(${active && 30}px);
+          transition: 0.2s ease;
 
           span {
             &:first-child {
