@@ -17,6 +17,7 @@ export class Calendar extends Component {
   };
 
   render() {
+    console.log(this.state.startDate?._d);
     moment.locale("ko", koLocale);
 
     return (
@@ -29,22 +30,29 @@ export class Calendar extends Component {
             endDateId="endDate" // PropTypes.string.isRequired,
             onDatesChange={({ startDate, endDate }) =>
               this.setState({
-                startDate: startDate.moment().format("MMM Do"),
+                startDate: startDate,
                 endDate: endDate,
               })
             } // PropTypes.func.isRequired,
             focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
             onFocusChange={(focusedInput) => this.setState({ focusedInput })} // PropTypes.func.isRequired,
             daySize={42}
-            hideKeyboardShortcutsPanel={true}
             isOutsideRange={(day) => moment().diff(day) >= 0}
             customArrowIcon={<div></div>}
             anchorDirection={"right"}
             startDatePlaceholderText={"날짜추가"}
             endDatePlaceholderText={"날짜추가"}
+            showClearDates
             block
             noBorder
-            showClearDates
+            hideKeyboardShortcutsPanel
+            numberOfMonths={1}
+            displayFormat="MM[월] D[일]"
+            monthFormat="YYYY[년] M[월]"
+            customCloseIcon={"X"}
+            verticalSpacing={100}
+            appendToBody
+            autoFocus
           />
         </CalendarModule>
       </>
@@ -56,11 +64,17 @@ export class Calendar extends Component {
 
 const CalendarModule = styled.div`
   position: absolute;
-  top: 160px;
+  top: 100px;
   left: 350px;
   border-radius: 12px;
   padding: 3px;
   z-index: 300;
+
+  .DateInput_input,
+  .DateInput {
+    background: transparent;
+    font-size: 14px;
+  }
 
   .CalendarDay {
     border: none;
