@@ -7,16 +7,9 @@ import HomeList from "./Pages/HomeList/HomeList";
 import Main from "./Pages/Main/Main";
 import Nav from "./Pages/Nav/Nav";
 
-import styled, { ThemeProvider } from "styled-components";
+import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./Styles/GlobalStyle";
-import theme, { flexSet } from "./Styles/Theme";
-
-// fontawesome 아이콘
-import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
-// import { faCheck } from "@fortawesome/free-solid-svg-icons";
-
-// 기본 fontawesome 쓰는법
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import theme from "./Styles/Theme";
 
 const Routes = () => {
   return (
@@ -36,7 +29,5 @@ const Routes = () => {
     </Fragment>
   );
 };
-
-// 반드시 대문자로 styled component 쓰는법
 
 export default Routes;
