@@ -13,7 +13,7 @@ import { faSearch, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 //LINK Mockdata
 const API = "/data/Location/Location.json";
 
-const Search = ({ searchActive }) => {
+const Search = ({ searchActive, searchHandler }) => {
   const [isDividerActive, setIsDividerActive] = useState(0);
   const [isInputActive, setIsInputActive] = useState(0);
   const [currentLocation, setCurrentLocation] = useState([]);
@@ -49,10 +49,10 @@ const Search = ({ searchActive }) => {
 
   //NOTE for active menu styling
   const activeInput = (e) => {
+    setIsBtnClicked(true);
     const { id } = e.currentTarget.dataset;
-    const isBtnStatus = !isBtnClicked;
     isInputActive === +id
-      ? setIsBtnClicked(isBtnStatus)
+      ? setIsBtnClicked(!isBtnClicked)
       : setIsInputActive(+id);
   };
 
@@ -100,10 +100,9 @@ const Search = ({ searchActive }) => {
     setIsInputActive(2);
   };
 
-  const confirmAddress = (keyword, fullname) => {
+  const confirmAddress = async (keyword, fullname) => {
     setLocationValue(fullname);
     setCurrentLocation([keyword]);
-    setIsInputActive(2);
   };
 
   // SECTION Booking Input

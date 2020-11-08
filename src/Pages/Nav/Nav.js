@@ -23,9 +23,12 @@ const Nav = () => {
   // REVIEW ref declare
   const nav = useRef();
   const profile = window.document.querySelector(".sc-giIncl");
+  const location = window.document.querySelector(".sc-idOhPF");
 
   const closeSearch = (e) => {
-    !nav.current.contains(e.target) &&
+    console.log(location);
+    !location?.contains(e.target) &&
+      !nav.current.contains(e.target) &&
       isSearchActive &&
       setIsSearchActive(false);
   };
@@ -100,7 +103,7 @@ const Nav = () => {
       </section>
 
       {/* SECTION triggered menu */}
-      <Search searchActive={isSearchActive} />
+      <Search searchActive={isSearchActive} searchHandler={setIsSearchActive} />
       <ProfileMenuList profileActive={isProfileActive} />
     </Navbar>
   );
