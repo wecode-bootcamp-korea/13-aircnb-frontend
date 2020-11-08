@@ -98,14 +98,22 @@
           }
         }
         &__hovered {
-          &_span:hover {
-            background: rgb(34, 34, 34);
-            color: rgb(247, 247, 247);
-            border-radius: 50%;
+          &_span {
+            background: rgb(247, 247, 247);
+            color: black;
+            &:hover {
+              background: rgb(34, 34, 34);
+              color: rgb(247, 247, 247);
+              border-radius: 50%;
+            }
           }
         }
         &__blocked_out_of_range {
           text-decoration: line-through;
+          &:hover {
+            background: #fff;
+            color: #cacccd;
+          }
         }
       }
     }

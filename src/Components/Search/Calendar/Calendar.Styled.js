@@ -6,6 +6,7 @@ export const CalendarModule = styled.div`
   position: fixed;
   width: 340px;
   top: 15px;
-  left: 350px;
+  left: 50%;
+  transform: translateX(-40px);
   z-index: 400;
 `;

@@ -87,19 +87,17 @@ const Calendar = ({ active, btnActive, bookStatus, booking }) => {
         daySize={42}
         isOutsideRange={(day) => moment().diff(day) >= 0}
         anchorDirection={"right"}
-        showClearDates
-        block
-        noBorder
-        hideKeyboardShortcutsPanel
-        numberOfMonths={1}
         displayFormat="MM[월] D[일]"
         monthFormat="YYYY[년] M[월]"
         navPrev={<FontAwesomeIcon icon={faChevronLeft} />}
         navNext={<FontAwesomeIcon icon={faChevronRight} />}
         verticalSpacing={100}
-        appendToBody
-        autoFocus
+        numberOfMonths={1}
+        hideKeyboardShortcutsPanel
         keepOpenOnDateSelect
+        showClearDates
+        noBorder
+        block
       />
     </CalendarModule>
   );

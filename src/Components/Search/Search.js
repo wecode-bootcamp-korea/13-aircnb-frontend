@@ -59,9 +59,10 @@ const Search = ({ searchActive }) => {
   const searchField = useRef();
 
   const deactiveInput = (e) => {
-    !searchField.current.contains(e.target) &&
-      isInputActive !== 0 &&
+    if (!searchField.current.contains(e.target) && isInputActive !== 0) {
       setIsInputActive(0);
+      setIsBtnClicked(false);
+    }
   };
 
   // SECTION Location Input
