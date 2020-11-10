@@ -4,8 +4,7 @@ import styled from "styled-components";
 const WrapperTOP = styled.div`
   & > div {
     border-radius: 13px;
-    min-width: 350px;
-    max-width: 375px;
+    width: 375px;
     height: auto;
     background-color: white;
     opacity: 1;

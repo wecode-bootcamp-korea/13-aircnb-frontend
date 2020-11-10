@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const WrapperMF = styled.div`
@@ -430,45 +430,68 @@ const CheckBox4MF = styled.div`
     margin-bottom: 28px;
   }
   & > div {
-    & > label {
+    & > .container {
       display: inline-block;
       width: 330px;
       height: 48px;
       padding: 12px 4px;
-
-      & > div {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        & > span:first-child {
-          border-radius: 4px;
-          border: 1px solid rgb(185, 185, 185);
-          width: 24px;
-          height: 24px;
-          padding: 0;
-          &:hover {
-            border: 1px solid rgb(34, 34, 34);
-          }
-          input {
-            position: absolute;
-            opacity: 0;
-            margin: 0;
-            cursor: pointer;
-            height: 24px;
-            width: 24px;
-            &:checked:: {
-              background-color: rgb(34, 34, 34);
-              opacity: 1;
-            }
-          }
+      padding-left: 35px;
+      position: relative;
+      color: rgb(34, 34, 34);
+      font-size: 16px;
+      font-weight: 400;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      & > input {
+        position: absolute;
+        left: 0px;
+        top: 24px;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+      }
+      .checkmark:after {
+        left: 9px;
+        top: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+      & > .checkmark {
+        cursor: pointer;
+        text-align: center;
+        padding-top: 3px;
+        font-weight: 800;
+        color: white;
+        position: absolute;
+        top: 8px;
+        left: 0;
+        border-radius: 4px;
+        border: 1px solid rgb(185, 185, 185);
+        width: 24px;
+        height: 24px;
+        background-color: white;
+        & > :hover {
+          border: 1px solid rgb(0, 0, 0);
         }
-
-        & > span:nth-child(2) {
-          padding: 0 12px;
-          color: rgb(34, 34, 34);
-          font-size: 16px;
-          font-weight: 400;
-        }
+        /* & > :after {
+          content: "";
+          position: absolute;
+          display: none;
+        } */
+      }
+      input:checked ~ .checkmark {
+        background-color: rgb(34, 34, 34);
+      }
+      input:checked ~ .checkmark:after {
+        display: block;
       }
     }
   }
@@ -492,13 +515,15 @@ const CheckBox4MF = styled.div`
   }
 `;
 
-const MoreFilters = () => {
+const MoreFilters = ({ onClose }) => {
+  const [getValue, setState] = useState("");
+
   return (
     <WrapperMF>
       <div>
         <section>
           <div>
-            <button>
+            <button onClick={onClose}>
               <span>
                 <img src="https://www.flaticon.com/svg/static/icons/svg/61/61155.svg"></img>
               </span>
@@ -618,6 +643,7 @@ const MoreFilters = () => {
             </div>
           </ToggleMF>
           <ToggleMF>
+            <h2></h2>
             <div>
               <div>
                 <h3>출장을 떠나시나요?</h3>
@@ -626,8 +652,8 @@ const MoreFilters = () => {
               <div>
                 <form action="#">
                   <div class="switch">
-                    <input id="switch-1" type="checkbox" class="switch-input" />
-                    <label for="switch-1" class="switch-label">
+                    <input id="switch-2" type="checkbox" class="switch-input" />
+                    <label for="switch-2" class="switch-label">
                       Switch
                     </label>
                   </div>
@@ -635,6 +661,7 @@ const MoreFilters = () => {
               </div>
             </div>
           </ToggleMF>
+
           <MoreOptionsMF>
             <h2>편의시설 더 보기</h2>
             <div>
@@ -646,8 +673,8 @@ const MoreFilters = () => {
               <div>
                 <form action="#">
                   <div class="switch">
-                    <input id="switch-1" type="checkbox" class="switch-input" />
-                    <label for="switch-1" class="switch-label">
+                    <input id="switch-3" type="checkbox" class="switch-input" />
+                    <label for="switch-3" class="switch-label">
                       Switch
                     </label>
                   </div>
@@ -669,37 +696,25 @@ const MoreFilters = () => {
           <CheckBox4MF>
             <h2>편의시설</h2>
             <div>
-              <label>
-                <div>
-                  <span>
-                    <input type="checkbox"></input>
-                  </span>
-                  <span>주방</span>
-                </div>
+              <label class="container">
+                주방
+                <input type="checkbox"></input>
+                <span class="checkmark">&#10003;</span>
               </label>
-              <label>
-                <div>
-                  <span>
-                    <input type="checkbox"></input>
-                  </span>
-                  <span>샴푸</span>
-                </div>
+              <label class="container">
+                샴푸
+                <input type="checkbox"></input>
+                <span class="checkmark">&#10003;</span>
               </label>
-              <label>
-                <div>
-                  <span>
-                    <input type="checkbox"></input>
-                  </span>
-                  <span>난방</span>
-                </div>
+              <label class="container">
+                난방
+                <input type="checkbox"></input>
+                <span class="checkmark">&#10003;</span>
               </label>
-              <label>
-                <div>
-                  <span>
-                    <input type="checkbox"></input>
-                  </span>
-                  <span>에어컨</span>
-                </div>
+              <label class="container">
+                에어컨
+                <input type="checkbox"></input>
+                <span class="checkmark">&#10003;</span>
               </label>
             </div>
             <button>편의시설 모두 보기</button>
@@ -707,21 +722,15 @@ const MoreFilters = () => {
           <CheckBox4MF>
             <h2>숙소 이용규칙</h2>
             <div>
-              <label>
-                <div>
-                  <span>
-                    <input type="checkbox"></input>
-                  </span>
-                  <span>반려동물 입실 가능</span>
-                </div>
+              <label class="container">
+                반려동물 입실 가능
+                <input type="checkbox"></input>
+                <span class="checkmark">&#10003;</span>
               </label>
-              <label>
-                <div>
-                  <span>
-                    <input type="checkbox"></input>
-                  </span>
-                  <span>흡연 가능</span>
-                </div>
+              <label class="container">
+                흡연 가능
+                <input type="checkbox"></input>
+                <span class="checkmark">&#10003;</span>
               </label>
             </div>
           </CheckBox4MF>

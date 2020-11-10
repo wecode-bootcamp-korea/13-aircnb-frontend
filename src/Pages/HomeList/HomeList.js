@@ -1,22 +1,170 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
-
+import MordalPortal from "./MordalPortal";
 import Card from "./Components/Card";
 import GoogleMap from "./Components/GoogleMap";
-
 import MoreFilters from "./Components/Filters/MoreFilters";
-import RoomsAndBeds from "./Components/Filters/RoomsAndBeds";
-import Price from "./Components/Filters/Price";
 import CancellationFlexibility from "./Components/Filters/CancellationFlexibility";
 import TypeOfPlace from "./Components/Filters/TypeOfPlace";
 import InstantBook from "./Components/Filters/InstantBook";
+import ModalPortal from "./MordalPortal";
+
+//함수
+const HomeList = () => {
+  const [modal, setState] = useState(false);
+
+  const useOpenModal = () => {
+    setState(true);
+    return modal;
+  };
+
+  const useCloseModal = () => {
+    setState(false);
+    return modal;
+  };
+
+  const useOpen = () => {};
+
+  const useClose = () => {};
+
+  return (
+    <>
+      {/* 필터리스트 */}
+      {modal && (
+        <ModalPortal>
+          <MoreFilters onClose={useCloseModal} />
+        </ModalPortal>
+      )}
+
+      <WrapperHL fixed={modal}>
+        <section>
+          <div>haha</div>
+        </section>
+
+        <section>
+          <div>
+            <div>
+              <div>
+                <Filter>
+                  <p>
+                    300개 이상의 숙소 · 11월 20일 - 12월 14일 (±3일) · 게스트
+                    3명
+                  </p>
+                  <h1>제주시의 숙소</h1>
+                  <div className="btns">
+                    <div>
+                      <div className="btnFilter">
+                        <Button onClick={useOpenModal}>
+                          <span>유연한 환불 정책</span>
+                        </Button>
+                      </div>
+                      <div className="modalFilter">
+                        {modal && (
+                          <ModalPortal>
+                            <CancellationFlexibility />
+                          </ModalPortal>
+                        )}
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="btnFilter">
+                        <Button onClick={useOpenModal}>
+                          <span>숙소 유형</span>
+                        </Button>
+                      </div>
+                      <div className="modalFilter">
+                        {modal && (
+                          <ModalPortal>
+                            <TypeOfPlace />
+                          </ModalPortal>
+                        )}
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="btnFilter">
+                        <Button>
+                          <span>요금</span>
+                        </Button>
+                      </div>
+                      <div className="modalFilter"></div>
+                    </div>
+
+                    <div>
+                      <div className="btnFilter">
+                        <Button onClick={useOpenModal}>
+                          <span>즉시 예약</span>
+                        </Button>
+                      </div>
+                      <div className="modalFilter">
+                        {modal && (
+                          <ModalPortal>
+                            <InstantBook />
+                          </ModalPortal>
+                        )}
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="btnFilter">
+                        <Button onClick={useOpenModal}>
+                          <span>필터 추가하기</span>
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </Filter>
+              </div>
+
+              <div>
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+              </div>
+            </div>
+
+            <div className="map">
+              <GoogleMap />
+            </div>
+          </div>
+
+          <div></div>
+        </section>
+
+        <section>
+          <div></div>
+        </section>
+      </WrapperHL>
+    </>
+  );
+};
+
+export default HomeList;
 
 //스타일
 const WrapperHL = styled.div`
   width: 98vw;
   height: 100%;
-  position: relative;
-  /* position: fixed; */
+  position: ${(props) => (props.fixed ? "fixed" : "relative")};
+  /* Morefilters 생길 때 이것도 변경되게 하기 */
   & > section:first-child {
     position: fixed;
     top: 0;
@@ -96,10 +244,10 @@ const Filter = styled.div`
     & > div {
       & > .btnFilter {
         margin-right: 5px;
-        position: relative;
         & > .modalFilter {
-          position: absolute;
-          top: 50px;
+          position: relative;
+          background-color: black;
+          top: 10px;
           left: 0;
           border-radius: 13px;
           box-shadow: rgba(0, 0, 0, 0.15) 0px 10px 37px;
@@ -137,126 +285,3 @@ const Button = styled.button`
     line-height: 18px;
   }
 `;
-
-const MD = () => {
-  return <MoreFilters />;
-};
-
-//함수
-const HomeList = () => {
-  return (
-    <>
-      {/* 필터리스트 */}
-      {/* <MoreFilters /> */}
-      <WrapperHL>
-        <section>
-          <div>haha</div>
-        </section>
-
-        <section>
-          <div>
-            <div>
-              <div>
-                <Filter>
-                  <p>
-                    300개 이상의 숙소 · 11월 20일 - 12월 14일 (±3일) · 게스트
-                    3명
-                  </p>
-                  <h1>제주시의 숙소</h1>
-                  <div className="btns">
-                    <div>
-                      <div className="btnFilter">
-                        <Button>
-                          <span>유연한 환불 정책</span>
-                        </Button>
-                        {/* <div className="modalFilter">
-                          <CancellationFlexibility />
-                        </div> */}
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="btnFilter">
-                        <Button>
-                          <span>숙소 유형</span>
-                        </Button>
-                      </div>
-                      <div className="modalFilter">
-                        <TypeOfPlace />
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="btnFilter">
-                        <Button>
-                          <span>요금</span>
-                        </Button>
-                      </div>
-                      {/* <div className="modalFilter">
-                        <Price />
-                      </div> */}
-                    </div>
-
-                    <div>
-                      <div className="btnFilter">
-                        <Button>
-                          <span>즉시 예약</span>
-                        </Button>
-                      </div>
-                      {/* <div className="modalFilter">
-                        <InstantBook />
-                      </div> */}
-                    </div>
-
-                    <div>
-                      <div className="btnFilter">
-                        <Button>
-                          <span>필터 추가하기</span>
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </Filter>
-              </div>
-
-              <div>
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-              </div>
-            </div>
-
-            <div className="map">
-              <GoogleMap />
-            </div>
-          </div>
-
-          <div></div>
-        </section>
-
-        <section>
-          <div></div>
-        </section>
-      </WrapperHL>
-    </>
-  );
-};
-
-export default HomeList;

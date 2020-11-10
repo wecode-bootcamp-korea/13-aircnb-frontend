@@ -4,8 +4,7 @@ import styled from "styled-components";
 const WrapperCF = styled.div`
   & > div {
     border-radius: 13px;
-    min-width: 330px;
-    max-width: 360px;
+    width: 360px;
     height: auto;
     background-color: white;
     opacity: 1;
@@ -14,7 +13,7 @@ const WrapperCF = styled.div`
 
     & > section:first-child {
       max-width: 360px;
-      height: auto;
+      height: 109px;
       border-bottom: 1px solid rgb(235, 235, 235);
       padding: 20px;
     }

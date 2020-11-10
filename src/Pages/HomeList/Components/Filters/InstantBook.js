@@ -4,7 +4,7 @@ import styled from "styled-components";
 const WrapperIB = styled.div`
   & > div {
     border-radius: 13px;
-    max-width: 360px;
+    width: 360px;
     height: auto;
     background-color: white;
     opacity: 1;
