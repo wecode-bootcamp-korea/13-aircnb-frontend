@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import styled from "styled-components";
 
@@ -25,7 +24,6 @@ const SingleRule = styled.div`
   display: flex;
 
   img {
-    /* border: 1px solid red; */
     width: 24px;
     height: 24px;
     margin: 6px 10px 14px 0;

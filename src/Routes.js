@@ -28,7 +28,9 @@ const Routes = () => {
             <Route exact path="/nav" component={Nav} />
             <Route exact path="/main" component={Main} />
             <Route exact path="/homebooking" component={HomeBooking} />
+            <Route exact path="/homebooking/:id" component={HomeBooking} />
             <Route exact path="/homedetails" component={HomeDetails} />
+            <Route exact path="/homedetails/:id" component={HomeDetails} />
             <Route exact path="/homelist" component={HomeList} />
           </ThemeProvider>
         </Switch>

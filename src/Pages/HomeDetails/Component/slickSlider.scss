@@ -1,0 +1,18 @@
+.slickImg {
+  max-height: 500px;
+}
+
+.slick-prev::before, .slick-next::before{
+  font-size: 40px;
+  color: gray;
+}
+
+.slick-prev::before {
+  position: relative;
+  right: 40px;
+}
+
+.slick-next::before {
+  position: relative;
+  left: 40px;
+}
