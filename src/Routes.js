@@ -19,11 +19,11 @@ const Routes = () => {
       <Router>
         <ThemeProvider theme={theme}>
           <GlobalStyle />
+          {/* <Nav /> */}
+          <Route path="/" component={Nav} />
           <Switch>
-            <Nav />
-            {/* <Route path="/" component={Nav} /> */}
             <MainContents>
-              <Route exact path="/" component={Main} />
+              <Route path="/main" component={Main} />
               <Route exact path="/homebooking" component={HomeBooking} />
               <Route exact path="/homebooking" component={HomeBooking} />
               <Route exact path="/homebooking/:id" component={HomeBooking} />
@@ -38,9 +38,11 @@ const Routes = () => {
   );
 };
 
-const MainContents = styled.main`
-  position: absolute;
+const MainContents = styled.section`
+  border: 1px solid red;
+  position: relative;
   top: 80px;
+  z-index: 1;
 `;
 
 export default Routes;
