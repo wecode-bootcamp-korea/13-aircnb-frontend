@@ -4,7 +4,12 @@ import reset from "styled-reset";
 const GlobalStyle = createGlobalStyle`
   ${reset}
   
-  * {box-sizing: border-box;}
+  * {
+    box-sizing: border-box;
+    &:focus {
+      outline: 0;
+    }
+  }
   
   body {
       margin: 0;
@@ -20,6 +25,20 @@ const GlobalStyle = createGlobalStyle`
 
   a {
       text-decoration: none;
+      &:hover{
+        text-decoration: none;  
+      }
+  }
+
+  button {
+    outline: 0;
+    &:focus{
+      outline:0;
+    }
+  }
+
+  button {
+    outline: none;
   }
 `;
 
