@@ -178,6 +178,7 @@ export const InputForm = styled.div`
 export const Footer = styled.div`
   border-top: 1px solid #ddd;
   padding: 16px 0;
+  height: 72px;
 
   > div {
     &:first-child {
@@ -190,8 +191,10 @@ export const Footer = styled.div`
       }
     }
     &:last-child {
-      margin-top: 24px;
       span {
+        cursor: pointer;
+        margin-bottom: 24px;
+
         &:first-child {
           color: ${({ theme }) => theme.subColor};
           font-weight: 200;
@@ -199,10 +202,10 @@ export const Footer = styled.div`
 
         &:last-child {
           font-size: 14px;
+          line-height: 40px;
           color: ${({ theme }) => theme.subColor};
           font-weight: 700;
           margin-left: 10px;
-          cursor: pointer;
         }
       }
     }
