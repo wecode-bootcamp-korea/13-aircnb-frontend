@@ -15,11 +15,6 @@
         "beds": 2,
         "rooms": 2,
         "bathrooms": 1,
-        "bedTypes":{
-          "icon": "https://www.flaticon.com/svg/static/icons/svg/3030/3030336.svg",
-          "rooms": "1번 침실",
-          "beds": 1
-        },
         "imgUrl": [
           "https://a0.muscache.com/im/pictures/2f3f3e94-976b-4eba-86da-5a2222f76783.jpg?aki_policy=xx_large",
           "https://a0.muscache.com/im/pictures/91351c61-1fab-4709-83fc-aff26e08d327.jpg?aki_policy=large",
@@ -31,16 +26,10 @@
         "review": {
           "avr_score": 4.65,
           "reviews": 62
-          
-        },
-        "hostInfo": {
-          "hostId": 1,
-          "superHost": true,
-          "varified": true
         }
       },
       {
-        "id": 1,
+        "id": 55,
         "name": "편안한 느낌의 제주시 감성숙소",
         "province": "제주특별자치도",
         "city": "제주시",
@@ -54,11 +43,6 @@
         "beds": 2,
         "rooms": 2,
         "bathrooms": 1,
-        "bedTypes":{
-          "icon": "https://www.flaticon.com/svg/static/icons/svg/3030/3030336.svg",
-          "rooms": "1번 침실",
-          "beds": 1
-        },
         "imgUrl": [
           "https://a0.muscache.com/im/pictures/2f3f3e94-976b-4eba-86da-5a2222f76783.jpg?aki_policy=xx_large",
           "https://a0.muscache.com/im/pictures/91351c61-1fab-4709-83fc-aff26e08d327.jpg?aki_policy=large",
@@ -66,46 +50,38 @@
           "https://a0.muscache.com/im/pictures/d8e199bf-a26f-4f87-8ccd-f1f1d0b300eb.jpg?aki_policy=large",
           "https://a0.muscache.com/im/pictures/be6e7eb5-efa0-48ca-b19e-3491146f5d52.jpg?aki_policy=large"
         ],
-        "facilities": [
-          {
-            "type": "주방"
-          },
-          {
-            "type": "건물 내 무료 주차"
-          },
-          {
-            "type": "노트북 작업 공간"
-          },
-          {
-            "type": "세탁기"
-          },
-          {
-            "type": "난방"
-          },
-          {
-            "type": "무선 인터넷"
-          },
-          {
-            "type": "헤어드라이어"
-          },
-          {
-            "type": "옷걸이"
-          },
-          {
-            "type": "TV"
-          },
-          {
-            "type": "필수품목"
-          }
-        ],
+        
         "review": {
           "avr_score": 4.65,
           "reviews": 62
-        },
-        "hostInfo": {
-          "hostId": 1,
-          "superHost": true,
-          "varified": true
+        }
+      },
+      {
+        "id": 13,
+        "name": "편안한 느낌의 제주시 감성숙소",
+        "province": "제주특별자치도",
+        "city": "제주시",
+        "address": "애월읍 한동리 1002",
+        "latitude": 37.506674,
+        "longitude": 127.053459,
+        "price": 394800,
+        "discountPrice": 323000,
+        "subcategory": "아파트",
+        "capacity": 2,
+        "beds": 2,
+        "rooms": 2,
+        "bathrooms": 1,
+        "imgUrl": [
+          "https://a0.muscache.com/im/pictures/2f3f3e94-976b-4eba-86da-5a2222f76783.jpg?aki_policy=xx_large",
+          "https://a0.muscache.com/im/pictures/91351c61-1fab-4709-83fc-aff26e08d327.jpg?aki_policy=large",
+          "https://a0.muscache.com/im/pictures/9b2cd826-e58b-441c-8040-470e76eba528.jpg?aki_policy=large",
+          "https://a0.muscache.com/im/pictures/d8e199bf-a26f-4f87-8ccd-f1f1d0b300eb.jpg?aki_policy=large",
+          "https://a0.muscache.com/im/pictures/be6e7eb5-efa0-48ca-b19e-3491146f5d52.jpg?aki_policy=large"
+        ],
+        
+        "review": {
+          "avr_score": 4.65,
+          "reviews": 62
         }
       }
     ]

@@ -1,7 +1,98 @@
 import React from "react";
 import styled from "styled-components";
 
+const TypeOfPlace = ({ onClose }) => {
+  return (
+    <WrapperTOP>
+      <div id="window" onClick={onClose}>
+        <div>
+          <section>
+            <CheckBox4TOP>
+              <div>
+                <label>
+                  <div>
+                    <div className="checkbox">
+                      <span>
+                        <input type="checkbox"></input>
+                      </span>
+                    </div>
+                    <div>
+                      <span>집 전체</span>
+                      <p>집 전체를 단독으로 사용합니다</p>
+                    </div>
+                  </div>
+                </label>
+                <label>
+                  <div>
+                    <div className="checkbox">
+                      <span>
+                        <input type="checkbox"></input>
+                      </span>
+                    </div>
+                    <div>
+                      <span>개인실</span>
+                      <p>
+                        침실은 단독으로 쓰고, 이외의 공간은 호스트나 다른
+                        게스트와 함께 이용할 수도 있습니다.
+                      </p>
+                    </div>
+                  </div>
+                </label>
+                <label>
+                  <div>
+                    <div className="checkbox">
+                      <span>
+                        <input type="checkbox"></input>
+                      </span>
+                    </div>
+                    <div>
+                      <span>호텔 객실</span>
+                      <p>
+                        부티크 호텔, 호스텔 등의 개인실이나 다인실을 이용합니다
+                      </p>
+                    </div>
+                  </div>
+                </label>
+                <label>
+                  <div>
+                    <div className="checkbox">
+                      <span>
+                        <input type="checkbox"></input>
+                      </span>
+                    </div>
+                    <div>
+                      <span>다인실</span>
+                      <p>
+                        사적 공간 없이, 침실이나 욕실 등을 호스트나 다른
+                        게스트와 함께 이용합니다
+                      </p>
+                    </div>
+                  </div>
+                </label>
+              </div>
+            </CheckBox4TOP>
+          </section>
+          <section>
+            <div>
+              <button>지우기</button>
+              <button>저장</button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </WrapperTOP>
+  );
+};
+
+export default TypeOfPlace;
+
 const WrapperTOP = styled.div`
+  #window {
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent;
+  }
+
   & > div {
     border-radius: 13px;
     width: 375px;
@@ -152,86 +243,3 @@ const CheckBox4TOP = styled.div`
     }
   }
 `;
-
-const TypeOfPlace = () => {
-  return (
-    <WrapperTOP>
-      <div>
-        <section>
-          <CheckBox4TOP>
-            <div>
-              <label>
-                <div>
-                  <div className="checkbox">
-                    <span>
-                      <input type="checkbox"></input>
-                    </span>
-                  </div>
-                  <div>
-                    <span>집 전체</span>
-                    <p>집 전체를 단독으로 사용합니다</p>
-                  </div>
-                </div>
-              </label>
-              <label>
-                <div>
-                  <div className="checkbox">
-                    <span>
-                      <input type="checkbox"></input>
-                    </span>
-                  </div>
-                  <div>
-                    <span>개인실</span>
-                    <p>
-                      침실은 단독으로 쓰고, 이외의 공간은 호스트나 다른 게스트와
-                      함께 이용할 수도 있습니다.
-                    </p>
-                  </div>
-                </div>
-              </label>
-              <label>
-                <div>
-                  <div className="checkbox">
-                    <span>
-                      <input type="checkbox"></input>
-                    </span>
-                  </div>
-                  <div>
-                    <span>호텔 객실</span>
-                    <p>
-                      부티크 호텔, 호스텔 등의 개인실이나 다인실을 이용합니다
-                    </p>
-                  </div>
-                </div>
-              </label>
-              <label>
-                <div>
-                  <div className="checkbox">
-                    <span>
-                      <input type="checkbox"></input>
-                    </span>
-                  </div>
-                  <div>
-                    <span>다인실</span>
-                    <p>
-                      사적 공간 없이, 침실이나 욕실 등을 호스트나 다른 게스트와
-                      함께 이용합니다
-                    </p>
-                  </div>
-                </div>
-              </label>
-            </div>
-          </CheckBox4TOP>
-        </section>
-        <section>
-          <div>
-            <button>지우기</button>
-            <button>저장</button>
-          </div>
-        </section>
-      </div>
-    </WrapperTOP>
-  );
-};
-
-export default TypeOfPlace;

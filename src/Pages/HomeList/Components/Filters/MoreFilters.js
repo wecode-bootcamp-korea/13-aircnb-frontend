@@ -516,8 +516,6 @@ const CheckBox4MF = styled.div`
 `;
 
 const MoreFilters = ({ onClose }) => {
-  const [getValue, setState] = useState("");
-
   return (
     <WrapperMF>
       <div>

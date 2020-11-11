@@ -1,7 +1,55 @@
 import React from "react";
 import styled from "styled-components";
 
+const CancellationFlexibility = ({ onClose }) => {
+  return (
+    <WrapperCF>
+      <div id="window" onClick={onClose}>
+        <div>
+          <section>
+            <Toggle>
+              <div>
+                <div>
+                  <p>유연한 환불 정책을 제공하는 숙소만 검색 결과에 표시</p>
+                </div>
+                <div>
+                  <form action="#">
+                    <div class="switch">
+                      <input
+                        id="switch-1"
+                        type="checkbox"
+                        class="switch-input"
+                      />
+                      <label for="switch-1" class="switch-label">
+                        Switch
+                      </label>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </Toggle>
+          </section>
+          <section>
+            <div>
+              <button>지우기</button>
+              <button>저장</button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </WrapperCF>
+  );
+};
+
+export default CancellationFlexibility;
+
 const WrapperCF = styled.div`
+  #window {
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent;
+  }
+
   & > div {
     border-radius: 13px;
     width: 360px;
@@ -146,39 +194,3 @@ const Toggle = styled.div`
     }
   }
 `;
-
-const CancellationFlexibility = () => {
-  return (
-    <WrapperCF>
-      <div>
-        <section>
-          <Toggle>
-            <div>
-              <div>
-                <p>유연한 환불 정책을 제공하는 숙소만 검색 결과에 표시</p>
-              </div>
-              <div>
-                <form action="#">
-                  <div class="switch">
-                    <input id="switch-1" type="checkbox" class="switch-input" />
-                    <label for="switch-1" class="switch-label">
-                      Switch
-                    </label>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </Toggle>
-        </section>
-        <section>
-          <div>
-            <button>지우기</button>
-            <button>저장</button>
-          </div>
-        </section>
-      </div>
-    </WrapperCF>
-  );
-};
-
-export default CancellationFlexibility;

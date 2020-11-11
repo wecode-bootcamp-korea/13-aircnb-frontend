@@ -1,7 +1,55 @@
 import React from "react";
 import styled from "styled-components";
 
+const InstantBook = ({ onClose }) => {
+  return (
+    <WrapperIB>
+      <div id="window" onClick={onClose}>
+        <div>
+          <section>
+            <Toggle>
+              <div>
+                <div>
+                  <h3>즉시 예약</h3>
+                  <p>호스트 승인을 기다릴 필요 없이 예약할 수 있는 숙소</p>
+                </div>
+                <div>
+                  <form action="#">
+                    <div class="switch">
+                      <input
+                        id="switch-1"
+                        type="checkbox"
+                        class="switch-input"
+                      />
+                      <label for="switch-1" class="switch-label">
+                        Switch
+                      </label>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </Toggle>
+          </section>
+          <section>
+            <div>
+              <button>지우기</button>
+              <button>저장</button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </WrapperIB>
+  );
+};
+
+export default InstantBook;
+
 const WrapperIB = styled.div`
+  #window {
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent;
+  }
   & > div {
     border-radius: 13px;
     width: 360px;
@@ -146,40 +194,3 @@ const Toggle = styled.div`
     }
   }
 `;
-
-const InstantBook = () => {
-  return (
-    <WrapperIB>
-      <div>
-        <section>
-          <Toggle>
-            <div>
-              <div>
-                <h3>즉시 예약</h3>
-                <p>호스트 승인을 기다릴 필요 없이 예약할 수 있는 숙소</p>
-              </div>
-              <div>
-                <form action="#">
-                  <div class="switch">
-                    <input id="switch-1" type="checkbox" class="switch-input" />
-                    <label for="switch-1" class="switch-label">
-                      Switch
-                    </label>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </Toggle>
-        </section>
-        <section>
-          <div>
-            <button>지우기</button>
-            <button>저장</button>
-          </div>
-        </section>
-      </div>
-    </WrapperIB>
-  );
-};
-
-export default InstantBook;

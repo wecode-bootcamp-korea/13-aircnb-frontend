@@ -11,32 +11,49 @@ import ModalPortal from "./MordalPortal";
 
 //함수
 const HomeList = () => {
-  const [modal, setState] = useState(false);
+  const [modal, setModal] = useState(false);
+  const [filter, setFilter] = useState(0);
 
   const useOpenModal = () => {
-    setState(true);
-    return modal;
+    setModal(true);
   };
 
   const useCloseModal = () => {
-    setState(false);
-    return modal;
+    setModal(false);
   };
 
-  const useOpen = () => {};
-
-  const useClose = () => {};
+  const useOpenFilter = (e) => {
+    switch (e.target.id) {
+      case "1":
+        setFilter(1);
+        break;
+      case "2":
+        setFilter(2);
+        break;
+      case "3":
+        setFilter(3);
+        break;
+      case "4":
+        setFilter(4);
+        break;
+      case "5":
+        setFilter(5);
+        break;
+      default:
+        console.log("It works");
+    }
+  };
 
   return (
     <>
       {/* 필터리스트 */}
-      {modal && (
+      {filter === 5 && modal && (
         <ModalPortal>
           <MoreFilters onClose={useCloseModal} />
         </ModalPortal>
       )}
 
-      <WrapperHL fixed={modal}>
+      <WrapperHL fixed={modal} filter={filter}>
         <section>
           <div>haha</div>
         </section>
@@ -53,64 +70,84 @@ const HomeList = () => {
                   <h1>제주시의 숙소</h1>
                   <div className="btns">
                     <div>
-                      <div className="btnFilter">
-                        <Button onClick={useOpenModal}>
+                      <div
+                        id="1"
+                        className="btnFilter"
+                        name="1"
+                        onClick={(useOpenFilter, useOpenModal)}
+                      >
+                        <Button>
                           <span>유연한 환불 정책</span>
                         </Button>
-                      </div>
-                      <div className="modalFilter">
-                        {modal && (
-                          <ModalPortal>
-                            <CancellationFlexibility />
-                          </ModalPortal>
-                        )}
+                        <div className="filterModal">
+                          {filter === 1 && modal && (
+                            <CancellationFlexibility onClose={useCloseModal} />
+                          )}
+                        </div>
                       </div>
                     </div>
 
                     <div>
-                      <div className="btnFilter">
-                        <Button onClick={useOpenModal}>
+                      <div
+                        id="2"
+                        className="btnFilter"
+                        name="2"
+                        onClick={useOpenFilter}
+                      >
+                        <Button>
                           <span>숙소 유형</span>
                         </Button>
-                      </div>
-                      <div className="modalFilter">
-                        {modal && (
-                          <ModalPortal>
-                            <TypeOfPlace />
-                          </ModalPortal>
-                        )}
+                        <div className="filterModal">
+                          {filter === 2 && modal && (
+                            <TypeOfPlace onClose={useCloseModal} />
+                          )}
+                        </div>
                       </div>
                     </div>
 
                     <div>
-                      <div className="btnFilter">
+                      <div
+                        id="3"
+                        className="btnFilter"
+                        name="3"
+                        onClick={useOpenFilter}
+                      >
                         <Button>
                           <span>요금</span>
                         </Button>
+                        <div className="filterModal"></div>
                       </div>
-                      <div className="modalFilter"></div>
                     </div>
 
                     <div>
-                      <div className="btnFilter">
-                        <Button onClick={useOpenModal}>
+                      <div
+                        id="4"
+                        className="btnFilter"
+                        name="4"
+                        onClick={useOpenFilter}
+                      >
+                        <Button>
                           <span>즉시 예약</span>
                         </Button>
-                      </div>
-                      <div className="modalFilter">
-                        {modal && (
-                          <ModalPortal>
-                            <InstantBook />
-                          </ModalPortal>
-                        )}
+                        <div className="filterModal">
+                          {filter === 4 && modal && (
+                            <InstantBook onClose={useCloseModal} />
+                          )}
+                        </div>
                       </div>
                     </div>
 
                     <div>
-                      <div className="btnFilter">
-                        <Button onClick={useOpenModal}>
+                      <div
+                        id="5"
+                        className="btnFilter"
+                        name="5"
+                        onClick={(useOpenModal, useOpenFilter)}
+                      >
+                        <Button>
                           <span>필터 추가하기</span>
                         </Button>
+                        <div className="filterModal"></div>
                       </div>
                     </div>
                   </div>
@@ -118,17 +155,6 @@ const HomeList = () => {
               </div>
 
               <div>
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
                 <Card />
                 <Card />
                 <Card />
@@ -241,18 +267,14 @@ const Filter = styled.div`
   & > div.btns {
     display: flex;
     margin: 20px 0;
+    width: 540px;
     & > div {
       & > .btnFilter {
         margin-right: 5px;
-        & > .modalFilter {
-          position: relative;
-          background-color: black;
-          top: 10px;
-          left: 0;
-          border-radius: 13px;
-          box-shadow: rgba(0, 0, 0, 0.15) 0px 10px 37px;
-          height: auto;
-          z-index: 300;
+        position: relative;
+        & > .filterModal {
+          position: absolute;
+          top: 20px;
         }
       }
     }
