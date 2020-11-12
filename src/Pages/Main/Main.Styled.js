@@ -6,7 +6,7 @@ export const MainContainer = styled.div`
   top: 0;
   left: 0;
   min-width: 100%;
-  min-height: 100%;
+  /* min-height: 100%; */
 `;
 
 export const Topper = styled.div`
@@ -187,10 +187,11 @@ export const MainHomeType = styled.div`
     }
   }
 `;
+
 export const Footer = styled.section`
   border-top: 1px solid #ddd;
   background-color: #f3f3f3;
-  padding: 0 80px;
+  padding: 0 80px 40px;
   ${flexSet(null, null, "column")}
   > div {
     &:first-child {
@@ -224,9 +225,23 @@ export const Footer = styled.section`
     }
 
     &:last-child {
+      padding-top: 30px;
       ${flexSet("center", "center", "column")}
       height: 123px;
       font-size: 14px;
+
+      figure {
+        margin: 10px 0;
+        width: 64px;
+        height: 64px;
+
+        img {
+          min-width: 100%;
+          height: 100%;
+          transform: translateX(-10%);
+        }
+      }
+
       ul {
         padding-bottom: 24px;
         li {
