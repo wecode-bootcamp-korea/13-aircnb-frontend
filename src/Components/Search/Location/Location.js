@@ -1,5 +1,8 @@
 import React, { useRef, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+
+// LINK redux action
+import { refMapMenu } from "../../../Redux/Actions/Index";
 
 //LINK style
 import { Map } from "./Location.Styled";
@@ -7,14 +10,11 @@ import { Map } from "./Location.Styled";
 // LINK Icons
 import map from "../../../Images/Search/map.svg";
 import pin from "../../../Images/Search/pin.svg";
-import { refMapMenu } from "../../../Redux/Actions/Index";
 
 const Location = ({ searchResult, current, address, btnActive }) => {
   console.log("------------location-------------");
 
   // ANCHOR redux
-  const modalReducer = useSelector(({ modalReducer }) => modalReducer);
-  const mapMenu = modalReducer.mapMenu;
   const dispatch = useDispatch();
   const refMapMenuAction = (menu) => dispatch(refMapMenu(menu));
 
@@ -28,6 +28,8 @@ const Location = ({ searchResult, current, address, btnActive }) => {
     navigator.geolocation.getCurrentPosition((position) => {
       const { coords } = position;
       current(coords.latitude, coords.longitude);
+      //NOTE originally this should be needed but this time, doesn't use this
+      // takeLocationAction(coords.latitude, coords.longitude)
     });
   };
 
@@ -40,18 +42,18 @@ const Location = ({ searchResult, current, address, btnActive }) => {
   return (
     <Map ref={mapMenuRef} btnActive={btnActive}>
       <ul>
-        {searchResult.length ? (
-          searchResult.map((address, idx) => (
+        {searchResult?.length ? (
+          searchResult.map((stay) => (
             <li
-              key={idx}
-              data-id={address.id}
-              data-name={address.name}
+              key={stay.id}
+              data-id={stay.id}
+              data-name={stay.full_address}
               onClick={getAddress}
             >
               <div>
                 <img src={pin} alt="location" />
               </div>
-              <div>{address.name}</div>
+              <div>{stay.full_address}</div>
             </li>
           ))
         ) : (

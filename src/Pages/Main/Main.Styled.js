@@ -6,7 +6,7 @@ export const MainContainer = styled.div`
   top: 0;
   left: 0;
   min-width: 100%;
-  min-height: 100%;
+  /* min-height: 100%; */
 `;
 
 export const Topper = styled.div`
@@ -80,7 +80,7 @@ export const Topper = styled.div`
 
 export const MainLocationCategory = styled.div`
   width: 100%;
-  height: 240px;
+  height: auto;
   padding: 25px 80px 40px;
   > ul {
     > li {
@@ -115,38 +115,12 @@ export const MainLocationCategory = styled.div`
     }
   }
   @media only screen and (max-width: 1350px) {
-    padding: 25px 80px 40px;
+    height: auto;
+    padding: 40px;
 
     > ul {
       > li {
-        width: 25%;
-        display: inline-block;
-        margin-top: 15px;
-        > div {
-          ${flexSet("flex-start", "center")}
-          figure {
-            width: 72px;
-            height: 72px;
-
-            img {
-              width: 100%;
-              height: 100%;
-              border-radius: 10px;
-            }
-          }
-          > div {
-            ${flexSet("center", "flex-start", "column")}
-            margin-left: 15px;
-            span {
-              &:first-child {
-                font-weight: 700;
-              }
-              &:last-child {
-                line-height: 30px;
-              }
-            }
-          }
-        }
+        width: 33%;
       }
     }
   }
@@ -190,10 +164,34 @@ export const MainHomeType = styled.div`
       }
     }
   }
+  @media only screen and (max-width: 1350px) {
+    padding: 0 40px;
+    > div {
+      &:last-child {
+        figure {
+          width: 334px;
+          height: 334px;
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 800px) {
+    padding: 0 40px;
+    > div {
+      &:last-child {
+        figure {
+          width: 250px;
+          height: 250px;
+        }
+      }
+    }
+  }
 `;
+
 export const Footer = styled.section`
-  background-color: #ededed;
-  padding: 0 80px;
+  border-top: 1px solid #ddd;
+  background-color: #f3f3f3;
+  padding: 0 80px 40px;
   ${flexSet(null, null, "column")}
   > div {
     &:first-child {
@@ -227,15 +225,56 @@ export const Footer = styled.section`
     }
 
     &:last-child {
+      padding-top: 30px;
       ${flexSet("center", "center", "column")}
       height: 123px;
       font-size: 14px;
+
+      figure {
+        margin: 10px 0;
+        width: 64px;
+        height: 64px;
+
+        img {
+          min-width: 100%;
+          height: 100%;
+          transform: translateX(-10%);
+        }
+      }
+
       ul {
         padding-bottom: 24px;
         li {
           display: inline-block;
           margin-top: 10px;
           margin-right: 20px;
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 1350px) {
+    padding: 0 40px;
+    > div {
+      &:first-child {
+        ${flexSet("center", "flex-start", "column")}
+        border-bottom: 0;
+        padding: 20px 0;
+        > div {
+          padding-top: 20px;
+        }
+
+        ul {
+          padding-bottom: 24px;
+          margin-bottom: 24px;
+          border-bottom: 1px solid #ddd;
+
+          &:last-child {
+            padding-bottom: 24px;
+            margin-bottom: 0;
+          }
+          li {
+            display: inline-block;
+          }
         }
       }
     }

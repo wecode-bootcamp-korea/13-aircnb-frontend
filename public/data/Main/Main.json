@@ -1,0 +1,98 @@
+{
+  "mainLocationCategories": [
+    {
+      "name": "부산",
+      "desc": "차로 5시간 거리",
+      "img": "/Image/desert.svg"
+    },
+    {
+      "name": "속초시",
+      "desc": "차로 2.5시간 거리",
+      "img": "/Image/farm.svg"
+    },
+    {
+      "name": "완주군",
+      "desc": "차로 2.5시간 거리",
+      "img": "/Image/island.svg"
+    },
+    {
+      "name": "양양군",
+      "desc": "차로 2.5시간 거리",
+      "img": "/Image/landscape.svg"
+    },
+    {
+      "name": "전주시",
+      "desc": "차로 3시간 거리",
+      "img": "/Image/pyramids.svg"
+    },
+    {
+      "name": "강릉시",
+      "desc": "차로 3시간 거리",
+      "img": "/Image/sealife.svg"
+    },
+    {
+      "name": "경주시",
+      "desc": "차로 4시간 거리",
+      "img": "/Image/village.svg"
+    },
+    {
+      "name": "고성군",
+      "desc": "차로 2.5시간 거리",
+      "img": "/Image/winter.svg"
+    }
+  ],
+  "mainHomeType": [
+    { "name": "집전체", "img": "/Image/house1.jpg" },
+    { "name": "통나무집 및 전원주택", "img": "/Image/house2.jpg" },
+    { "name": "독특한 공간", "img": "/Image/house3.jpg" },
+    { "name": "반려동물 환영", "img": "/Image/house4.jpg" }
+  ],
+  "footerContent": [
+    {
+      "name": "소개",
+      "items": [
+        "에어비앤비 이용 방법",
+        "뉴스룸",
+        "에어비앤비 플러스",
+        "에어비앤비 Luxe",
+        "호텔투나잇",
+        "에어비앤비 비즈니스 프로그램",
+        "올림픽",
+        "채용정보"
+      ]
+    },
+    {
+      "name": "커뮤니티",
+      "items": [
+        "다양성 및 소속감",
+        "접근성",
+        "에어비앤비 어소시에이트",
+        "구호 인력을 위한 숙소",
+        "친구 초대하기"
+      ]
+    },
+    {
+      "name": "호스팅하기",
+      "items": [
+        "숙소 호스팅",
+        "온라인 체험 호스팅하기",
+        "체험 호스팅하기",
+        "책임감 있는 호스팅",
+        "호스트 추천",
+        "Open Homes",
+        "자료 센터",
+        "커뮤니티 센터"
+      ]
+    },
+    {
+      "name": "에어비앤비 지원",
+      "items": [
+        "에어비앤비의 코로나 19 대응 방안",
+        "도움말 센터",
+        "예약 취소 옵션",
+        "에어비앤비 이웃 민원 지원",
+        "신뢰와 안전"
+      ]
+    }
+  ]
+}
