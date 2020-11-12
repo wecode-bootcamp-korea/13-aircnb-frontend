@@ -107,7 +107,10 @@ const Nav = () => {
             <Link to="/">
               <div>
                 <span>
-                  <FontAwesomeIcon icon={faAirbnb} />
+                  <img
+                    src="https://media.vlpt.us/images/jjburi/post/510cf7af-d3bb-4656-8df5-347dd74fa5b6/logo_airc&b.png"
+                    alt=""
+                  />
                 </span>
                 <span>aircnb</span>
               </div>

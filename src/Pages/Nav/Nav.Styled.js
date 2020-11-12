@@ -6,6 +6,7 @@ export const Navbar = styled.header`
   top: 0px;
   width: 100%;
   height: 80px;
+  background-color: #fff;
   z-index: 100;
 
   > section {
@@ -29,12 +30,14 @@ export const LogoSet = styled.div`
 
         span {
           &:first-child {
-            font-size: 35px;
-            color: ${primaryColor};
+            ${flexSet("center", "center")}
+            > img {
+              width: 60px;
+              height: auto;
+            }
           }
           &:last-child {
             color: ${primaryColor};
-            margin-left: 10px;
             font-size: 25px;
             font-weight: 700;
           }
@@ -60,7 +63,7 @@ export const SearchTrigger = styled.div`
           ${flexSet("space-between", "center")};
           position: absolute;
           top: 19%;
-          left: 39%;
+          left: 50%;
           width: ${active ? 600 : 300}px;
           height: 48px;
           background-color: #fff;
@@ -68,7 +71,7 @@ export const SearchTrigger = styled.div`
           border-radius: 24px;
           transition: 0.2s ease-in;
           opacity: ${active ? 0 : 1};
-          transform: translateY(${active && 40}px);
+          transform: translateX(-50%) ${active && "translateY(40px)"};
           transition: 0.2s ease;
           cursor: pointer;
 

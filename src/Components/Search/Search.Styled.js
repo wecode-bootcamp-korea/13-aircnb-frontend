@@ -70,65 +70,83 @@ const buttonStyle = (
   }
 `;
 
+export const searchMenuPreset = css`
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  transition: ease 0.3s;
+  z-index: 101;
+
+  > div {
+    padding: 0 80px;
+
+    form {
+      margin: 0 auto;
+      width: 850px;
+
+      fieldset {
+        ${flexSet("center", "center")};
+        height: 80px;
+
+        span {
+          text-align: center;
+          line-height: 80px;
+          transition: ease 0.2s;
+
+          &::before {
+            content: "";
+            position: absolute;
+            height: 2px;
+            background-color: #000;
+            border-radius: 1px;
+            top: 60px;
+            width: 18px;
+            transform: translateX(5px);
+          }
+        }
+      }
+
+      > div {
+        ${flexSet("center")}
+        transition: ease 0.2s;
+
+        > div {
+          ${flexSet("space-between", "center")};
+          border: 1px solid #ddd;
+          border-radius: 33px;
+          transition: 0.2s ease;
+        }
+      }
+    }
+  }
+`;
+
 // SECTION Styled
 export const SearchMenu = styled.div`
   ${({ searchActive, active }) => {
     return css`
-      border: 1px solid red;
-      position: absolute;
-      top: 0px;
-      width: 100%;
-      transition: ease 0.3s;
-      border: 1px solid blue;
-      z-index: 101;
+      ${searchMenuPreset}
+      background-color: #fff;
 
       > div {
-        padding: 0 80px;
-
         form {
-          margin: 0 auto;
-          width: 850px;
-
           fieldset {
-            ${flexSet("center", "center")};
-            height: 80px;
-
             span {
               transform: ${!searchActive && "translateY(-70px)"};
               opacity: ${searchActive ? 1 : 0};
-              text-align: center;
-              line-height: 80px;
-              transition: ease 0.2s;
-
-              &::before {
-                content: "";
-                position: absolute;
-                height: 2px;
-                background-color: #000;
-                border-radius: 1px;
-                top: 60px;
-                width: 18px;
-                transform: translateX(5px);
-              }
             }
           }
 
           > div {
-            ${flexSet("center")}
             height: ${searchActive ? 100 : 0}px;
-            transition: ease 0.2s;
 
             > div {
-              ${flexSet("space-between", "center")};
               width: ${searchActive ? "100%" : "300px"};
               height: ${searchActive ? "66px" : "48px"};
               transform: ${!searchActive &&
               "translate(18px, -155px) scale(0.4)"};
               opacity: ${searchActive ? 1 : 0};
-              border: 1px solid #ddd;
-              border-radius: 33px;
               background-color: ${active ? "#f8f8f8" : "#fff"};
-              transition: 0.2s ease;
             }
           }
         }

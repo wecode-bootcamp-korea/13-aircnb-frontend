@@ -109,7 +109,6 @@ const Login = ({ history }) => {
         email,
         password,
       };
-      console.log(profile);
       const response = await axios.post(SIGNIN_API_DEFAULT, profile);
       const validation = response && response.status === 200;
       !validation && new Error("cannot fetch the data");
