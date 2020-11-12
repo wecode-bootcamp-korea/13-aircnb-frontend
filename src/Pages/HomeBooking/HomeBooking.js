@@ -41,9 +41,17 @@ const HomeBooking = (props) => {
 
   const [totalPrice, setTotalPrice] = useState(0);
 
-  const [checkinDate, setCheckinDate] = useState(startDate);
-  const [checkoutDate, setCheckoutDate] = useState(endDate);
+  const [checkinDate, setCheckinDate] = useState(
+    startDate && 2020 + startDate.slice(0, 2) + startDate.slice(4, 6)
+  );
+  const [checkoutDate, setCheckoutDate] = useState(
+    endDate && 2020 + endDate.slice(0, 2) + endDate.slice(4, 6)
+  );
   const [dates, setDates] = useState(1);
+
+  const refundableDate = checkinDate
+    ? moment(checkinDate).add(8, "days").format("MM월 DD일")
+    : "예약 후 7일";
 
   const reducer = (state, action) => {
     return {
@@ -81,18 +89,14 @@ const HomeBooking = (props) => {
       }
     }
   };
-  //Backend API: `${API_GetBooking}/stay/${this.props.match.params.id}`
+  //Backend API: `${API_GetBooking}/stay/${props.match.params.id}`
   //Mockdata API: "http://localhost:3000/data/HomeBookingData.json"
   async function fetchData() {
-    const res = await fetch(
-      "http://localhost:3000/data/HomeBookingData.json"
-      //{
+    const res = await fetch(`${API_GetBooking}/stay/${props.match.params.id}`, {
       // headers: {
-      //   AUTHORIZATION:
-      //    userToken,
+      //   AUTHORIZATION: userToken,
       // },
-      //}
-    );
+    });
     const result = await res.json();
     setStay(result.stay);
   }
@@ -134,10 +138,6 @@ const HomeBooking = (props) => {
     );
     setInputValue();
   };
-
-  const refundableDate = checkinDate
-    ? moment(checkinDate).add(8, "days").format("MM월 DD일")
-    : "예약 후 7일";
 
   return (
     <StyledHomeBooking>
