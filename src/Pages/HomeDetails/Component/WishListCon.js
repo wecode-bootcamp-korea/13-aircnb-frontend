@@ -1,41 +1,39 @@
-import React, { useEffect, useState } from "react";
-import styled, { css } from "styled-components";
+import React, { createRef, useState } from "react";
+import styled from "styled-components";
 import "@fortawesome/fontawesome-free/js/all.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import WishList from "./WishList";
 
-const LISTS = [
-  {
-    img:
-      "https://a0.muscache.com/im/pictures/8c468f95-9cb3-431f-936d-d1866c03235f.jpg?im_w=720",
-    title: "서귀포",
-  },
-  {
-    img:
-      "https://a0.muscache.com/im/pictures/ce558c6e-60b7-4c8f-890b-6202210784f9.jpg?im_w=720",
-    title: "제주시",
-  },
-];
-
 const WishListCon = ({ active, handleModal }) => {
+  const LISTS = [
+    {
+      img:
+        "https://a0.muscache.com/im/pictures/8c468f95-9cb3-431f-936d-d1866c03235f.jpg?im_w=720",
+      title: "서귀포",
+    },
+    {
+      img:
+        "https://a0.muscache.com/im/pictures/ce558c6e-60b7-4c8f-890b-6202210784f9.jpg?im_w=720",
+      title: "제주시",
+    },
+  ];
+
   return (
     <StyledWishList active={active}>
       <WishListModal>
         <Header>
           <div>
-            <FontAwesomeIcon
-              icon={faTimes}
-              className="closeBtn"
-              onClick={() => handleModal(false)}
-            />
+            <span className="closeBtn" onClick={() => handleModal(false)}>
+              &times;
+            </span>
           </div>
 
           <span>목록에 저장하기</span>
         </Header>
         <Lists>
-          {LISTS.map((list) => (
-            <WishList img={list.img} title={list.title} />
+          {LISTS.map((list, idx) => (
+            <WishList key={idx} img={list.img} title={list.title} />
           ))}
         </Lists>
         <Bottom>
@@ -89,10 +87,17 @@ const Header = styled.div`
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    padding-top: 3px;
+    padding-top: 8px;
 
     &:hover {
       background-color: rgb(235, 235, 235);
+    }
+
+    .closeBtn {
+      position: relative;
+      font-size: 36px;
+      font-weight: 400;
+      margin: 0 auto;
     }
   }
 
@@ -102,16 +107,9 @@ const Header = styled.div`
     font-size: 16px;
     font-weight: 600;
   }
-
-  .closeBtn {
-    display: inline-block;
-    border-radius: 50%;
-    font-size: 30px;
-  }
 `;
 
 const Bottom = styled.div`
-  /* background-color: green; */
   height: 80px;
   width: 100%;
   border-top: 1px solid rgb(235, 235, 235);
@@ -128,6 +126,10 @@ const Bottom = styled.div`
     color: white;
     font-size: 16px;
     border-radius: 6px;
+
+    &:focus {
+      outline: none;
+    }
   }
 `;
 

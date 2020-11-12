@@ -6,39 +6,59 @@ import Review from "./Review";
 import ModalPortal from "./ModalPortal";
 import ReviewModal from "./ReviewModal";
 
-const Reviews = ({ data }) => {
-  const userReviewArr = data?.userReviews.slice(0, 6);
+const Reviews = ({ stayId }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [reviews, setReviews] = useState([]);
+  const [info, setInfo] = useState({});
+  const userReviewArr = reviews.slice(0, 6);
   // const [location, setLocation] = useState("reviews");
 
+  const API = `http://10.58.1.75:8000/review/list`;
+
+  async function fetchData() {
+    const res = await fetch(`${API}?offset=0&limit=6&stay_id=${stayId}`);
+    res.json().then((res) => {
+      setReviews(res.review_list);
+      setInfo(res.overall);
+    });
+  }
+
+  useEffect(() => {
+    fetchData();
+    console.log(info && info.overall_star);
+  }, []);
+
+  console.log(info && info.overall_star);
   return (
     <StyledReviews>
       <h3>
         <FontAwesomeIcon icon={faStar} className="starIcon" />
-        {`${data?.avr_score.toFixed(2)}점 (후기 ${data?.reviews}개)`}
+        {`${info?.overall_star?.toFixed(2)}점 (후기 ${info?.review_count}개)`}
       </h3>
       <ReviewCon>
-        {userReviewArr?.map((review, idx) => (
-          <Review
-            key={idx}
-            userImg={review.userImg}
-            userName={review.userName}
-            date={review.date}
-            detail={review.detail}
-            // location={location}
-          />
-        ))}
+        {reviews &&
+          userReviewArr?.map((review, idx) => (
+            <Review
+              key={idx}
+              userImg={review.user_img}
+              userName={review.user_name}
+              date={review.review_date}
+              detail={review.review_body}
+              // location={location}
+            />
+          ))}
       </ReviewCon>
       <ModalPortal>
         <ReviewModal
-          reviewData={data}
+          stayId={stayId}
+          // reviewData={data}
           active={isVisible}
           event={setIsVisible}
         ></ReviewModal>
       </ModalPortal>
       <ReviewBtn
         onClick={() => setIsVisible(true)}
-      >{`후기 ${data?.userReviews.length}개 모두보기`}</ReviewBtn>
+      >{`후기 ${info?.review_count}개 모두보기`}</ReviewBtn>
     </StyledReviews>
   );
 };

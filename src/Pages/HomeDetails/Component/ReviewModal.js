@@ -1,11 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled, { css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import Review from "./Review";
 
-const ReviewModal = ({ reviewData, active, event }) => {
+const LIMIT = 5;
+const ReviewModal = ({ reviewData, active, event, stayId }) => {
   const [location, setLocation] = useState("modal");
+  const [reviews, setReviews] = useState([]);
+  const [offset, setOffset] = useState(0);
+  const [fetching, setFetching] = useState(false);
+
+  // useEffect(() => {
+  // scroll event listener 등록
+  // document
+  //   .querySelector("#reviewContent")?
+  //   .addEventListener("scroll", handleScroll);
+  // return () => {
+  // scroll event listener 해제
+  // document
+  //   .querySelector("#reviewContent")?
+  //   .removeEventListener("scroll", handleScroll);
+  //   };
+  // });
+  const API = `http://10.58.1.75:8000/review/list`;
 
   const setDataFormat = (dataValue) => {
     const year = dataValue.split("-")[0];
@@ -13,9 +31,67 @@ const ReviewModal = ({ reviewData, active, event }) => {
     return `${year}년 ${month}월`;
   };
 
+  async function fetchData() {
+    const res = await fetch(`${API}?offset=0&limit=6&stay_id=${stayId}`);
+    res
+      .json()
+      .then((res) => setReviews(res.review_list), console.log("통신확인"));
+  }
+
+  useEffect(() => {
+    fetchData();
+    console.log(reviews);
+  }, []);
+
+  useEffect(() => {
+    // scroll event listener 등록
+    document
+      .querySelector("#reviewContent")
+      .addEventListener("scroll", handleScroll);
+    console.log(fetching, offset);
+    return () => {
+      // scroll event listener 해제
+      document
+        .querySelector("#reviewContent")
+        .removeEventListener("scroll", handleScroll);
+    };
+  });
+
+  const handleScroll = () => {
+    const clientHeight = document.querySelector("#reviewContent")?.clientHeight;
+    const scrollHeight = document.querySelector("#reviewContent")?.scrollHeight;
+    const scrollTop = document.querySelector("#reviewContent")?.scrollTop;
+
+    if (scrollTop + clientHeight >= scrollHeight) {
+      setOffset(Number(LIMIT) + Number(offset));
+      fetchMoreReviews();
+    }
+  };
+
+  async function fetchMoreReviews() {
+    setFetching(true);
+    const res = await fetch(
+      `http://10.58.1.75:8000/review/list?offset=${offset}&limit=${LIMIT}&stay_id=${stayId}`
+    );
+    res.json().then((res) => {
+      setReviews([...reviews, ...res.review_list]);
+      setFetching(false);
+    });
+  }
+
+  console.log(
+    "clientHeight >>",
+    document.querySelector("#reviewContent")?.clientHeight,
+    "scrollHeight >>",
+    document.querySelector("#reviewContent")?.scrollHeight,
+    "scrollTop >>",
+    document.querySelector("#reviewContent")?.scrollTop,
+    "reviews>>",
+    reviews
+  );
   return (
     <StyledReviewModal active={active}>
-      <AllReviews>
+      <AllReviews active={active}>
         <Header>
           <button onClick={() => event(false)}>
             <span>&times;</span>
@@ -28,17 +104,18 @@ const ReviewModal = ({ reviewData, active, event }) => {
               {"  "}4.55 (후기 33개)
             </span>
           </RightAside>
-          <ReviewCon>
-            {reviewData?.userReviews?.map((review, idx) => (
-              <Review
-                key={idx}
-                userImg={review.userImg}
-                userName={review.userName}
-                date={review.date}
-                detail={review.detail}
-                location={location}
-              />
-            ))}
+          <ReviewCon id="reviewContent">
+            {reviews &&
+              reviews.map((review, idx) => (
+                <Review
+                  key={idx}
+                  userImg={review.user_img}
+                  userName={review.user_name}
+                  date={review.review_date}
+                  detail={review.review_body}
+                  location={location}
+                />
+              ))}
           </ReviewCon>
         </Content>
       </AllReviews>
@@ -63,7 +140,7 @@ const StyledReviewModal = styled.div`
 `;
 
 const AllReviews = styled.div`
-  position: relative;
+  position: "relative";
   top: 15px;
   background-color: white;
   width: 970px;
@@ -89,7 +166,7 @@ const Header = styled.div`
     font-weight: 500;
 
     &:hover {
-      background-color: gray;
+      background-color: rgb(247, 247, 247);
     }
 
     &:focus {

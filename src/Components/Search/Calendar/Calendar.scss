@@ -1,134 +1,133 @@
 .SM {
+  @mixin flexSet($arg...) {
+    display: flex;
+    justify-content: #{nth($arg, 1)};
+    align-items: #{nth($arg, 2)};
+    @if length($arg) == 3 {
+      flex-direction: #{nth($arg, 3)};
+    }
+  }
   
-
-@mixin flexSet($arg...) {
-  display: flex;
-  justify-content: #{nth($arg, 1)};
-  align-items: #{nth($arg, 2)};
-  @if length($arg) == 3 {
-    flex-direction: #{nth($arg, 3)};
+  $primary-color: #fe5131;
+  $default-color: rgb(247, 247, 247);
+  
+  .DateRangePickerInput {
+    @include flexSet(space-between, null);
+    width: 100%;
+    padding: 0;
+    background-color: transparent;
+    z-index: inherit;
+  
+    &_arrow,
+    .DateInput {
+      display: none;
+    }
   }
-}
-
-$primary-color: #fe5131;
-$default-color: rgb(247, 247, 247);
-
-.DateRangePickerInput {
-  @include flexSet(space-between, null);
-  width: 100%;
-  padding: 0;
-  background-color: transparent;
-  z-index: inherit;
-
-  &_arrow,
-  .DateInput {
-    display: none;
-  }
-}
-
-.DateRangePicker {
-  z-index: 400;
-
-  .DateRangePickerInput button {
-    display: none;
-  }
-
-  &_picker {
-    width: 458px;
-    border-radius: 30px;
-
-    .DayPicker {
-      width: 100% !important;
-      margin: 0 !important;
-      padding: 33px 0 10px;
+  
+  .DateRangePicker {
+    z-index: 400;
+  
+    .DateRangePickerInput button {
+      display: none;
+    }
+  
+    &_picker {
+      width: 458px;
       border-radius: 30px;
-
-      > div {
+  
+      .DayPicker {
+        width: 100%;
+        margin: 0 !important;
+        padding: 33px 0 10px;
+        border-radius: 30px;
+  
         > div {
-          margin: 0 auto;
-
-          .CalendarMonthGrid {
-            display: flex;
-
-            .CalendarMonth_caption {
-              padding-top: 8px;
-              padding-bottom: 49px;
-              font-size: 16px;
-              font-weight: 700;
+          > div {
+            margin: 0 auto;
+  
+            .CalendarMonthGrid {
+              display: flex;
+  
+              .CalendarMonth_caption {
+                padding-top: 8px;
+                padding-bottom: 49px;
+                font-size: 16px;
+                font-weight: 700;
+              }
             }
           }
         }
-      }
-
-      .DayPickerNavigation {
-        @include flexSet(space-between, null);
-
-        &_button {
-          @include flexSet(center, center);
-          width: 32px;
-          height: 32px;
-        }
-      }
-
-      &_weekHeader {
-        top: 50px;
-      }
-
-      .CalendarDay {
-        border: none;
-        line-height: 42px;
-        font-size: 14px;
-        font-weight: 600;
-        z-index: inherit;
-
-        &__default {
-          &:hover {
-            background: $primary-color;
-            color: $default-color;
-            border-radius: 50%;
+  
+        .DayPickerNavigation {
+          @include flexSet(space-between, null);
+  
+          &_button {
+            @include flexSet(center, center);
+            width: 32px;
+            height: 32px;
           }
         }
-
-        &__selected {
-          &:hover {
-            background: $primary-color;
-            border-radius: 50%;
-          }
-
-          &_start,
-          &_end {
-            background: $primary-color;
-            border-radius: 50%;
-          }
-          &_span {
-            background: $default-color;
-            color: black;
-
+  
+        &_weekHeader {
+          top: 50px;
+        }
+  
+        .CalendarDay {
+          border: none;
+          line-height: 42px;
+          font-size: 14px;
+          font-weight: 600;
+          z-index: inherit;
+  
+          &__default {
             &:hover {
               background: $primary-color;
               color: $default-color;
               border-radius: 50%;
             }
           }
-        }
-        &__hovered {
-          &_span {
-            background: $default-color;
-            color: black;
-
+  
+          &__selected {
             &:hover {
               background: $primary-color;
-              color: $default-color;
               border-radius: 50%;
             }
+  
+            &_start,
+            &_end {
+              background: $primary-color;
+              border-radius: 50%;
+            }
+            &_span {
+              background: $default-color;
+              color: black;
+  
+              &:hover {
+                background: $primary-color;
+                color: $default-color;
+                border-radius: 50%;
+              }
+            }
           }
-        }
-        &__blocked_out_of_range {
-          text-decoration: line-through;
-
-          &:hover {
-            background: #fff;
-            color: #cacccd;
+          &__hovered {
+            &_span {
+              background: $default-color;
+              color: black;
+  
+              &:hover {
+                background: $primary-color;
+                color: $default-color;
+                border-radius: 50%;
+              }
+            }
+          }
+          &__blocked_out_of_range {
+            text-decoration: line-through;
+  
+            &:hover {
+              background: #fff;
+              color: #cacccd;
+            }
           }
         }
       }
@@ -136,5 +135,4 @@ $default-color: rgb(247, 247, 247);
   }
 }
 
-}
 
