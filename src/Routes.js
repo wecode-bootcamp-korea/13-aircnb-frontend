@@ -39,7 +39,6 @@ const Routes = () => {
 };
 
 const MainContents = styled.section`
-  border: 1px solid red;
   position: relative;
   top: 80px;
   z-index: 1;

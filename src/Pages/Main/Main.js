@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
 
-// LINK component
+// LINK Mockdata API
+import { MAIN_PAGE_API } from "../../config";
 
 // LINK styles
 import {
@@ -12,124 +14,52 @@ import {
   Footer,
 } from "./Main.Styled";
 import mainImg from "../../Images/Main/main.jpg";
-import first_icon from "../../Images/Main/desert.svg";
-import second_icon from "../../Images/Main/farm.svg";
-import third_icon from "../../Images/Main/island.svg";
-import forth_icon from "../../Images/Main/landscape.svg";
-import fifth_icon from "../../Images/Main/village.svg";
-import sixth_icon from "../../Images/Main/winter.svg";
-import seventh_icon from "../../Images/Main/sealife.svg";
-import eighth_icon from "../../Images/Main/pyramids.svg";
-import first_house from "../../Images/Main/house1.jpg";
-import second_house from "../../Images/Main/house2.jpg";
-import third_house from "../../Images/Main/house3.jpg";
-import forth_house from "../../Images/Main/house4.jpg";
 
 const Main = () => {
-  const [isWidthBiggerThanHeight, setIsWidthBiggerThanHeight] = useState(null);
+  const [windowSize, setWindowSize] = useState(null);
+  const [mainLocationCategories, setMainLocationCategories] = useState(null);
+  const [mainHomeType, setMainHomeType] = useState(null);
+  const [footerContent, setFooterContent] = useState(null);
 
-  const mainLocationCategories = [
-    {
-      name: "부산",
-      desc: "차로 5시간 거리",
-      img: first_icon,
-    },
-    {
-      name: "속초시",
-      desc: "차로 2.5시간 거리",
-      img: second_icon,
-    },
-    {
-      name: "완주군",
-      desc: "차로 2.5시간 거리",
-      img: third_icon,
-    },
-    {
-      name: "양양군",
-      desc: "차로 2.5시간 거리",
-      img: forth_icon,
-    },
-    {
-      name: "전주시",
-      desc: "차로 3시간 거리",
-      img: fifth_icon,
-    },
-    {
-      name: "강릉시",
-      desc: "차로 3시간 거리",
-      img: sixth_icon,
-    },
-    {
-      name: "경주시",
-      desc: "차로 4시간 거리",
-      img: seventh_icon,
-    },
-    {
-      name: "고성군",
-      desc: "차로 2.5시간 거리",
-      img: eighth_icon,
-    },
-  ];
+  const getMainPageDate = async () => {
+    try {
+      const response = await axios.get(MAIN_PAGE_API);
+      const validation = response && response.status === 200;
+      validation && new Error("cannot fetch the data");
+      console.log(response);
+      const {
+        footerContent,
+        mainHomeType,
+        mainLocationCategories,
+      } = await response.data;
+      setFooterContent(footerContent);
+      setMainHomeType(mainHomeType);
+      setMainLocationCategories(mainLocationCategories);
+    } catch (error) {
+      console.log("!!error fetch data!!");
+    }
+  };
 
-  const mainHomeType = [
-    { name: "집전체", img: first_house },
-    { name: "통나무집 및 전원주택", img: second_house },
-    { name: "독특한 공간", img: third_house },
-    { name: "반려동물 환영", img: forth_house },
-  ];
+  useEffect(() => {
+    getWindowSize();
+    getMainPageDate();
+  }, []);
 
-  const footerContent = [
-    {
-      name: "소개",
-      items: [
-        "에어비앤비 이용 방법",
-        "뉴스룸",
-        "에어비앤비 플러스",
-        "에어비앤비 Luxe",
-        "호텔투나잇",
-        "에어비앤비 비즈니스 프로그램",
-        "올림픽",
-        "채용정보",
-      ],
-    },
-    {
-      name: "커뮤니티",
-      items: [
-        "다양성 및 소속감",
-        "접근성",
-        "에어비앤비 어소시에이트",
-        "구호 인력을 위한 숙소",
-        "친구 초대하기",
-      ],
-    },
-    {
-      name: "호스팅하기",
-      items: [
-        "숙소 호스팅",
-        "온라인 체험 호스팅하기",
-        "체험 호스팅하기",
-        "책임감 있는 호스팅",
-        "호스트 추천",
-        "Open Homes",
-        "자료 센터",
-        "커뮤니티 센터",
-      ],
-    },
-    {
-      name: "에어비앤비 지원",
-      items: [
-        "에어비앤비의 코로나 19 대응 방안",
-        "도움말 센터",
-        "예약 취소 옵션",
-        "에어비앤비 이웃 민원 지원",
-        "신뢰와 안전",
-      ],
-    },
-  ];
+  const getWindowSize = () => {
+    const width = document.body.clientWidth;
+    setWindowSize(width);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", getWindowSize);
+    return () => {
+      window.removeEventListener("resize", getWindowSize);
+    };
+  }, [windowSize]);
 
   return (
     <MainContainer>
-      <Topper landscape={isWidthBiggerThanHeight}>
+      <Topper>
         <div>
           <figure>
             <img src={mainImg} alt="mainImg" />
@@ -146,20 +76,25 @@ const Main = () => {
       </Topper>
       <MainLocationCategory>
         <ul>
-          {mainLocationCategories.map((category, idx) => {
-            return (
-              <li key={idx}>
-                <div>
-                  <figure>
-                    <img src={category.img} alt="" />
-                  </figure>
+          {mainLocationCategories?.map((category, idx) => {
+            const mainLocationCategoriesTemplate = (content, num) => {
+              return (
+                <li key={num}>
                   <div>
-                    <span>{category.name}</span>
-                    <span>{category.desc}</span>
+                    <figure>
+                      <img src={content.img} alt="" />
+                    </figure>
+                    <div>
+                      <span>{content.name}</span>
+                      <span>{content.desc}</span>
+                    </div>
                   </div>
-                </div>
-              </li>
-            );
+                </li>
+              );
+            };
+            return windowSize > 1350
+              ? mainLocationCategoriesTemplate(category, idx)
+              : idx < 6 && mainLocationCategoriesTemplate(category, idx);
           })}
         </ul>
       </MainLocationCategory>
@@ -168,23 +103,29 @@ const Main = () => {
           <span>어디에서나, 여행은 살아보는 거야!</span>
         </div>
         <div>
-          {mainHomeType.map((home, idx) => {
-            return (
-              <div key={idx}>
-                <figure>
-                  <img src={home.img} alt="" />
-                </figure>
-                <div>
-                  <span>{home.name}</span>
+          {mainHomeType?.map((home, idx) => {
+            const mainHomeTypeTemplate = (content, id) => {
+              return (
+                <div key={id}>
+                  <figure>
+                    <img src={content.img} alt="" />
+                  </figure>
+                  <div>
+                    <span>{content.name}</span>
+                  </div>
                 </div>
-              </div>
-            );
+              );
+            };
+
+            return windowSize > 1550
+              ? mainHomeTypeTemplate(home, idx)
+              : idx < 3 && mainHomeTypeTemplate(home, idx);
           })}
         </div>
       </MainHomeType>
       <Footer>
         <div>
-          {footerContent.map((content, idx) => {
+          {footerContent?.map((content, idx) => {
             return (
               <div>
                 <div key={idx}>{content.name}</div>

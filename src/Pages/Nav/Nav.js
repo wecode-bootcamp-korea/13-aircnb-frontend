@@ -40,6 +40,7 @@ const Nav = () => {
   const profile = modalReducer.profile;
   const profileButton = modalReducer.profileButton;
   // const mapMenu = modalReducer.mapMenu;
+  const location = bookReducer.location;
   const startDate = bookReducer.startDate;
   const endDate = bookReducer.endDate;
   const adults = bookReducer.adults;
@@ -104,7 +105,7 @@ const Nav = () => {
       <section>
         <div>
           <LogoSet>
-            <Link to="/">
+            <Link to="/main">
               <div>
                 <span>
                   <img
@@ -121,11 +122,17 @@ const Nav = () => {
           <SearchTrigger onClick={toggleNavbarAction} active={isNavbarActive}>
             <div>
               <button tabIndex="0">
-                <span>
-                  {totalGuest && endDate
-                    ? `${startDate}-${endDate} | 게스트 ${totalGuest}명`
-                    : "검색 시작하기"}
-                </span>
+                <div>
+                  <span>
+                    {totalGuest || endDate || location
+                      ? `${location ? location : "장소입력"} | ${
+                          endDate ? `${startDate}-${endDate}` : "날짜입력"
+                        } | ${
+                          totalGuest ? `게스트 ${totalGuest}명` : "게스트 추가"
+                        }`
+                      : "검색 시작하기"}
+                  </span>
+                </div>
                 <span>
                   <FontAwesomeIcon icon={faSearch} />
                 </span>

@@ -4,3 +4,5 @@ export const GOOGLE_TOKEN =
 export const SIGNIN_API_KAKAO = "http://10.58.7.122:8000/user/signin/kakao";
 export const SIGNIN_API_GOOGLE = "http://10.58.7.122:8000/user/signin/google";
 export const SIGNIN_API_DEFAULT = "http://10.58.7.122:8000/user/signin";
+export const SEARCH_API = "http://10.58.1.225:8000/list?";
+export const MAIN_PAGE_API = "/data/Main/Main.json";

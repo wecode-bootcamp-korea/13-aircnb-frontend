@@ -1,4 +1,5 @@
 const INITIAL_STATE = {
+  location: null,
   startDate: null,
   endDate: null,
   adults: 0,
@@ -27,6 +28,16 @@ const bookReducer = (state = INITIAL_STATE, action) => {
         adults: 0,
         children: 0,
         babies: 0,
+      };
+    case "TAKE_LOCATION":
+      return {
+        ...state,
+        location: action.payload.location,
+      };
+    case "RESET_LOCATION":
+      return {
+        ...state,
+        location: null,
       };
     default:
       return state;

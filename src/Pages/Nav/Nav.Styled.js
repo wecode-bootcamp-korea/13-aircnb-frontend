@@ -64,7 +64,8 @@ export const SearchTrigger = styled.div`
           position: absolute;
           top: 19%;
           left: 50%;
-          width: ${active ? 600 : 300}px;
+          width: ${active && 600}px;
+          min-width: 300px;
           height: 48px;
           background-color: #fff;
           border: 1px solid ${borderColor};
@@ -78,23 +79,23 @@ export const SearchTrigger = styled.div`
           &:hover {
             box-shadow: 0px 2px 4px 0.5px ${borderColor};
           }
-
-          span {
-            &:first-child {
-              font-size: 14px;
+          > div {
+            margin: auto;
+            padding: 0 16px 0 24px;
+            font-size: 14px;
+            > span {
               font-weight: 550;
-              padding: 0 16px 0 24px;
               line-height: 18px;
+              border-right: 1px solid #ddd;
             }
-
-            &:last-child {
-              ${flexSet("center", "center")};
-              width: 32px;
-              height: 32px;
-              color: #fff;
-              background-color: ${primaryColor};
-              border-radius: 50%;
-            }
+          }
+          > span {
+            ${flexSet("center", "center")};
+            width: 32px;
+            height: 32px;
+            color: #fff;
+            background-color: ${primaryColor};
+            border-radius: 50%;
           }
         }
       }
