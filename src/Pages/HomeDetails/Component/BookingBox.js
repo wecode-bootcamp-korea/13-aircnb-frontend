@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import BookingBoxCalendar from "./BookingBoxCalendar";
 import BookingBoxPersonnel from "./BookingBoxPersonnel";
+import { useSelector } from "react-redux";
 
 const BookingBox = ({ price, setCheckDates, discountPrice, history, id }) => {
   const priceNum = Number(price);
@@ -17,16 +18,39 @@ const BookingBox = ({ price, setCheckDates, discountPrice, history, id }) => {
   const [tax, setTax] = useState(Number(roomPrice * 0.005));
   const [totalPrice, setTotalPrice] = useState(roomPrice + serviceCharge + tax);
 
+  // redux link
+  const bookReducer = useSelector(({ bookReducer }) => bookReducer);
+  const startDate = bookReducer.startDate;
+  const endDate = bookReducer.endDate;
+  // const adults = bookReducer.adults;
+  // const children = bookReducer.children;
+  // const babies = bookReducer.babies;
+
+  // console.log(
+  //   startDate,
+  //   endDate,
+  //   adults,
+  //   children,
+  //   babies,
+  //   "23123131273123671283678136127863"
+  // );
+
   useEffect(() => {
-    setNights(getNights(checkIn, checkOut));
+    setNights(getNights(startDate, endDate));
     setRoomPrice(priceNum * nights);
-  }, [nights, checkIn, checkOut]);
+    setCheckIn(startDate);
+    setCheckOut(endDate);
+  }, [nights, checkIn, checkOut, startDate, endDate]);
 
   const getNights = (checkIn, checkOut) => {
-    const checkInMonth = +checkIn?.split(".")[1];
-    const checkOutMonth = +checkOut?.split(".")[1];
-    const checkInDays = +checkIn?.split(".")[2];
-    const checkOutDays = +checkOut?.split(".")[2];
+    // const checkInMonth = +checkIn?.split(".")[1];
+    // const checkOutMonth = +checkOut?.split(".")[1];
+    // const checkInDays = +checkIn?.split(".")[2];
+    // const checkOutDays = +checkOut?.split(".")[2];
+    const checkInMonth = checkIn?.slice(0, 2);
+    const checkOutMonth = checkOut?.slice(0, 2);
+    const checkInDays = checkIn?.slice(4, 6);
+    const checkOutDays = checkOut?.slice(4, 6);
     let countNights = 1;
 
     if (checkInMonth === checkOutMonth) {
@@ -247,6 +271,10 @@ const BookingBtn = styled.button`
   color: white;
   font-size: 16px;
   font-weight: 600;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 const PriceBox = styled.ul`

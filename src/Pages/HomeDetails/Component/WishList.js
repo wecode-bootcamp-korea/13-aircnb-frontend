@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import styled, { css } from "styled-components";
+import React, { useState } from "react";
+import styled from "styled-components";
 
 const WishList = ({ img, title }) => {
   const [acting, setActing] = useState(false);
@@ -9,8 +9,9 @@ const WishList = ({ img, title }) => {
       <img alt="listImg" src={img} />
       <span>{title}</span>
       <div className="likeCon" onClick={() => setActing(!acting)}>
-        <i className="fas fa-heart actLike"></i>
-        <i className="far fa-heart unActLike"></i>
+        <span>&#9825;</span>
+        {/* <i className="fas fa-heart actLike"></i> */}
+        {/* <i className="far fa-heart unActLike"></i> */}
       </div>
     </StyledWishList>
   );
@@ -21,7 +22,6 @@ export default WishList;
 const StyledWishList = styled.div`
   display: flex;
   position: relative;
-  /* border: 1px solid red; */
   width: 100%;
   margin-bottom: 8px;
   border-radius: 8px;
@@ -47,20 +47,24 @@ const StyledWishList = styled.div`
   .likeCon {
     position: relative;
     font-size: 30px;
-    right: 20px;
+    /* right: 20px; */
+    left: 200px;
     top: 16px;
   }
 
-  .actLike {
+  .actLike,
+  .unActLike {
     position: relative;
     left: 30px;
+    font-size: 40px;
+  }
+
+  .actLike {
     color: #ff385c;
     display: ${(props) => (props.acting ? "inline-block" : "none")};
   }
 
   .unActLike {
-    position: relative;
-    left: 30px;
     display: ${(props) => (props.acting ? "none" : "inline-block")};
   }
 `;

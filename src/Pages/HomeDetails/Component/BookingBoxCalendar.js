@@ -3,7 +3,9 @@ import styled, { css } from "styled-components";
 import "react-dates/initialize";
 import { DateRangePicker } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
-import "moment/locale/ko";
+// import "moment/locale/ko";
+import koLocale from "moment/locale/ko";
+import moment from "moment";
 import "react-bootstrap";
 import { START_DATE, ANCHOR_RIGHT } from "react-dates/constants";
 import "./CalendarStyling.scss";
@@ -12,14 +14,17 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
+import { connect } from "react-redux";
+import { takeBookDate } from "../../../Redux/Actions/Index";
 
 class BookingBoxCalendar extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
+
     this.state = {
       startDate: null,
       endDate: null,
-      focusedInput: START_DATE,
+      focusedInput: null,
       isOpen: false,
       nightAndDay: "숙박일수를 선택해 주세요",
       datesText: "숙박일은 최소 2일 이상이여야 합니다.",
@@ -27,7 +32,39 @@ class BookingBoxCalendar extends Component {
     };
   }
 
+  onDatesHandler = ({ startDate, endDate }) => {
+    this.setState({ startDate, endDate }, () => {
+      const { takeBookDate } = this.props;
+      takeBookDate(
+        this.state.startDate.format("MM월 DD일"),
+        this.state.endDate?.format("MM월 DD일")
+      );
+    });
+  };
+
+  // 11월 13일
+  // 11월 17일
+  formDateFormat = (date) => {
+    if (!date) return null;
+
+    const [month, day] = date.split(" ");
+    return moment().set({
+      year: 2020,
+      month: Number(month.slice(0, -1)) - 1,
+      date: Number(day.slice(0, -1)),
+    });
+  };
+
   componentDidUpdate(prevProps, prevState) {
+    if (prevProps.storeStartDate !== this.props.storeStartDate) {
+      this.setState({
+        startDate: this.formDateFormat(this.props.storeStartDate),
+      });
+    }
+    if (prevProps.storeEndDate !== this.props.storeEndDate) {
+      this.setState({ endDate: this.formDateFormat(this.props.storeEndDate) });
+    }
+
     if (prevState.focusedInput === null) {
       this.setState({ focusedInput: START_DATE });
     }
@@ -38,8 +75,6 @@ class BookingBoxCalendar extends Component {
   };
 
   setDates = (dates) => {
-    this.props.handleCheckIn(dates && dates.startDate?.format("YYYY.MM.DD"));
-    this.props.handleCheckOut(dates && dates.endDate?.format("YYYY.MM.DD"));
     this.props.event(false);
     this.getNightsAndDays(
       dates.startDate?.format("MM-DD"),
@@ -84,13 +119,7 @@ class BookingBoxCalendar extends Component {
   };
 
   render() {
-    const {
-      nightAndDay,
-      datesText,
-      startDate,
-      endDate,
-      focusedInput,
-    } = this.state;
+    const { nightAndDay, datesText, focusedInput } = this.state;
 
     return (
       <CalendarDiv active={this.props.active}>
@@ -109,13 +138,11 @@ class BookingBoxCalendar extends Component {
         </DatesInfo>
         <DateRangePickerCon>
           <DateRangePicker
-            startDate={startDate}
+            startDate={this.state.startDate}
             startDateId="your_unique_start_date_id"
-            endDate={endDate}
+            endDate={this.state.endDate}
             endDateId="your_unique_end_date_id"
-            onDatesChange={({ startDate, endDate }) =>
-              this.setState({ startDate, endDate })
-            }
+            onDatesChange={this.onDatesHandler}
             focusedInput={focusedInput}
             onFocusChange={(focusedInput) => this.setState({ focusedInput })}
             startDatePlaceholderText="YYYY.MM.DD"
@@ -124,10 +151,11 @@ class BookingBoxCalendar extends Component {
             onClose={({ startDate, endDate }) => {
               this.setDates({ startDate, endDate });
             }}
-            onOutsideClick={this.clickOutSide}
+            // onOutsideClick={this.clickOutSide}
             hideKeyboardShortcutsPanel={true}
             navPrev={<FontAwesomeIcon icon={faChevronLeft} />}
             navNext={<FontAwesomeIcon icon={faChevronRight} />}
+            required={false}
           />
           <CloseBtn onClick={this.handleCloseBtn}>닫기</CloseBtn>
         </DateRangePickerCon>
@@ -136,7 +164,16 @@ class BookingBoxCalendar extends Component {
   }
 }
 
-export default BookingBoxCalendar;
+const mapStateToProps = ({ bookReducer: { startDate, endDate } }) => ({
+  storeStartDate: startDate,
+  storeEndDate: endDate,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  takeBookDate: (start, end) => dispatch(takeBookDate(start, end)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookingBoxCalendar);
 
 const CalendarDiv = styled.div`
   border-radius: 16px;
