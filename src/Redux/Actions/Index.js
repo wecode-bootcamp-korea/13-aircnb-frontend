@@ -77,6 +77,15 @@ export const resetGuestNumber = () => ({
   type: "RESET_GUEST_NUMBER",
 });
 
+export const takeLocation = (location) => ({
+  type: "TAKE_LOCATION",
+  payload: { location },
+});
+
+export const resetLoction = () => ({
+  type: "RESET_LOCATION",
+});
+
 // SECTION catch object
 export const refNavbar = (navbar) => {
   return {
