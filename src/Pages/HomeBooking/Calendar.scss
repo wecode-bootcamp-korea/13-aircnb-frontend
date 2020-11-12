@@ -1,141 +1,148 @@
-.DateRangePickerInput {
-    z-index: inherit;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding-left: 2px;
-    background-color: transparent;
-    border: 1px solid #484848;
-    border-radius: 6px;
-    &_arrow {
-      padding-top: 13px;
-    }
+.bookingCalendar {
+  background-color: transparent;
+  float: right;
+  margin-top: -65px;
 
-    .DateInput {
-      svg {
+  .DateRangePickerInput {
+      background-color: transparent;
+      border: 1px solid #484848;
+      border-radius: 15px;
+      &_arrow {
+        padding-top: 13px;
+      }
+  
+      .DateInput {
+        .DateInput_input {
+          font-size: 14px;
+          text-align: center;
+          &:hover {
+            background-color: #eeeeee;
+          }
+          &:focus {
+            outline:none;
+            border: 2px solid GRAY;
+            border-bottom-color: gray;
+            border-bottom-style: solid;
+            border-bottom-width: 2px;
+          }
+          .DateInput_input__focused {
+            border: 2px solid violet;
+            text-align: center;
+          }
+        }
+        
+      }
+  
+      .DateInput_clearDates {
+        margin: 0 0 0 10px;
+        &:hover {
+          background-color: none;
+        }
+      }
+    }
+  
+    .DateRangePicker {
+      z-index: 400;
+  
+      .DateRangePickerInput_arrow {
         display: none;
       }
-      
-      .DateInput_input_1 {
-        border-bottom: none;
-        border-radius: 3px;
-        font-size: 14px;
-        &:focus, &:hover {
-          background-color: #eeeeee;
-        }
-      }
-      
-    }
-
-    .DateInput_clearDates {
-      margin: 0 0 0 10px;
-      &:hover {
-        background-color: none;
-      }
-    }
-  }
-
-  .DateRangePicker {
-    z-index: 400;
-
-    .DateRangePickerInput_arrow {
-      display: none;
-    }
-
-    &_picker {
-      width: 458px;
-
-      .DayPicker {
-        width: 100% !important;
-        margin-left: -155px !important;
-        padding: 20px 5px 10px 0;
-        box-shadow: none;
-        outline: none;
-        > div {
+  
+      &_picker {
+        width: 458px;
+  
+        .DayPicker {
+          width: 100% !important;
+          margin-left: -155px !important;
+          padding: 0px 5px 10px 0;
+          box-shadow: none;
+          outline: none;
           > div {
-            margin: 0 auto;
-            .CalendarMonthGrid {
-              display: flex;
-              .CalendarMonth_caption {
-                padding-top: 8px;
-                padding-bottom: 49px;
-                font-size: 16px;
-                font-weight: 700;
+            > div {
+              margin: 0 auto;
+              .CalendarMonthGrid {
+                display: flex;
+                .CalendarMonth_caption {
+                  padding-top: 8px;
+                  padding-bottom: 49px;
+                  font-size: 16px;
+                  font-weight: 700;
+                }
               }
             }
           }
-        }
-
-        .DayPickerNavigation {
-          display: flex;
-          justify-content: space-between;
-          &_button {
+  
+          .DayPickerNavigation {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 32px;
-            height: 32px;
-          }
-        }
-        &_weekHeader {
-          top: 50px;
-        }
-
-        .CalendarDay {
-          z-index: inherit;
-          border: none;
-          line-height: 42px;
-          font-size: 14px;
-          font-weight: 600;
-
-          &__default {
-            &:hover {
-              background: rgb(34, 34, 34);
-              color: rgb(247, 247, 247);
-              border-radius: 50%;
+            justify-content: space-between;
+            &_button {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 32px;
+              height: 32px;
             }
           }
-
-          &__selected {
-            &:hover {
-              background: rgb(34, 34, 34);
-              border-radius: 50%;
-            }
-
-            &_start,
-            &_end {
-              background: rgb(34, 34, 34);
-              border-radius: 50%;
-            }
-
-            &_span {
-              background: rgb(247, 247, 247);
-              color: black;
+          &_weekHeader {
+            top: 50px;
+          }
+  
+          .CalendarDay {
+            z-index: inherit;
+            border: none;
+            line-height: 42px;
+            font-size: 14px;
+            font-weight: 600;
+  
+            &__default {
               &:hover {
                 background: rgb(34, 34, 34);
                 color: rgb(247, 247, 247);
                 border-radius: 50%;
               }
             }
-          }
-
-          &__hovered {
-            &_span {
-              background: rgb(247, 247, 247);
-              color: black;
+  
+            &__selected {
               &:hover {
                 background: rgb(34, 34, 34);
-                color: rgb(247, 247, 247);
                 border-radius: 50%;
               }
+  
+              &_start,
+              &_end {
+                background: rgb(34, 34, 34);
+                border-radius: 50%;
+              }
+  
+              &_span {
+                background: rgb(247, 247, 247);
+                color: black;
+                &:hover {
+                  background: rgb(34, 34, 34);
+                  color: rgb(247, 247, 247);
+                  border-radius: 50%;
+                }
+              }
             }
-          }
-          
-          &__blocked_out_of_range {
-            text-decoration: line-through;
-            &:hover {
-              background: #fff;
-              color: #CACCCD;
+  
+            &__hovered {
+              &_span {
+                background: rgb(247, 247, 247);
+                color: black;
+                &:hover {
+                  background: rgb(34, 34, 34);
+                  color: rgb(247, 247, 247);
+                  border-radius: 50%;
+                }
+              }
+            }
+            
+            &__blocked_out_of_range {
+              text-decoration: line-through;
+              &:hover {
+                background: #fff;
+                color: #CACCCD;
+              }
             }
           }
         }

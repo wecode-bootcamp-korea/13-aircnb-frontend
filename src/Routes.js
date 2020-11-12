@@ -7,7 +7,6 @@ import HomeDetails from "./Pages/HomeDetails/HomeDetails";
 import HomeList from "./Pages/HomeList/HomeList";
 import Main from "./Pages/Main/Main";
 import Nav from "./Pages/Nav/Nav";
-import calendar from "./Pages/HomeBooking/Calendar";
 
 // LINK style
 import styled, { ThemeProvider } from "styled-components";

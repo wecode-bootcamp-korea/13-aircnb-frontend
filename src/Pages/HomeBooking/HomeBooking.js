@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useReducer } from "react";
+import { useSelector } from "react-redux";
 import { withRouter } from "react-router-dom";
+import moment from "moment";
 import {
   faChevronLeft,
   faChevronRight,
@@ -17,21 +19,30 @@ import styled from "styled-components";
 import Payment from "./Payment";
 
 const HomeBooking = (props) => {
+  const bookReducer = useSelector(({ bookReducer }) => bookReducer);
+  const signReducer = useSelector(({ signReducer }) => signReducer);
+  const startDate = bookReducer.startDate;
+  const endDate = bookReducer.endDate;
+  const adults = bookReducer.adults;
+  const children = bookReducer.children;
+  const babies = bookReducer.babies;
+  const userToken = signReducer.userToken;
+
   const [stay, setStay] = useState(null);
 
   const [checked, setChecked] = useState(false);
 
-  const [adultCount, setAdultCount] = useState(1);
-  const [childrenCount, setChildrenCount] = useState(0);
-  const [infantCount, setInfantCount] = useState(0);
+  const [adultCount, setAdultCount] = useState(adults);
+  const [childrenCount, setChildrenCount] = useState(children);
+  const [infantCount, setInfantCount] = useState(babies);
   const [guestSum, setGuestSum] = useState(0);
 
   const [country, setCountry] = useState("한국");
 
   const [totalPrice, setTotalPrice] = useState(0);
 
-  const [checkinDate, setCheckinDate] = useState("2020. 11. 10");
-  const [checkoutDate, setCheckoutDate] = useState("2020. 11. 12");
+  const [checkinDate, setCheckinDate] = useState(startDate);
+  const [checkoutDate, setCheckoutDate] = useState(endDate);
   const [dates, setDates] = useState(1);
 
   const reducer = (state, action) => {
@@ -42,14 +53,14 @@ const HomeBooking = (props) => {
   };
 
   const [state, dispatch] = useReducer(reducer, {
-    cardNum: "",
-    CVV: "",
-    expDate: "",
-    zipCode: "",
+    userName: "",
+    phoneNumber: "",
+    email: "",
+    address: "",
     region: "",
   });
 
-  const { cardNum, expDate, CVV, zipCode } = state;
+  const { userName, phoneNumber, email, address } = state;
 
   const onChange = (e) => {
     dispatch(e.target);
@@ -70,7 +81,6 @@ const HomeBooking = (props) => {
       }
     }
   };
-  //<Link to ={`/homebooking/${this.props.homeId}`}
   //Backend API: `${API_GetBooking}/stay/${this.props.match.params.id}`
   //Mockdata API: "http://localhost:3000/data/HomeBookingData.json"
   async function fetchData() {
@@ -79,7 +89,7 @@ const HomeBooking = (props) => {
       //{
       // headers: {
       //   AUTHORIZATION:
-      //     "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MzN9.Ad8wugR1nNKBdnAKJfn9TNffFXyqPgjXT716dFH4yWE",
+      //    userToken,
       // },
       //}
     );
@@ -89,15 +99,14 @@ const HomeBooking = (props) => {
 
   useEffect(() => {
     fetchData();
-    console.log("PROPS!!!!!!!!!!", props.match.params.id);
   }, []);
 
   const setInputValue = () => {
-    fetch(`${API_PostBooking}/reservation/booking`, {
+    fetch(`${API_PostBooking}reservation/booking`, {
       method: "POST",
       headers: {
         AUTHORIZATION:
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MzF9.-dpTDEqbZkYtHbWbna51heDOR2mJvgPAOI7J9QoJMX8",
+          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MzJ9.LJhBmYS_xzjGH1LhaiVHHuCvc8bkmE48flTDPf8uvK8",
       },
       body: JSON.stringify({
         stay: 1,
@@ -105,7 +114,8 @@ const HomeBooking = (props) => {
         checkout_date: checkoutDate,
         guest_number: String(guestSum),
         price: String(totalPrice),
-        creditcard: cardNum,
+        creditcard: userName,
+        email: email,
       }),
     }).then((res) => res.json());
   };
@@ -113,12 +123,21 @@ const HomeBooking = (props) => {
   const handleConfirm = (e) => {
     e.preventDefault();
     setGuestSum(adultCount + childrenCount + infantCount);
+    console.log("게스트!!!", adultCount + childrenCount + infantCount);
 
     setTotalPrice(
+      (stay && stay[0].price) * Number(dates) + 165000 + 26400 + 2640
+    );
+    console.log(
+      "가격!!!!!!!!",
       stay && stay[0].price * Number(dates) + 165000 + 26400 + 2640
     );
     setInputValue();
   };
+
+  const refundableDate = checkinDate
+    ? moment(checkinDate).add(8, "days").format("MM월 DD일")
+    : "예약 후 7일";
 
   return (
     <StyledHomeBooking>
@@ -148,12 +167,17 @@ const HomeBooking = (props) => {
                       dates={dates}
                       setDates={setDates}
                       hide={hide}
+                      initialStartDate={startDate}
+                      initialEndDate={endDate}
+                      bedCounts={stay && stay[0].beds.beds__sum}
+                      bathCounts={stay && stay[0].bathrooms}
                     />
                   )}
                 />
               </DateWrapper>
               <ChosenDate>
-                {checkinDate}−{checkoutDate}
+                {checkinDate?.replace(/-/gi, ".")}−
+                {checkoutDate?.replace(/-/gi, ".")}
               </ChosenDate>
             </BookingDate>
             <BookingDate>
@@ -163,12 +187,7 @@ const HomeBooking = (props) => {
                   toggle={(show) => <Revision onClick={show}>수정</Revision>}
                   content={(hide, show) => (
                     <GuestsModal>
-                      <div
-                        className="modalBox"
-                        // onBlur={hide}
-                        // onFocus={show}
-                        // tabIndex="2"
-                      >
+                      <div className="modalBox">
                         <button className="closeBtn" onClick={hide}>
                           X
                         </button>
@@ -345,25 +364,25 @@ const HomeBooking = (props) => {
             </CardInput>
             <CardNumInput
               onChange={onChange}
-              name="cardNum"
+              name="userName"
               type="text"
               placeholder="성함"
             />
             <ExpDateInput
               onChange={onChange}
-              name="expDate"
+              name="phoneNumber"
               type="text"
               placeholder="핸드폰번호"
             />
             <CVVInput
               onChange={onChange}
-              name="CVV"
+              name="email"
               type="text"
               placeholder="email"
             />
             <AdressInput
               onChange={onChange}
-              name="zipCode"
+              name="address"
               type="text"
               placeholder="주소"
             />
@@ -456,9 +475,9 @@ const HomeBooking = (props) => {
             <PolicyWrapper>
               <SubTitle>환불 정책</SubTitle>
               <ChosenDate>
-                예약 후 7일 이내에 무료로 취소할 수 있습니다. 그 후에는 14일 PM
-                3:00 전에 예약을 취소하면 첫 1박 요금 및 서비스 수수료를 제외한
-                요금의 50%가 환불됩니다.
+                {refundableDate} 이내에 무료로 취소할 수 있습니다. 그 후에는{" "}
+                {refundableDate} PM 3:00 전에 예약을 취소하면 첫 1박 요금 및
+                서비스 수수료를 제외한 요금의 50%가 환불됩니다.
               </ChosenDate>
             </PolicyWrapper>
           </RefundPolicy>
@@ -475,10 +494,10 @@ const HomeBooking = (props) => {
           </AdditionalInfo>
           <Payment
             handleConfirm={handleConfirm}
-            buyer_name={cardNum}
-            buyer_tel={expDate}
-            buyer_email={CVV}
-            buyer_addr={zipCode}
+            buyer_name={userName}
+            buyer_tel={phoneNumber}
+            buyer_email={email}
+            buyer_addr={address}
           />
         </InfoArea>
         <SummaryArea>
@@ -566,11 +585,11 @@ const HomeBooking = (props) => {
             </div>
             <div className="refundSummary">
               <div className="refundTitle">
-                11월 10일 3:00 PM까지 무료 취소 가능
+                {refundableDate} 3:00 PM까지 무료 취소 가능
               </div>
               <div className="refundDetail">
-                그 후에는 11월 15일 3:00 PM 전에 예약을 취소하면 첫 1박 요금 및
-                서비스 수수료를 제외한 요금의 50%가 환불됩니다.
+                그 후에는 {refundableDate} 3:00 PM 전에 예약을 취소하면 첫 1박
+                요금 및 서비스 수수료를 제외한 요금의 50%가 환불됩니다.
               </div>
               <div className="seeDetail">자세히 알아보기</div>
             </div>
@@ -581,19 +600,25 @@ const HomeBooking = (props) => {
   );
 };
 
-export default withRouter(HomeBooking);
-
 const StyledHomeBooking = styled.div`
   width: 100%;
-  padding: 80px 80px;
+  padding-bottom: 80px;
 `;
 
 const Wrapper = styled.div`
   height: 100%;
   width: 1100px;
   margin: 0 auto;
-  .toPrevPage {
-    margin: 24px 24px 24px 5px;
+  a {
+    color: black;
+    text-decoration: none;
+    .toPrevPage {
+      margin: 24px 24px 24px 5px;
+      &:hover,
+      &:focus {
+        text-decoration: none;
+      }
+    }
   }
 `;
 
@@ -697,6 +722,7 @@ const Input = styled.input`
   height: 56px;
   margin-top: 10px;
   padding: 16px 40px 16px 16px;
+  font-size: 13px;
   border: solid 1px grey;
   border-radius: 8px;
   ::-webkit-inner-spin-button {
@@ -779,7 +805,6 @@ const CardInput = styled.div`
 const CardNumInput = styled(Input)`
   border-radius: 8px 8px 0px 0px;
   border-bottom: none;
-  background-color: ${(props) => (props.onBlur === true ? "red" : "white")};
 `;
 
 const ExpDateInput = styled(Input)`
@@ -796,63 +821,6 @@ const CVVInput = styled(Input)`
 `;
 
 const AdressInput = styled(Input)``;
-
-// const CountryInput = styled.div`
-//   width: 100%;
-//   height: 56px;
-//   margin-top: 10px;
-
-//   .dropdown {
-//     width: 100%;
-//     display: inline-block;
-//     position: relative;
-
-//     .dropbtn {
-//       width: 100%;
-//       height: 56px;
-//       padding: 16px;
-//       display: flex;
-//       align-items: center;
-//       color: #717171;
-//       font-size: 13px;
-//       background-color: white;
-//       border: none;
-//       border-radius: 8px;
-//       border: solid 1px grey;
-
-//       &:hover,
-//       &:focus {
-//         border: solid 1px #bbbbbb;
-//         outline: none;
-//         cursor: pointer;
-//       }
-//     }
-//     .dropdown-content {
-//       width: 100%;
-//       height: 56px;
-//       display: none;
-//       padding: 16px;
-//       margin-top: 5px;
-//       position: absolute;
-//       background-color: rgb(242, 242, 242) !important;
-//       border-radius: 8px;
-//       border: solid 1px grey;
-//       font-size: 13px;
-//       color: #717171;
-//       box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-//       z-index: 1;
-//       a {
-//         display: block;
-//         padding: 4px 0;
-//         color: black;
-//         text-decoration: none;
-//       }
-//     }
-//     .show {
-//       display: block;
-//     }
-//   }
-// `;
 
 const EssentialInfo = styled.div`
   padding-bottom: 24px;
@@ -877,7 +845,7 @@ const Button = styled.button`
   }
 `;
 
-const EssentialInfoWrapper = styled.div`
+export const EssentialInfoWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1360,3 +1328,5 @@ const CountryModal = styled.div`
     }
   }
 `;
+
+export default withRouter(HomeBooking);

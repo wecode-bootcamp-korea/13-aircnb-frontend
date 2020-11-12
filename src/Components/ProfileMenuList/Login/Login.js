@@ -4,6 +4,7 @@ import KakaoLogin from "react-kakao-login";
 import GoogleLogin from "react-google-login";
 import { useSelector, useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
+import Swal from "sweetalert2";
 
 //LINK redux action
 import { signin, closeLoginModal } from "../../../Redux/Actions/Index";
@@ -74,6 +75,13 @@ const Login = ({ history }) => {
       !validation && new Error("cannot fetch the data");
       const result = response.data.AUTHORIZATION;
       console.log(result);
+      Swal.fire({
+        title: "로그인 완료",
+        text: "로그인이 성공적으로 완료되었습니다!",
+        icon: "success",
+        timer: 2000,
+        showConfirmButton: false,
+      });
       // ANCHOR send REDUX
       signinAction(result);
       closeLoginModalAction();
@@ -94,6 +102,13 @@ const Login = ({ history }) => {
       !validation && new Error("cannot fetch the data");
       const result = response.data.AUTHORIZATION;
       console.log(result);
+      Swal.fire({
+        title: "로그인 완료",
+        text: "로그인이 성공적으로 완료되었습니다!",
+        icon: "success",
+        timer: 2000,
+        showConfirmButton: false,
+      });
       // ANCHOR send REDUX
       signinAction(result);
       closeLoginModalAction();
@@ -114,6 +129,13 @@ const Login = ({ history }) => {
       !validation && new Error("cannot fetch the data");
       const result = response.data.AUTHORIZATION;
       console.log(result);
+      Swal.fire({
+        title: "로그인 완료",
+        text: "로그인이 성공적으로 완료되었습니다!",
+        icon: "success",
+        timer: 2000,
+        showConfirmButton: false,
+      });
       // ANCHOR send REDUX
       signinAction(result);
       closeLoginModalAction();
@@ -151,6 +173,7 @@ const Login = ({ history }) => {
                 <img
                   src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
                   height="48"
+                  alt="kakaoLogin"
                 />
               </div>
             </KakaoLogin>
