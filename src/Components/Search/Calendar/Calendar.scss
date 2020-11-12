@@ -1,3 +1,6 @@
+.SM {
+  
+
 @mixin flexSet($arg...) {
   display: flex;
   justify-content: #{nth($arg, 1)};
@@ -132,3 +135,6 @@ $default-color: rgb(247, 247, 247);
     }
   }
 }
+
+}
+

@@ -7,4 +7,4 @@ export const SIGNIN_API_DEFAULT = "http://10.58.7.122:8000/user/signin";
 export const SEARCH_API = "http://10.58.1.225:8000/homelist?";
 export const MAIN_PAGE_API = "/data/Main/Main.json";
 export const API_GetBooking = "http://10.58.1.225:8000";
-export const API_PostBooking = "http://10.58.7.122:8000";
+export const API_PostBooking = "http://10.58.1.75:8000/";

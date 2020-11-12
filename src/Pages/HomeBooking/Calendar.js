@@ -6,7 +6,6 @@ import { DateRangePicker } from "react-dates";
 import koLocale from "moment/locale/ko";
 import moment from "moment";
 // LINK style
-//import { CalendarModule } from "./Calendar.Styled";
 import "./Calendar.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -16,22 +15,29 @@ import {
 import styled from "styled-components";
 
 const Calendar = ({
-  active,
-  btnActive,
   setCheckinDate,
   setCheckoutDate,
   dates,
   setDates,
   hide,
+  initialStartDate,
+  initialEndDate,
+  bedCounts,
+  bathCounts,
 }) => {
+  const formedStartDate = initialStartDate
+    ? moment(2020 + initialStartDate.slice(0, 2) + initialStartDate.slice(4, 6))
+    : null;
+
+  const formedEndDate = initialEndDate
+    ? moment(2020 + initialEndDate.slice(0, 2) + initialEndDate.slice(4, 6))
+    : null;
+
   const [dateRange, setdateRange] = useState({
-    startDate: moment("20201110"),
-    endDate: moment("20201112"),
+    startDate: formedStartDate,
+    endDate: formedEndDate,
   });
-  // const [formedDate, setFormedDate] = useState({
-  //   formedStartDate: null,
-  //   formedEndDate: null,
-  // });
+
   const [focus, setFocus] = useState("startDate");
   const { startDate, endDate } = dateRange;
   const handleOnDateChange = (startDate, endDate) => {
@@ -39,8 +45,13 @@ const Calendar = ({
   };
 
   useEffect(() => {
-    setDates((endDate - startDate) / 86400000);
-  }, [endDate]);
+    setDates(
+      (endDate - startDate) / 86400000 <= 0
+        ? 0
+        : (endDate - startDate) / 86400000,
+      [endDate]
+    );
+  });
 
   moment.locale("ko", koLocale);
 
@@ -60,34 +71,37 @@ const Calendar = ({
         <div className="modalHeader">
           <div className="headerWrapper">
             <span className="nDays">{dates}박</span>
-            <span className="countOfFacility">침대 1개 욕실 0개</span>
+            <span className="countOfFacility">
+              침대 {bedCounts}개 욕실 {bathCounts}개
+            </span>
           </div>
-          <div className="calendar">
-            <DateRangePicker
-              startDate={startDate}
-              startDateId="startDate"
-              endDate={endDate}
-              endDateId="endDate"
-              onDatesChange={handleOnDateChange}
-              focusedInput={focus}
-              onFocusChange={(focus) => setFocus(focus)}
-              daySize={40}
-              isOutsideRange={(day) => moment().diff(day) >= 0}
-              anchorDirection={"right"}
-              displayFormat={"YYYY. MM. DD"}
-              monthFormat="M[월] YYYY[년]"
-              navPrev={<FontAwesomeIcon icon={faChevronLeft} />}
-              navNext={<FontAwesomeIcon icon={faChevronRight} />}
-              verticalSpacing={30}
-              numberOfMonths={2}
-              hideKeyboardShortcutsPanel
-              keepOpenOnDateSelect
-              autoFocus
-              showClearDates
-              noBorder
-              block
-            />
-          </div>
+        </div>
+        <div className="bookingCalendar">
+          <DateRangePicker
+            startDatePlaceholderText="YYYY.MM.DD"
+            endDatePlaceholderText="YYYY.MM.DD"
+            startDate={startDate}
+            startDateId="startDate"
+            endDate={endDate}
+            endDateId="endDate"
+            onDatesChange={handleOnDateChange}
+            focusedInput={focus}
+            onFocusChange={(focus) => setFocus(focus)}
+            daySize={40}
+            isOutsideRange={(day) => moment().diff(day) >= 0}
+            anchorDirection={"right"}
+            displayFormat={"YYYY. MM. DD"}
+            monthFormat="M[월] YYYY[년]"
+            navPrev={<FontAwesomeIcon icon={faChevronLeft} />}
+            navNext={<FontAwesomeIcon icon={faChevronRight} />}
+            verticalSpacing={30}
+            numberOfMonths={2}
+            hideKeyboardShortcutsPanel
+            keepOpenOnDateSelect
+            autoFocus
+            noBorder
+            block
+          />
         </div>
         <button className="saveBtn" onClick={onClose}>
           저장
@@ -153,10 +167,9 @@ const DateRangePickerWrapper = styled.div`
           padding-top: 8px;
         }
       }
-      .calendar {
-      }
     }
     .saveBtn {
+      margin-top: 100px;
       background-color: black;
       border: none;
       color: white;
@@ -165,7 +178,8 @@ const DateRangePickerWrapper = styled.div`
       border-radius: 8px;
       position: absolute;
       right: 25px;
-      bottom: 15px;
+      bottom: 20px;
+      z-index: 99;
       &:hover {
         cursor: pointer;
       }

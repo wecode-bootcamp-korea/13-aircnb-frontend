@@ -52,7 +52,7 @@ const ToggleSwitchSmall = styled.div`
     width: 200%;
     height: 32px;
     margin-left: -100%;
-    transition: margin 0.3s ease-in 0s;
+    transition: margin 0.2s ease-in 0s;
     &:before,
     &:after {
       display: block;
@@ -69,7 +69,7 @@ const ToggleSwitchSmall = styled.div`
       content: "";
       height: 32px;
       line-height: 32px;
-      background-color: #fe5131;
+      background-color: black;
     }
   }
 
@@ -91,7 +91,7 @@ const ToggleSwitchSmall = styled.div`
     right: 16px;
     border: 1.5px solid #bbb;
     border-radius: 50%;
-    transition: all 0.3s ease-in 0s;
+    transition: all 0.2s ease-in 0s;
   }
 
   .toggle-switch-checkbox:checked + .toggle-switch-label {
