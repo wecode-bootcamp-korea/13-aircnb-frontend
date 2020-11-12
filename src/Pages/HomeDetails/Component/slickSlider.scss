@@ -3,16 +3,16 @@
 }
 
 .slick-prev::before, .slick-next::before{
-  font-size: 40px;
-  color: gray;
+  font-size: 35px;
+  color: white;
 }
 
 .slick-prev::before {
   position: relative;
-  right: 40px;
+  left: 35px;
 }
 
 .slick-next::before {
   position: relative;
-  left: 40px;
+  left: -50px;
 }

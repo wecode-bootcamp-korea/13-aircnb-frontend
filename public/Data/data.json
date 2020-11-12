@@ -1,0 +1,116 @@
+{
+  "stay": [
+      {
+          "id": 115,
+          "name": "펜션 ea",
+          "province": "제주특별자치도",
+          "city": "서귀포시",
+          "address1": "표선면",
+          "address2": "성읍리 2363",
+          "latitude": 33,
+          "longitude": 126,
+          "price": 62000,
+          "discount_price": 31000,
+          "subcategory": "펜션",
+          "capacity": 6,
+          "beds": 4,
+          "rooms": 2,
+          "bathrooms": 4,
+          "imgUrl": [
+              "https://images.pexels.com/photos/5023628/pexels-photo-5023628.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+              "https://images.pexels.com/photos/5525057/pexels-photo-5525057.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+              "https://images.pexels.com/photos/5047705/pexels-photo-5047705.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+              "https://images.pexels.com/photos/5047696/pexels-photo-5047696.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+              "https://images.pexels.com/photos/5047651/pexels-photo-5047651.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+          ],
+          "review": {
+              "avr_score": 4.5676,
+              "reviews": 37
+          }
+      },
+      {
+          "id": 127,
+          "name": "게스트하우스 veniam",
+          "province": "제주특별자치도",
+          "city": "서귀포시",
+          "address1": "표선면",
+          "address2": "성읍리 1261",
+          "latitude": 33,
+          "longitude": 126,
+          "price": 206000,
+          "discount_price": 103000,
+          "subcategory": "게스트 스위트",
+          "capacity": 6,
+          "beds": 4,
+          "rooms": 2,
+          "bathrooms": 4,
+          "imgUrl": [
+              "https://images.pexels.com/photos/4642460/pexels-photo-4642460.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+              "https://images.pexels.com/photos/4217854/pexels-photo-4217854.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+              "https://images.pexels.com/photos/4219077/pexels-photo-4219077.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+              "https://images.pexels.com/photos/4941919/pexels-photo-4941919.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+              "https://images.pexels.com/photos/4775451/pexels-photo-4775451.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+          ],
+          "review": {
+              "avr_score": 4.5345,
+              "reviews": 58
+          }
+      },
+      {
+          "id": 199,
+          "name": "펜션 repudiandae",
+          "province": "제주특별자치도",
+          "city": "서귀포시",
+          "address1": "표선면",
+          "address2": "일주동로",
+          "latitude": 33,
+          "longitude": 126,
+          "price": 244000,
+          "discount_price": 122000,
+          "subcategory": "펜션",
+          "capacity": 6,
+          "beds": 4,
+          "rooms": 2,
+          "bathrooms": 4,
+          "imgUrl": [
+              "https://images.pexels.com/photos/4030032/pexels-photo-4030032.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+              "https://images.pexels.com/photos/4030052/pexels-photo-4030052.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+              "https://images.pexels.com/photos/4030076/pexels-photo-4030076.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+              "https://images.pexels.com/photos/4330942/pexels-photo-4330942.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+              "https://images.pexels.com/photos/4555057/pexels-photo-4555057.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+          ],
+          "review": {
+              "avr_score": 4.4043,
+              "reviews": 47
+          }
+      },
+      {
+          "id": 200,
+          "name": "하우스 praesentium",
+          "province": "제주특별자치도",
+          "city": "서귀포시",
+          "address1": "표선면",
+          "address2": "표선리 산4-1",
+          "latitude": 33,
+          "longitude": 126,
+          "price": 148000,
+          "discount_price": 74000,
+          "subcategory": "저택",
+          "capacity": 6,
+          "beds": 4,
+          "rooms": 2,
+          "bathrooms": 4,
+          "imgUrl": [
+              "https://images.pexels.com/photos/4030065/pexels-photo-4030065.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+              "https://images.pexels.com/photos/4030040/pexels-photo-4030040.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+              "https://images.pexels.com/photos/4030059/pexels-photo-4030059.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+              "https://images.pexels.com/photos/4044785/pexels-photo-4044785.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+              "https://images.pexels.com/photos/1090638/pexels-photo-1090638.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+          ],
+          "review": {
+              "avr_score": 4.5238,
+              "reviews": 63
+          }
+      }
+  ]
+}
