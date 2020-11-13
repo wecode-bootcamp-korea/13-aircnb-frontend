@@ -31,14 +31,12 @@ const Search = ({ searchActive, history }) => {
   const [currentLocation, setCurrentLocation] = useState([]);
   const [locationValue, setLocationValue] = useState("");
   const [address, setAddress] = useState([]);
-  const [isBtnClicked, setIsBtnClicked] = useState(false);
+  const [isBtnClicked, setIsBtnClicked] = useState(true);
   const [booking, setBooking] = useState({
     startDate: "날짜추가",
     endDate: "날짜추가",
   });
   // const [totalGuest, setTotalGuest] = useState(0);
-
-  console.log("------------search-------------");
 
   // ANCHOR redux
   const bookReducer = useSelector(({ bookReducer }) => bookReducer);

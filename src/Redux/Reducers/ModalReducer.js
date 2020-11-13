@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   mapMenu: null,
   isNavbarActive: false,
   isLoginModalActive: false,
+  isSignupModalActive: false,
   isProfileModalActive: false,
   isGuestModalActive: false,
 };
@@ -16,6 +17,10 @@ const modalReducer = (state = INITIAL_STATE, action) => {
       return { ...state, isLoginModalActive: !state.isLoginModalActive };
     case "CLOSE_LOGIN_MODAL":
       return { ...state, isLoginModalActive: false };
+    case "TOGGLE_SIGNUP_MODAL":
+      return { ...state, isSignupModalActive: !state.isSignupModalActive };
+    case "CLOSE_SIGNUP_MODAL":
+      return { ...state, isSignupModalActive: false };
     case "PROFILE_MODAL_STATUS":
       return { ...state, isProfileModalActive: !state.isProfileModalActive };
     case "CLOSE_PROFILE_MODAL":

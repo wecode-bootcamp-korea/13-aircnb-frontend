@@ -66,7 +66,7 @@ const ReviewModal = ({
   async function fetchMoreReviews() {
     setFetching(true);
     const res = await fetch(
-      `http://10.58.1.75:8000/review/list?offset=${offset}&limit=${LIMIT}&stay_id=${1}`
+      `http://10.58.1.75:8000/review/list?offset=${offset}&limit=${LIMIT}&stay_id=${stayId}`
     );
     res.json().then((res) => {
       setReviews([...reviews, ...res.review_list]);
