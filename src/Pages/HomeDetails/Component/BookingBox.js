@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import BookingBoxCalendar from "./BookingBoxCalendar";
 import BookingBoxPersonnel from "./BookingBoxPersonnel";
-import { useSelector } from "react-redux";
+// import { withRouter } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { takeGuestNumber } from "../../../Redux/Actions/Index";
 
 const BookingBox = ({ price, setCheckDates, discountPrice, history, id }) => {
   const priceNum = Number(price);
@@ -22,18 +24,9 @@ const BookingBox = ({ price, setCheckDates, discountPrice, history, id }) => {
   const bookReducer = useSelector(({ bookReducer }) => bookReducer);
   const startDate = bookReducer.startDate;
   const endDate = bookReducer.endDate;
-  // const adults = bookReducer.adults;
-  // const children = bookReducer.children;
-  // const babies = bookReducer.babies;
-
-  // console.log(
-  //   startDate,
-  //   endDate,
-  //   adults,
-  //   children,
-  //   babies,
-  //   "23123131273123671283678136127863"
-  // );
+  const dispatch = useDispatch();
+  const takeGuestNumberAction = (ad, ch, bb) =>
+    dispatch(takeGuestNumber(ad, ch, bb));
 
   useEffect(() => {
     setNights(getNights(startDate, endDate));
@@ -42,11 +35,11 @@ const BookingBox = ({ price, setCheckDates, discountPrice, history, id }) => {
     setCheckOut(endDate);
   }, [nights, checkIn, checkOut, startDate, endDate]);
 
+  const handleBookingBtn = () => {
+    history.push(`/homebooking/${id}`);
+  };
+
   const getNights = (checkIn, checkOut) => {
-    // const checkInMonth = +checkIn?.split(".")[1];
-    // const checkOutMonth = +checkOut?.split(".")[1];
-    // const checkInDays = +checkIn?.split(".")[2];
-    // const checkOutDays = +checkOut?.split(".")[2];
     const checkInMonth = checkIn?.slice(0, 2);
     const checkOutMonth = checkOut?.slice(0, 2);
     const checkInDays = checkIn?.slice(4, 6);
