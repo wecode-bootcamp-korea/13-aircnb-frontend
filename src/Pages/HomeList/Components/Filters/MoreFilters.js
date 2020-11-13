@@ -253,7 +253,7 @@ const MoreFilters = (props) => {
         <section>
           <div>
             <button>전체 삭제</button>
-            <button onClick={props.fetchFilter(num)}>필터 숙소 보기</button>
+            <button>필터 숙소 보기</button>
           </div>
         </section>
       </div>

@@ -18,6 +18,7 @@ const buttonStyle = (
     border-radius: 33px;
     padding: ${last ? "14px 10px 14px 32px" : "14px 32px"};
     box-shadow: ${active && "0px 4px 10px 4px #ddd"};
+
     cursor: pointer;
 
     &:hover {
@@ -71,6 +72,8 @@ const buttonStyle = (
 `;
 
 export const searchMenuPreset = css`
+  box-shadow: 0px 2px 5px 1px #aaa;
+
   position: absolute;
   top: 0px;
   width: 100%;

@@ -20,15 +20,14 @@ const HomeList = (props) => {
   const [offset, setOffset] = useState(0);
   const LIMIT = 5;
   const PATHNAME = window.location.pathname;
-
-  const API = `http://10.58.1.225:8000/homelist${props.match.params.id}&limit=${LIMIT}&offset=${offset}`;
+  // const API = `http://10.58.1.225:8000/homelist${props.location.search}&limit=${LIMIT}&offset=${offset}`;
+  const API = "/Data/data.json";
   const LIKELIST = `http://10.58.1.75:8000/user/likelist&limit=${LIMIT}&offset=${offset}`;
   //redux
   const signReducer = useSelector(({ signReducer }) => signReducer);
   const userToken = signReducer.userToken;
   async function fetchData() {
-    console.log(props.match.params.id, "hahaha this is id");
-
+    // console.log(props.location.search, "hahaha this is id");
     if (PATHNAME === "/homelist") {
       const res = await fetch(API, {
         headers: {
@@ -45,11 +44,9 @@ const HomeList = (props) => {
       res.json().then((res) => setStay(res.stay));
     }
   }
-
   useEffect(() => {
     fetchData();
   }, []);
-
   const urlParams = new URLSearchParams(props.location.search);
   useEffect(() => {
     const result = [];
@@ -63,9 +60,8 @@ const HomeList = (props) => {
     setOffset(Number(e.target.id) * LIMIT);
     const offset = Number(e.target.id) * LIMIT;
     // const nextOffset = offset + LIMIT;
-    const API = `http://10.58.1.225:8000/homelist${props.match.params.id}&limit=${LIMIT}&offset=${offset}`;
+    const API = `http://10.58.1.225:8000/homelist${props.location.search}&limit=${LIMIT}&offset=${offset}`;
     const LIKELIST = `http://10.58.1.75:8000/user/likelist&limit=${LIMIT}&offset=${offset}`;
-
     if (PATHNAME === "/homelist") {
       fetch(API, {
         headers: {
@@ -87,8 +83,7 @@ const HomeList = (props) => {
   const fetchFilter = (num) => {
     const LIMIT = 5;
     // const nextOffset = offset + LIMIT;
-    const API = `http://10.58.1.225:8000/homelist${props.match.params.id}&limit=${LIMIT}&offset=0&beds=${num.beds}&rooms=${num.rooms}$bathrooms=${num.bathrooms}`;
-
+    const API = `http://10.58.1.225:8000/homelist${props.location.search}&limit=${LIMIT}&offset=0&beds=${num.beds}&rooms=${num.rooms}$bathrooms=${num.bathrooms}`;
     fetch(API, {
       headers: {
         AUTHORIZATION: userToken,
@@ -141,7 +136,7 @@ const HomeList = (props) => {
       {/* 필터리스트 */}
       {modal && (
         <ModalPortal>
-          <MoreFilters onClose={closeModal} fetchFilter={fetchFilter} />
+          <MoreFilters onClose={closeModal} />
         </ModalPortal>
       )}
       <WrapperHL fixed={modal}>
@@ -274,6 +269,7 @@ const HomeList = (props) => {
             <Pages
               currentIndex={currentIndex}
               fetchHome={fetchHome}
+              d
               PATHNAME={PATHNAME}
             />
           </div>
@@ -286,10 +282,9 @@ const HomeList = (props) => {
   );
 };
 export default HomeList;
-
 //스타일
 const WrapperHL = styled.div`
-  top: -80px;
+  /* top: -80px; */
   width: 98vw;
   height: 100%;
   position: ${(props) => (props.fixed ? "fixed" : "relative")};
@@ -303,7 +298,6 @@ const WrapperHL = styled.div`
     margin-bottom: 80px;
     //네비게이션바 여기 조절
   }
-
   & > section:nth-child(2) {
     position: relative;
     top: 80px;
@@ -311,7 +305,6 @@ const WrapperHL = styled.div`
     width: 98vw;
     display: flex;
     flex-direction: column;
-
     & > div:first-child {
       display: flex;
       width: 98vw;
@@ -331,7 +324,6 @@ const WrapperHL = styled.div`
           padding: 0 24px;
         }
       }
-
       & > div:nth-child(2).map {
         width: calc(98vw - 840px);
         height: 100vh;
@@ -340,28 +332,24 @@ const WrapperHL = styled.div`
         right: 0;
       }
     }
-
     & > div:nth-child(2) {
       display: block;
       width: 98vw;
       height: 178px;
     }
   }
-
   & > section:nth-child(3) {
     display: block;
     width: 98vw;
     height: 300px;
   }
 `;
-
 const Filter = styled.div`
   & > p {
     font-size: 14px;
     line-height: 18px;
     margin-bottom: 8px;
   }
-
   & > h1 {
     font-size: 30px;
     line-height: 36px;
@@ -386,7 +374,6 @@ const Filter = styled.div`
     }
   }
 `;
-
 const Button = styled.button`
   margin-right: 5px;
   cursor: pointer;
@@ -401,7 +388,6 @@ const Button = styled.button`
   &:focus {
     outline: none;
     border: 1px solid rgb(34, 34, 34);
-
     box-shadow: 1px -1px rgb(34, 34, 34), -0.7px -1px rgb(34, 34, 34),
       1px 1px rgb(34, 34, 34), -0.7px 1px rgb(34, 34, 34);
   }

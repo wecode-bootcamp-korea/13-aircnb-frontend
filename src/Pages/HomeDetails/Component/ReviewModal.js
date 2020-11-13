@@ -18,7 +18,7 @@ const ReviewModal = ({
   const [offset, setOffset] = useState(0);
   const [fetching, setFetching] = useState(false);
 
-  const API = `http://10.58.1.75:8000/review/list`;
+  const API = `http://10.58.4.202:8000/review/list`;
 
   const setDataFormat = (dataValue) => {
     const year = dataValue.split("-")[0];
@@ -27,7 +27,7 @@ const ReviewModal = ({
   };
 
   async function fetchData() {
-    const res = await fetch(`${API}?offset=0&limit=6&stay_id=${stayId}`);
+    const res = await fetch(`${API}?offset=0&limit=6&stay_id=${1}`);
     res
       .json()
       .then((res) => setReviews(res.review_list), console.log("통신확인"));
@@ -66,7 +66,7 @@ const ReviewModal = ({
   async function fetchMoreReviews() {
     setFetching(true);
     const res = await fetch(
-      `http://10.58.1.75:8000/review/list?offset=${offset}&limit=${LIMIT}&stay_id=${stayId}`
+      `http://10.58.4.202:8000/review/list?offset=${offset}&limit=${LIMIT}&stay_id=${1}`
     );
     res.json().then((res) => {
       setReviews([...reviews, ...res.review_list]);
@@ -181,7 +181,7 @@ const RightAside = styled.div`
   span {
     display: inline-block;
     margin: 15px 0 0 20px;
-    font-size: 32px;
+    font-size: 25px;
     font-weight: 700;
     line-height: 36px;
 

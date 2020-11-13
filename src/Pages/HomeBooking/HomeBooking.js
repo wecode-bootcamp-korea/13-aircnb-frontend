@@ -602,6 +602,7 @@ const HomeBooking = (props) => {
 };
 
 const StyledHomeBooking = styled.div`
+  margin-top: 80px;
   width: 100%;
   padding-bottom: 80px;
 `;

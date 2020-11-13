@@ -38,16 +38,18 @@ const HomeDetails = (props) => {
   const [wishListIsVisible, setWishListIsVisible] = useState(false);
   const [stayId, setStayId] = useState(stay && stay[0]?.id);
 
-  // const API = `http://10.58.1.225:8000/stay/${props.match.params.id}`;
+  const API = `http://10.58.1.225:8000/stay/${props.match.params.id}`;
   // const API = "/data/detail_data.json";
-  const API = `http://10.58.1.225:8000/stay/1`;
+  // const API = `http://10.58.1.225:8000/stay/1`;
 
   // redux
   const signReducer = useSelector(({ signReducer }) => signReducer);
   const userToken = signReducer.userToken;
 
   async function fetchData() {
-    const res = await fetch(API);
+    const res = await fetch(API, {
+      Authorization: userToken,
+    });
     res.json().then(
       (res) => setStay(res.stay),
       () => console.log("확인")
@@ -67,7 +69,7 @@ const HomeDetails = (props) => {
     fetch(`http://10.58.1.75:8000/user/like`, {
       method: "POST",
       headers: {
-        AUTHORIZATION: userToken,
+        Authorization: userToken,
       },
       body: JSON.stringify({
         stay_id: value,

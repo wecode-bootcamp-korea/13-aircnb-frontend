@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { withRouter } from "react-router-dom";
 
 function Payment({
   handleConfirm,
@@ -7,6 +8,7 @@ function Payment({
   buyer_tel,
   buyer_email,
   buyer_addr,
+  history,
 }) {
   function onClickPayment(e) {
     handleConfirm(e);
@@ -34,6 +36,7 @@ function Payment({
 
     if (success) {
       alert("결제 성공");
+      history.push("/main");
     } else {
       alert(`결제 실패: ${error_msg}`);
     }
@@ -45,7 +48,7 @@ function Payment({
   );
 }
 
-export default Payment;
+export default withRouter(Payment);
 
 const RequestButton = styled.div`
   button {

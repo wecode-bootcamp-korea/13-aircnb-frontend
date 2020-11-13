@@ -13,7 +13,7 @@ const Reviews = ({ stayId }) => {
   const userReviewArr = reviews.slice(0, 6);
   // const [location, setLocation] = useState("reviews");
 
-  const API = `http://10.58.1.75:8000/review/list`;
+  const API = `http://10.58.4.202:8000/review/list`;
 
   async function fetchData() {
     const res = await fetch(`${API}?offset=0&limit=6&stay_id=${1}`);

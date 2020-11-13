@@ -25,11 +25,12 @@ const Routes = () => {
             <MainContents>
               <Route path="/main" component={Main} />
               <Route exact path="/homebooking" component={HomeBooking} />
-              <Route exact path="/homebooking" component={HomeBooking} />
               <Route exact path="/homebooking/:id" component={HomeBooking} />
               <Route exact path="/homedetails" component={HomeDetails} />
               <Route exact path="/homedetails/:id" component={HomeDetails} />
               <Route exact path="/homelist" component={HomeList} />
+              <Route exact path="/homelist/:id" component={HomeList} />
+              {/* <Route exact path="/user/likelist" component={HomeList} /> */}
             </MainContents>
           </Switch>
         </ThemeProvider>

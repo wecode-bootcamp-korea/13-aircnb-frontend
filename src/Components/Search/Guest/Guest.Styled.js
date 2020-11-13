@@ -5,13 +5,13 @@ export const GuestModal = styled.div`
   ${({ btnActive }) => !btnActive && visibilityHidden}
   position: absolute;
   top: 160px;
-  left: 850px;
+  left: 1000px;
   width: 394px;
   height: 244px;
   background: #fff;
   padding: 16px 32px;
   border-radius: 30px;
-  box-shadow: 0px 4px 10px 4px #ddd;
+  box-shadow: 0px 2px 5px 1px #aaa;
   z-index: 1000;
 
   ul {

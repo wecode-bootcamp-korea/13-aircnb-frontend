@@ -88,31 +88,29 @@ const Calendar = ({ active, btnActive, bookStatus, booking }) => {
   moment.locale("ko", koLocale);
   return (
     <CalendarModule btnActive={btnActive}>
-      <div className="SM">
-        <DateRangePicker
-          startDate={startDate} // momentPropTypes.momentObj or null,
-          startDateId="starDate"
-          endDate={endDate}
-          endDateId="endDate"
-          onDatesChange={handleOnDateChange}
-          focusedInput={focus}
-          onFocusChange={(focus) => setFocus(focus)}
-          daySize={42}
-          isOutsideRange={(day) => moment().diff(day) >= 0}
-          anchorDirection={"right"}
-          displayFormat="MM[월] D[일]"
-          monthFormat="YYYY[년] M[월]"
-          navPrev={<FontAwesomeIcon icon={faChevronLeft} />}
-          navNext={<FontAwesomeIcon icon={faChevronRight} />}
-          verticalSpacing={100}
-          numberOfMonths={1}
-          hideKeyboardShortcutsPanel
-          keepOpenOnDateSelect
-          showClearDates
-          noBorder
-          block
-        />
-      </div>
+      <DateRangePicker
+        startDate={startDate} // momentPropTypes.momentObj or null,
+        startDateId="starDate"
+        endDate={endDate}
+        endDateId="endDate"
+        onDatesChange={handleOnDateChange}
+        focusedInput={focus}
+        onFocusChange={(focus) => setFocus(focus)}
+        daySize={42}
+        isOutsideRange={(day) => moment().diff(day) >= 0}
+        anchorDirection={"right"}
+        displayFormat="MM[월] D[일]"
+        monthFormat="YYYY[년] M[월]"
+        navPrev={<FontAwesomeIcon icon={faChevronLeft} />}
+        navNext={<FontAwesomeIcon icon={faChevronRight} />}
+        verticalSpacing={100}
+        numberOfMonths={1}
+        hideKeyboardShortcutsPanel
+        keepOpenOnDateSelect
+        showClearDates
+        noBorder
+        block
+      />
     </CalendarModule>
   );
 };

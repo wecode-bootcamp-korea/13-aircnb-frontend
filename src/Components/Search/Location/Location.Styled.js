@@ -10,7 +10,7 @@ export const Map = styled.div`
   padding: 16px 0;
   background-color: #fff;
   border-radius: 30px;
-  box-shadow: 0px 5px 5px 2px #444;
+  box-shadow: 0px 2px 5px 1px #aaa;
   z-index: 1000;
 
   > ul {
