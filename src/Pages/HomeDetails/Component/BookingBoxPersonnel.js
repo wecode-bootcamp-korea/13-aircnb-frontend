@@ -1,24 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { Children, useEffect, useState } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import { takeGuestNumber } from "../../../Redux/Actions/Index";
 
 const BookingBoxPersonnel = ({ active, event, setTotal }) => {
-  const [adult, setAdult] = useState(1);
-  const [child, setChild] = useState(0);
-  const [infant, setInfant] = useState(0);
-
   // redux link
   const bookReducer = useSelector(({ bookReducer }) => bookReducer);
   const adults = bookReducer.adults;
   const children = bookReducer.children;
   const babies = bookReducer.babies;
+  const dispatch = useDispatch();
+  const takeGuestNumberAction = (ad, ch, bb) =>
+    dispatch(takeGuestNumber(ad, ch, bb));
 
   useEffect(() => {
-    setAdult(adults);
-    setChild(children);
-    setInfant(babies);
-    setTotal(adult + child);
-  }, [adult, child, adults, children, babies]);
+    setTotal(adults + children);
+  }, [adults, children]);
 
   return (
     <BookingPersonnel active={active}>
@@ -27,18 +25,22 @@ const BookingBoxPersonnel = ({ active, event, setTotal }) => {
           <span className="title">성인</span>
           <BtnDiv>
             <CircleBtn
-              disabled={adult === 0}
+              disabled={adults === 0}
               onClick={() => {
-                adult < 0 ? setAdult(0) : setAdult(adult - 1);
+                adults < 0
+                  ? takeGuestNumberAction(0, children, babies)
+                  : takeGuestNumberAction(adults - 1, children, babies);
               }}
             >
               <span className="btnIcon">&minus;</span>
             </CircleBtn>
-            <span>{adult}</span>
+            <span>{adults}</span>
             <CircleBtn
-              disabled={adult === 2}
+              disabled={adults === 2}
               onClick={() => {
-                adult < 2 ? setAdult(adult + 1) : setAdult(2);
+                adults < 2
+                  ? takeGuestNumberAction(adults + 1, children, babies)
+                  : takeGuestNumberAction(adults, children, babies);
               }}
             >
               <span className="btnIcon">+</span>
@@ -53,18 +55,22 @@ const BookingBoxPersonnel = ({ active, event, setTotal }) => {
           </div>
           <OtherBtnDiv>
             <CircleBtn
-              disabled={child === 0}
+              disabled={children === 0}
               onClick={() => {
-                child < 0 ? setChild(0) : setChild(child - 1);
+                children < 0
+                  ? takeGuestNumberAction(adults, 0, babies)
+                  : takeGuestNumberAction(adults, children - 1, babies);
               }}
             >
               <span className="btnIcon">&minus;</span>
             </CircleBtn>
-            <span>{child}</span>
+            <span>{children}</span>
             <CircleBtn
-              disabled={child === 2}
+              disabled={children === 2}
               onClick={() => {
-                child < 2 ? setChild(child + 1) : setChild(2);
+                children < 2
+                  ? takeGuestNumberAction(adults, children + 1, babies)
+                  : takeGuestNumberAction(adults, 2, babies);
               }}
             >
               <span className="btnIcon">+</span>
@@ -78,18 +84,22 @@ const BookingBoxPersonnel = ({ active, event, setTotal }) => {
           </div>
           <OtherBtnDiv>
             <CircleBtn
-              disabled={infant === 0}
+              disabled={babies === 0}
               onClick={() => {
-                infant < 0 ? setInfant(0) : setInfant(infant - 1);
+                babies < 0
+                  ? takeGuestNumberAction(adults, children, 0)
+                  : takeGuestNumberAction(adults, children, babies - 1);
               }}
             >
               <span className="btnIcon">&minus;</span>
             </CircleBtn>
-            <span>{infant}</span>
+            <span>{babies}</span>
             <CircleBtn
-              disabled={infant === 2}
+              disabled={babies === 2}
               onClick={() => {
-                infant < 2 ? setInfant(infant + 1) : setInfant(2);
+                babies < 2
+                  ? takeGuestNumberAction(adults, children, babies + 1)
+                  : takeGuestNumberAction(adults, children, 2);
               }}
             >
               <span className="btnIcon">+</span>
