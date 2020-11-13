@@ -94,9 +94,9 @@ const HomeBooking = (props) => {
   //Mockdata API: "http://localhost:3000/data/HomeBookingData.json"
   async function fetchData() {
     const res = await fetch(`${API_GetBooking}/stay/${props.match.params.id}`, {
-      headers: {
-        AUTHORIZATION: userToken,
-      },
+      // headers: {
+      //   AUTHORIZATION: userToken,
+      // },
     });
     const result = await res.json();
     setStay(result.stay);
@@ -346,7 +346,7 @@ const HomeBooking = (props) => {
               <CardLogos>
                 <img
                   alt="visa"
-                  src="https://lh3.googleusercontent.com/proxy/FOavFGoMvOoen3eyNvPVzKT25Nk0Iq3fOsDNUtm-mk8WmPYungbKwXhE_rnONY64M9c3MTWHz2GN1ATnSBD5UmvS860QOrjMeOSw68t0ewuR4q_sTNjiiI9tAZNrAg"
+                  src="https://www.pngkey.com/png/full/388-3889634_introduction-of-kakao-pay-kakaopay-png.png"
                 />
               </CardLogos>
             </PaymentWrapper>
