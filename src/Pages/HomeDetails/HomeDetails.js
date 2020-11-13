@@ -28,6 +28,7 @@ import ModalPortal from "./Component/ModalPortal";
 
 import Rule from "./Component/Rule";
 
+const LIMIT = 5;
 const TOKEN =
   "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MzF9.-dpTDEqbZkYtHbWbna51heDOR2mJvgPAOI7J9QoJMX8";
 

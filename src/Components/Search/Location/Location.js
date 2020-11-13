@@ -12,8 +12,6 @@ import map from "../../../Images/Search/map.svg";
 import pin from "../../../Images/Search/pin.svg";
 
 const Location = ({ searchResult, current, address, btnActive }) => {
-  console.log("------------location-------------");
-
   // ANCHOR redux
   const dispatch = useDispatch();
   const refMapMenuAction = (menu) => dispatch(refMapMenu(menu));
