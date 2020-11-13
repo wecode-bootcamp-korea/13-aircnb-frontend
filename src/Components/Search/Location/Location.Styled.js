@@ -15,6 +15,7 @@ export const Map = styled.div`
 
   > ul {
     width: 100%;
+    padding: 10px 0 10px 0;
 
     li {
       ${flexSet("flex-start", "center")};

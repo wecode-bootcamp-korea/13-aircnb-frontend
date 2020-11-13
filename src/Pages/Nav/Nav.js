@@ -19,7 +19,6 @@ import ProfileMenuList from "../../Components/ProfileMenuList/ProfileMenuList";
 // LINK style item
 import { Navbar, LogoSet, SearchTrigger, ProfileTrigger } from "./Nav.Styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAirbnb } from "@fortawesome/free-brands-svg-icons";
 import {
   faSearch,
   faBars,
@@ -32,7 +31,7 @@ const Nav = () => {
 
   // ANCHOR redux state
   const modalReducer = useSelector(({ modalReducer }) => modalReducer);
-  const signReducer = useSelector(({ signReducer }) => signReducer);
+  // const signReducer = useSelector(({ signReducer }) => signReducer);
   const bookReducer = useSelector(({ bookReducer }) => bookReducer);
   const isProfileModalActive = modalReducer.isProfileModalActive;
   const isNavbarActive = modalReducer.isNavbarActive;
@@ -47,7 +46,7 @@ const Nav = () => {
   const children = bookReducer.children;
   const babies = bookReducer.babies;
   let totalGuest = adults + children + babies;
-  const userToken = signReducer.userToken;
+  // const userToken = signReducer.userToken;
 
   // ANCHOR redux function
   const dispatch = useDispatch();
@@ -57,8 +56,6 @@ const Nav = () => {
   const closeProfileModalAction = () => dispatch(closeProfileModal());
   const toggleNavbarAction = () => dispatch(toggleNavbar());
   const closeNavbarAction = () => dispatch(closeNavbar());
-
-  console.log("------------nav-------------");
 
   // REVIEW ref nav declare
   useEffect(() => {

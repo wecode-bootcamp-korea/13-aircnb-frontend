@@ -40,6 +40,14 @@ export const closeLoginModal = () => {
   };
 };
 
+export const toggleSignupModal = () => ({
+  type: "TOGGLE_SIGNUP_MODAL",
+});
+
+export const closeSignupModal = () => ({
+  type: "CLOSE_SIGNUP_MODAL",
+});
+
 export const toggleProfileModal = () => {
   return {
     type: "PROFILE_MODAL_STATUS",

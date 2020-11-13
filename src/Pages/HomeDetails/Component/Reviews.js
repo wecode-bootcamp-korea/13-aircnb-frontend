@@ -16,7 +16,7 @@ const Reviews = ({ stayId }) => {
   const API = `http://10.58.1.75:8000/review/list`;
 
   async function fetchData() {
-    const res = await fetch(`${API}?offset=0&limit=6&stay_id=${stayId}`);
+    const res = await fetch(`${API}?offset=0&limit=6&stay_id=${1}`);
     res.json().then((res) => {
       setReviews(res.review_list);
       setInfo(res.overall);
@@ -26,9 +26,9 @@ const Reviews = ({ stayId }) => {
   useEffect(() => {
     fetchData();
     console.log(info && info.overall_star);
-  }, []);
+  });
 
-  console.log(info && info.overall_star);
+  console.log(reviews);
   return (
     <StyledReviews>
       <h3>
@@ -51,6 +51,8 @@ const Reviews = ({ stayId }) => {
       <ModalPortal>
         <ReviewModal
           stayId={stayId}
+          avrStar={info.overall_star}
+          reviewNum={info.review_count}
           // reviewData={data}
           active={isVisible}
           event={setIsVisible}
