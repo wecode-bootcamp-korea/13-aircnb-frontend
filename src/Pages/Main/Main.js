@@ -26,7 +26,6 @@ const Main = () => {
       const response = await axios.get(MAIN_PAGE_API);
       const validation = response && response.status === 200;
       validation && new Error("cannot fetch the data");
-      console.log(response);
       const {
         footerContent,
         mainHomeType,

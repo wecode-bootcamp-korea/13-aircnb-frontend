@@ -26,6 +26,9 @@ export const GuestModal = styled.div`
       }
     }
   }
+  @media only screen and (max-width: 1350px) {
+    left: 580px;
+  }
 `;
 
 export const GuestContents = styled.div`

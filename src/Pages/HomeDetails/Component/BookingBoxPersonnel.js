@@ -14,6 +14,12 @@ const BookingBoxPersonnel = ({ active, event, setTotal }) => {
   const takeGuestNumberAction = (ad, ch, bb) =>
     dispatch(takeGuestNumber(ad, ch, bb));
 
+  // redux link
+  const bookReducer = useSelector(({ bookReducer }) => bookReducer);
+  const adults = bookReducer.adults;
+  const children = bookReducer.children;
+  const babies = bookReducer.babies;
+
   useEffect(() => {
     setTotal(adults + children);
   }, [adults, children]);

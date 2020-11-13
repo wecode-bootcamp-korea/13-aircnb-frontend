@@ -39,7 +39,7 @@ const Routes = () => {
 };
 
 const MainContents = styled.main`
-  position: relative;
+  /* position: absolute; */
   top: 80px;
   z-index: 1;
 `;
