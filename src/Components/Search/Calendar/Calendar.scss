@@ -79,7 +79,6 @@ $default-color: rgb(247, 247, 247);
           font-size: 14px;
           font-weight: 600;
           z-index: inherit;
-
           &__default {
             &:hover {
               background: $primary-color;
@@ -87,13 +86,11 @@ $default-color: rgb(247, 247, 247);
               border-radius: 50%;
             }
           }
-
           &__selected {
             &:hover {
               background: $primary-color;
               border-radius: 50%;
             }
-
             &_start,
             &_end {
               background: $primary-color;
@@ -102,7 +99,6 @@ $default-color: rgb(247, 247, 247);
             &_span {
               background: $default-color;
               color: black;
-
               &:hover {
                 background: $primary-color;
                 color: $default-color;
@@ -114,7 +110,6 @@ $default-color: rgb(247, 247, 247);
             &_span {
               background: $default-color;
               color: black;
-
               &:hover {
                 background: $primary-color;
                 color: $default-color;
@@ -124,7 +119,6 @@ $default-color: rgb(247, 247, 247);
           }
           &__blocked_out_of_range {
             text-decoration: line-through;
-
             &:hover {
               background: #fff;
               color: #cacccd;

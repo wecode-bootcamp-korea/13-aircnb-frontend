@@ -28,15 +28,20 @@ import ModalPortal from "./Component/ModalPortal";
 
 import Rule from "./Component/Rule";
 
+const LIMIT = 5;
+const TOKEN =
+  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MzF9.-dpTDEqbZkYtHbWbna51heDOR2mJvgPAOI7J9QoJMX8";
+
 const HomeDetails = (props) => {
   const [stay, setStay] = useState([]);
   const [checkDates, setCheckDates] = useState(["2020-11-20", "2020-11-23"]);
   const [isLiked, setIsLiked] = useState(false);
   const [wishListIsVisible, setWishListIsVisible] = useState(false);
+  const [stayId, setStayId] = useState(stay && stay[0]?.id);
 
   // const API = `http://10.58.1.225:8000/stay/${props.match.params.id}`;
-  // const API = "/data/detail_data.json";
-  const API = `http://10.58.1.225:8000/stay/1`;
+  const API = "/data/detail_data.json";
+  // const API = `http://10.58.1.225:8000/stay/1`;
 
   async function fetchData() {
     const res = await fetch(API);
@@ -45,10 +50,30 @@ const HomeDetails = (props) => {
 
   useEffect(() => {
     fetchData();
-    console.log(stay);
   }, []);
 
-  console.log(stay);
+  useEffect(() => {
+    setStayId(stay && stay[0]?.id);
+    console.log(stayId);
+  }, [stayId]);
+
+  const LikedOrUnLiked = (value) => {
+    fetch(`http://10.58.1.75:8000/user/like`, {
+      method: "POST",
+      headers: {
+        AUTHORIZATION: TOKEN,
+      },
+      body: JSON.stringify({
+        stay_id: value,
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log("포스트 확인메세지:", result);
+      });
+  };
+
+  console.log(stay && stayId);
   return (
     <StyledHomeDetails>
       <Container>
@@ -62,14 +87,14 @@ const HomeDetails = (props) => {
                 {stay[0]?.review.avr_score?.toFixed(2)}{" "}
                 {`(${stay[0]?.review.reviews})`}
               </span>
-              <span>.</span>
+              <span>&middot;</span>
               {stay[0]?.hostInfo?.superHost ? (
                 <span>
                   <FontAwesomeIcon icon={faMedal} className="colorIcon" /> 슈퍼
                   호스트
                 </span>
               ) : null}
-              {stay[0]?.hostInfo.superHost ? <span>.</span> : null}
+              {stay[0]?.hostInfo.superHost ? <span>&middot;</span> : null}
 
               <span className="underline">{`${stay && stay[0]?.city}, ${
                 stay && stay[0]?.address1
@@ -87,7 +112,7 @@ const HomeDetails = (props) => {
                 <div
                   className="IconCon"
                   onClick={() => (
-                    setWishListIsVisible(true), setIsLiked(!isLiked)
+                    setIsLiked(!isLiked), LikedOrUnLiked(stayId && stayId)
                   )}
                 >
                   <i className="fas fa-heart fullHeart"></i>
@@ -112,7 +137,7 @@ const HomeDetails = (props) => {
                 stay && stay[0]?.subcategory
               } 전체`}</h3>
               <span>
-                {`최대인원 ${stay[0]?.capacity}명 . 침실 ${stay[0]?.rooms}개 . 침대 ${stay[0]?.beds}개 . 욕실 ${stay[0]?.bathrooms}개`}
+                {`최대인원 ${stay[0]?.capacity}명 · 침실 ${stay[0]?.rooms}개 · 침대 ${stay[0]?.beds}개 · 욕실 ${stay[0]?.bathrooms}개`}
               </span>
             </div>
             <div className="rules">
@@ -149,7 +174,7 @@ const HomeDetails = (props) => {
             </div>
           </Aside>
         </ContentCon>
-        <Reviews data={stay && stay[0]?.review} />
+        <Reviews stayId={stay && stay[0]?.id} />
         <Location>
           <span>위치</span>
           <MapContent
