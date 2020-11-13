@@ -49,10 +49,6 @@ const HomeBooking = (props) => {
   );
   const [dates, setDates] = useState(1);
 
-  const refundableDate = checkinDate
-    ? moment(checkinDate).add(8, "days").format("MM월 DD일")
-    : "예약 후 7일";
-
   const reducer = (state, action) => {
     return {
       ...state,
