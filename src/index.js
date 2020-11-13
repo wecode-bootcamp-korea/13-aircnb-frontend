@@ -11,7 +11,8 @@ import storage from "redux-persist/lib/storage";
 import rootReducer from "./Redux/Reducers/Index";
 import logger from "redux-logger";
 
-const middleware = [logger];
+// logger
+const middleware = [];
 
 const persistConfig = {
   key: "root",

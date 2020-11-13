@@ -1,14 +1,24 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const BookingBoxPersonnel = ({ active, event, setTotal }) => {
   const [adult, setAdult] = useState(1);
   const [child, setChild] = useState(0);
   const [infant, setInfant] = useState(0);
 
+  // redux link
+  const bookReducer = useSelector(({ bookReducer }) => bookReducer);
+  const adults = bookReducer.adults;
+  const children = bookReducer.children;
+  const babies = bookReducer.babies;
+
   useEffect(() => {
+    setAdult(adults);
+    setChild(children);
+    setInfant(babies);
     setTotal(adult + child);
-  }, [adult, child]);
+  }, [adult, child, adults, children, babies]);
 
   return (
     <BookingPersonnel active={active}>
@@ -165,6 +175,7 @@ const CircleBtn = styled.button`
   height: 32px;
   color: rgb(176, 176, 176);
   text-align: center;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "default")};
 
   &:hover {
     color: #222222;
@@ -211,8 +222,12 @@ const CloseBtnDiv = styled.div`
     border-radius: 8px;
     cursor: pointer;
 
-    :hover {
+    &:hover {
       background-color: rgb(247, 247, 247);
+    }
+
+    &:focus {
+      outline: none;
     }
   }
 `;

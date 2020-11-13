@@ -7,8 +7,8 @@ const BedType = ({ data }) => {
     <StyledBedType>
       <h3>침대/침구 유형</h3>
       <BedCon>
-        {data?.map((bed) => (
-          <Bed icon={bed.icon} rooms={bed.rooms} beds={bed.beds} />
+        {data?.map((bed, idx) => (
+          <Bed key={idx} icon={bed.icon} rooms={bed.rooms} beds={bed.beds} />
         ))}
       </BedCon>
     </StyledBedType>

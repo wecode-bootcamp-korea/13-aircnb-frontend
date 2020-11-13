@@ -41,6 +41,7 @@ const StyledImgCarouselCon = styled.div`
   visibility: ${(props) => (props.active ? "visible" : "hidden")};
 
   .carouselCon {
+    position: relative;
     background-color: white;
     width: 700px;
     height: 500px;
@@ -50,8 +51,8 @@ const StyledImgCarouselCon = styled.div`
 
 const CloseBtn = styled.button`
   position: relative;
-  top: -40px;
-  left: 1000px;
+  top: -650px;
+  left: 100px;
   width: 50px;
   height: 35px;
   font-size: 16px;

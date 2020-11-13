@@ -19,9 +19,9 @@ const Routes = () => {
       <Router>
         <ThemeProvider theme={theme}>
           <GlobalStyle />
-          {/* <Nav /> */}
-          <Route path="/" component={Nav} />
+          <Nav />
           <Switch>
+            {/* <Route path="/" component={Nav} /> */}
             <MainContents>
               <Route path="/main" component={Main} />
               <Route exact path="/homebooking" component={HomeBooking} />
@@ -38,8 +38,8 @@ const Routes = () => {
   );
 };
 
-const MainContents = styled.section`
-  position: relative;
+const MainContents = styled.main`
+  /* position: absolute; */
   top: 80px;
   z-index: 1;
 `;
