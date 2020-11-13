@@ -350,11 +350,11 @@ const HomeBooking = (props) => {
               </CardLogos>
             </PaymentWrapper>
             <CardInput>
-              <div class="dropdown">
-                <button onClick={(e) => openCardDropBox(e)} class="dropbtn">
+              <div className="dropdown">
+                <button onClick={(e) => openCardDropBox(e)} className="dropbtn">
                   카카오페이
                 </button>
-                <div id="myDropdown" class="dropdown-content">
+                <div id="myDropdown" className="dropdown-content">
                   <div className="paymentList">
                     카카오페이
                     <FontAwesomeIcon className="checkIcon" icon={faCheck} />
@@ -421,7 +421,7 @@ const HomeBooking = (props) => {
                         "이탈리아",
                         "프랑스",
                         "베트남",
-                      ].map((el) => (
+                      ].map((el, idx) => (
                         <li onClick={(e) => setCountry(e.target.innerText)}>
                           <div className="countryName">{el}</div>
                           <FontAwesomeIcon
