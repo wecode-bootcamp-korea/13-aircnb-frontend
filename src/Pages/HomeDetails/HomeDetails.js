@@ -38,9 +38,9 @@ const HomeDetails = (props) => {
   const [wishListIsVisible, setWishListIsVisible] = useState(false);
   const [stayId, setStayId] = useState(stay && stay[0]?.id);
 
-  const API = `http://10.58.1.225:8000/stay/${props.match.params.id}`;
+  // const API = `http://10.58.1.225:8000/stay/${props.match.params.id}`;
   // const API = "/data/detail_data.json";
-  // const API = `http://10.58.1.225:8000/stay/1`;
+  const API = `http://10.58.1.225:8000/stay/1`;
 
   // redux
   const signReducer = useSelector(({ signReducer }) => signReducer);
@@ -79,7 +79,6 @@ const HomeDetails = (props) => {
       });
   };
 
-  console.log(stay && stayId);
   return (
     <StyledHomeDetails>
       <Container>

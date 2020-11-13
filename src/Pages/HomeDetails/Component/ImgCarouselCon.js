@@ -43,6 +43,7 @@ const StyledImgCarouselCon = styled.div`
   .carouselCon {
     position: relative;
     background-color: white;
+    top: 100px;
     width: 700px;
     height: 500px;
     margin: 100px auto;
@@ -51,7 +52,7 @@ const StyledImgCarouselCon = styled.div`
 
 const CloseBtn = styled.button`
   position: relative;
-  top: -650px;
+  top: -550px;
   left: 100px;
   width: 50px;
   height: 35px;

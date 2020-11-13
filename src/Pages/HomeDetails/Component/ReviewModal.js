@@ -5,24 +5,19 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import Review from "./Review";
 
 const LIMIT = 5;
-const ReviewModal = ({ reviewData, active, event, stayId }) => {
+const ReviewModal = ({
+  reviewData,
+  active,
+  event,
+  stayId,
+  avrStar,
+  reviewNum,
+}) => {
   const [location, setLocation] = useState("modal");
   const [reviews, setReviews] = useState([]);
   const [offset, setOffset] = useState(0);
   const [fetching, setFetching] = useState(false);
 
-  // useEffect(() => {
-  // scroll event listener 등록
-  // document
-  //   .querySelector("#reviewContent")?
-  //   .addEventListener("scroll", handleScroll);
-  // return () => {
-  // scroll event listener 해제
-  // document
-  //   .querySelector("#reviewContent")?
-  //   .removeEventListener("scroll", handleScroll);
-  //   };
-  // });
   const API = `http://10.58.1.75:8000/review/list`;
 
   const setDataFormat = (dataValue) => {
@@ -79,16 +74,16 @@ const ReviewModal = ({ reviewData, active, event, stayId }) => {
     });
   }
 
-  console.log(
-    "clientHeight >>",
-    document.querySelector("#reviewContent")?.clientHeight,
-    "scrollHeight >>",
-    document.querySelector("#reviewContent")?.scrollHeight,
-    "scrollTop >>",
-    document.querySelector("#reviewContent")?.scrollTop,
-    "reviews>>",
-    reviews
-  );
+  // console.log(
+  //   "clientHeight >>",
+  //   document.querySelector("#reviewContent")?.clientHeight,
+  //   "scrollHeight >>",
+  //   document.querySelector("#reviewContent")?.scrollHeight,
+  //   "scrollTop >>",
+  //   document.querySelector("#reviewContent")?.scrollTop,
+  //   "reviews>>",
+  //   reviews
+  // );
   return (
     <StyledReviewModal active={active}>
       <AllReviews active={active}>
@@ -101,7 +96,8 @@ const ReviewModal = ({ reviewData, active, event, stayId }) => {
           <RightAside>
             <span>
               <FontAwesomeIcon icon={faStar} className="colorIcon" />
-              {"  "}4.55 (후기 33개)
+              {"  "}
+              {`${avrStar?.toFixed(2)}점 (후기 ${reviewNum}개)`}
             </span>
           </RightAside>
           <ReviewCon id="reviewContent">
@@ -141,7 +137,7 @@ const StyledReviewModal = styled.div`
 
 const AllReviews = styled.div`
   position: "relative";
-  top: 15px;
+  top: 70px;
   background-color: white;
   width: 970px;
   max-width: 970px;
@@ -197,7 +193,7 @@ const RightAside = styled.div`
 
 const ReviewCon = styled.div`
   width: 650px;
-  height: 470px;
+  height: 420px;
   max-height: 600px;
   padding: 25px;
   overflow: auto;
