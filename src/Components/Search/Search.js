@@ -38,8 +38,6 @@ const Search = ({ searchActive, history }) => {
   });
   // const [totalGuest, setTotalGuest] = useState(0);
 
-  console.log("------------search-------------");
-
   // ANCHOR redux
   const bookReducer = useSelector(({ bookReducer }) => bookReducer);
   const location = bookReducer.location;

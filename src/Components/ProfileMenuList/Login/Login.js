@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import axios from "axios";
 import KakaoLogin from "react-kakao-login";
 import GoogleLogin from "react-google-login";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Swal from "sweetalert2";
 
@@ -39,8 +39,8 @@ const Login = ({ history }) => {
   });
 
   // ANCHOR redux
-  const signReducer = useSelector(({ signReducer }) => signReducer);
-  const userToken = signReducer.userToken;
+  // const signReducer = useSelector(({ signReducer }) => signReducer);
+  // const userToken = signReducer.userToken;
   const dispatch = useDispatch();
   const signinAction = (token) => dispatch(signin(token));
   const closeLoginModalAction = () => dispatch(closeLoginModal());

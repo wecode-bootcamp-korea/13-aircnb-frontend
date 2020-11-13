@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -24,8 +24,8 @@ const Signup = () => {
   });
 
   // ANCHOR redux
-  const modalReducer = useSelector(({ modalReducer }) => modalReducer);
-  const isSignupModalActive = modalReducer.isSignupModalActive;
+  // const modalReducer = useSelector(({ modalReducer }) => modalReducer);
+  // const isSignupModalActive = modalReducer.isSignupModalActive;
 
   const dispatch = useDispatch();
   const closeSignupModalAction = () => dispatch(closeSignupModal());
