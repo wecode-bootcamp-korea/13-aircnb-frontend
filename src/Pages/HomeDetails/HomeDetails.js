@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import { withRouter } from "react-router-dom";
 import "react-dates/initialize";
-import { DateRangePicker } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
 import "moment/locale/ko";
 import "react-bootstrap";
@@ -28,40 +28,45 @@ import ModalPortal from "./Component/ModalPortal";
 
 import Rule from "./Component/Rule";
 
-const LIMIT = 5;
 const TOKEN =
   "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MzF9.-dpTDEqbZkYtHbWbna51heDOR2mJvgPAOI7J9QoJMX8";
 
 const HomeDetails = (props) => {
   const [stay, setStay] = useState([]);
-  const [checkDates, setCheckDates] = useState(["2020-11-20", "2020-11-23"]);
   const [isLiked, setIsLiked] = useState(false);
   const [wishListIsVisible, setWishListIsVisible] = useState(false);
   const [stayId, setStayId] = useState(stay && stay[0]?.id);
 
-  // const API = `http://10.58.1.225:8000/stay/${props.match.params.id}`;
-  const API = "/data/detail_data.json";
+  const API = `http://10.58.1.225:8000/stay/${props.match.params.id}`;
+  // const API = "/data/detail_data.json";
   // const API = `http://10.58.1.225:8000/stay/1`;
+
+  // redux
+  const signReducer = useSelector(({ signReducer }) => signReducer);
+  const userToken = signReducer.userToken;
 
   async function fetchData() {
     const res = await fetch(API);
-    res.json().then((res) => setStay(res.stay));
+    res.json().then(
+      (res) => setStay(res.stay),
+      () => console.log("확인")
+    );
   }
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    setStayId(stay && stay[0]?.id);
-    console.log(stayId);
-  }, [stayId]);
+  // useEffect(() => {
+  //   setStayId(stay && stay[0]?.id);
+  //   console.log(stayId);
+  // }, [stayId]);
 
   const LikedOrUnLiked = (value) => {
     fetch(`http://10.58.1.75:8000/user/like`, {
       method: "POST",
       headers: {
-        AUTHORIZATION: TOKEN,
+        AUTHORIZATION: userToken,
       },
       body: JSON.stringify({
         stay_id: value,
@@ -154,20 +159,12 @@ const HomeDetails = (props) => {
             <TextDesc>{stay[0]?.desc}</TextDesc>
             <BedType data={stay && stay[0]?.bedType} />
             <Facilities data={stay && stay[0]?.facilities} />
-            {/* <Calender>
-              <h3>Halilim-eub, Cheju에서 4박</h3>
-              <span>2020년 12월 7일 - 2020년 12월 11일</span>
-              <div>
-                <DateRangePicker />
-              </div>
-            </Calender> */}
           </HomeInfo>
           <Aside>
             <div className="boxCon">
               <BookingBox
                 price={stay && stay[0]?.price}
                 discountPrice={stay && stay[0]?.discountPrice}
-                setCheckDates={setCheckDates}
                 history={props.history}
                 id={stay && stay[0]?.id}
               ></BookingBox>
@@ -324,24 +321,6 @@ const TextDesc = styled.div`
   border-top: 1px solid #d3d3d3;
   font-size: 14px;
   line-height: 20px;
-`;
-
-const Calender = styled.div`
-  height: 550px;
-  padding: 48px 0;
-  border-top: 1px solid #d3d3d3;
-
-  h3 {
-    font-size: 22px;
-    font-weight: 600;
-    line-height: 26px;
-  }
-
-  span {
-    font-size: 14px;
-    line-height: 18px;
-    color: #717171;
-  }
 `;
 
 const Aside = styled.div`

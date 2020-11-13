@@ -89,13 +89,13 @@ const HomeBooking = (props) => {
       }
     }
   };
-  //Backend API: `${API_GetBooking}/stay/${props.match.params.id}`
+  // Backend API: `${API_GetBooking}/stay/${this.props.match.params.id}`
   //Mockdata API: "http://localhost:3000/data/HomeBookingData.json"
   async function fetchData() {
     const res = await fetch(`${API_GetBooking}/stay/${props.match.params.id}`, {
-      // headers: {
-      //   AUTHORIZATION: userToken,
-      // },
+      headers: {
+        AUTHORIZATION: userToken,
+      },
     });
     const result = await res.json();
     setStay(result.stay);

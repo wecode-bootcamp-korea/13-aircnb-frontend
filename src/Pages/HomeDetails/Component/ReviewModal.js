@@ -32,7 +32,7 @@ const ReviewModal = ({ reviewData, active, event, stayId }) => {
   };
 
   async function fetchData() {
-    const res = await fetch(`${API}?offset=0&limit=6&stay_id=${stayId}`);
+    const res = await fetch(`${API}?offset=0&limit=6&stay_id=${1}`);
     res
       .json()
       .then((res) => setReviews(res.review_list), console.log("통신확인"));
@@ -51,9 +51,9 @@ const ReviewModal = ({ reviewData, active, event, stayId }) => {
     console.log(fetching, offset);
     return () => {
       // scroll event listener 해제
-      document
-        .querySelector("#reviewContent")
-        .removeEventListener("scroll", handleScroll);
+      // document
+      //   .querySelector("#reviewContent")
+      //   .removeEventListener("scroll", handleScroll);
     };
   });
 
@@ -71,7 +71,7 @@ const ReviewModal = ({ reviewData, active, event, stayId }) => {
   async function fetchMoreReviews() {
     setFetching(true);
     const res = await fetch(
-      `http://10.58.1.75:8000/review/list?offset=${offset}&limit=${LIMIT}&stay_id=${stayId}`
+      `http://10.58.1.75:8000/review/list?offset=${offset}&limit=${LIMIT}&stay_id=${1}`
     );
     res.json().then((res) => {
       setReviews([...reviews, ...res.review_list]);
