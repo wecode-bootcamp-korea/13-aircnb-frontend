@@ -9,6 +9,8 @@ import InstantBook from "./Components/Filters/InstantBook";
 import ModalPortal from "./MordalPortal";
 import { useSelector } from "react-redux";
 import Pages from "./Components/Pages";
+import { SEARCH_LIST_API } from "../../config";
+
 //함수
 const HomeList = (props) => {
   const [modal, setModal] = useState(false);
@@ -19,15 +21,20 @@ const HomeList = (props) => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [offset, setOffset] = useState(0);
   const LIMIT = 5;
+
   const PATHNAME = window.location.pathname;
+  // console.log(PATHNAME, "===================");
   // const API = `http://10.58.1.225:8000/homelist${props.location.search}&limit=${LIMIT}&offset=${offset}`;
-  const API = "/Data/data.json";
-  const LIKELIST = `http://10.58.1.75:8000/user/likelist&limit=${LIMIT}&offset=${offset}`;
+  // const API = "/Data/data.json";
+  // const LIKELIST = `http://10.58.1.75:8000/user/likelist&limit=${LIMIT}&offset=${offset}`;
   //redux
   const signReducer = useSelector(({ signReducer }) => signReducer);
   const userToken = signReducer.userToken;
+
   async function fetchData() {
     // console.log(props.location.search, "hahaha this is id");
+    const API = `${SEARCH_LIST_API}${props.location.search}`;
+
     if (PATHNAME === "/homelist") {
       const res = await fetch(API, {
         headers: {
@@ -35,19 +42,23 @@ const HomeList = (props) => {
         },
       });
       res.json().then((res) => setStay(res.stay));
-    } else {
-      const res = await fetch(LIKELIST, {
-        headers: {
-          AUTHORIZATION: userToken,
-        },
-      });
-      res.json().then((res) => setStay(res.stay));
     }
+    // else {
+    //   const res = await fetch(LIKELIST, {
+    //     headers: {
+    //       AUTHORIZATION: userToken,
+    //     },
+    //   });
+    //   res.json().then((res) => setStay(res.stay));
+    // }
   }
+
   useEffect(() => {
     fetchData();
   }, []);
+
   const urlParams = new URLSearchParams(props.location.search);
+
   useEffect(() => {
     const result = [];
     for (const [key, value] of urlParams) {
@@ -55,35 +66,35 @@ const HomeList = (props) => {
     }
     setAllValues(result);
   }, []);
-  const fetchHome = (e) => {
+
+  const fetchHome = async (e) => {
     const LIMIT = 5;
-    setOffset(Number(e.target.id) * LIMIT);
+    // setOffset(Number(e.target.id) * LIMIT);
     const offset = Number(e.target.id) * LIMIT;
-    // const nextOffset = offset + LIMIT;
-    const API = `http://10.58.1.225:8000/homelist${props.location.search}&limit=${LIMIT}&offset=${offset}`;
-    const LIKELIST = `http://10.58.1.75:8000/user/likelist&limit=${LIMIT}&offset=${offset}`;
-    if (PATHNAME === "/homelist") {
-      fetch(API, {
-        headers: {
-          AUTHORIZATION: userToken,
-        },
-      })
-        .then((res) => res.json())
-        .then((res) => setStay(res.stay));
-    } else {
-      fetch(LIKELIST, {
-        headers: {
-          AUTHORIZATION: userToken,
-        },
-      })
-        .then((res) => res.json())
-        .then((res) => setStay(res.stay));
-    }
+    const nextLimit = offset + 5;
+    // const API = `${SEARCH_LIST_API}?${props.location.search}`;
+    // console.log("==================", props.location);
+    const API = `${SEARCH_LIST_API}${props.location.search}&limit=${nextLimit}&offset=${offset}`;
+    // const LIKELIST = `http://10.58.1.75:8000/user/likelist&limit=${LIMIT}&offset=${offset}`;
+    fetch(API, { headers: { AUTHORIZATION: userToken } })
+      .then((res) => res.json())
+      .then((res) => setStay(res.stay));
+    // }
+    // else {
+    //   fetch(LIKELIST, {
+    //     headers: {
+    //       AUTHORIZATION: userToken,
+    //     },
+    //   })
+    //     .then((res) => res.json())
+    //     .then((res) => setStay(res.stay));
+    // }
   };
+
   const fetchFilter = (num) => {
     const LIMIT = 5;
     // const nextOffset = offset + LIMIT;
-    const API = `http://10.58.1.225:8000/homelist${props.location.search}&limit=${LIMIT}&offset=0&beds=${num.beds}&rooms=${num.rooms}$bathrooms=${num.bathrooms}`;
+    const API = `${SEARCH_LIST_API}${props.location.search}&limit=${LIMIT}&offset=0&beds=${num.beds}&rooms=${num.rooms}$bathrooms=${num.bathrooms}`;
     fetch(API, {
       headers: {
         AUTHORIZATION: userToken,
@@ -92,6 +103,7 @@ const HomeList = (props) => {
       .then((res) => res.json())
       .then((res) => setStay(res.stay));
   };
+
   const fetchLike = () => {
     const LIMIT = 5;
     // const nextOffset = offset + LIMIT;
@@ -104,6 +116,7 @@ const HomeList = (props) => {
       },
     });
   };
+
   const openModal = () => {
     setModal(true);
   };
@@ -129,6 +142,7 @@ const HomeList = (props) => {
     }
   };
   const closeFilter = () => {
+    // TODO filter
     setOnOff(false);
   };
   return (

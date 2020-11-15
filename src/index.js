@@ -12,7 +12,7 @@ import rootReducer from "./Redux/Reducers/Index";
 import logger from "redux-logger";
 
 // logger
-const middleware = [logger];
+const middleware = [];
 
 const persistConfig = {
   key: "root",
