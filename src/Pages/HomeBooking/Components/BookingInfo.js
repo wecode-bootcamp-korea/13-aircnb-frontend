@@ -8,13 +8,13 @@ import {
   faChevronDown,
   faStar,
   faFireAlt,
-  faCheck,
+  faCheck
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ToggleSwitch from "./ToggleSwitch";
 import ToggleContent from "./Modal";
 import Calendar from "./Calendar";
-import { API_PostBooking, API_GetBooking } from "../../config";
+import { API_PostBooking, API_GetBooking } from "../../../config";
 import styled from "styled-components";
 import Payment from "./Payment";
 
@@ -56,7 +56,7 @@ const HomeBooking = (props) => {
   const reducer = (state, action) => {
     return {
       ...state,
-      [action.name]: action.value,
+      [action.name]: action.value
     };
   };
 
@@ -65,7 +65,7 @@ const HomeBooking = (props) => {
     phoneNumber: "",
     email: "",
     address: "",
-    region: "",
+    region: ""
   });
 
   const { userName, phoneNumber, email, address } = state;
@@ -92,8 +92,8 @@ const HomeBooking = (props) => {
 
   // Backend API: `${API_GetBooking}/stay/${this.props.match.params.id}`
   //Mockdata API: "http://localhost:3000/data/HomeBookingData.json"
-  async function fetchData() {
-    const res = await fetch(`${API_GetBooking}/stay/${props.match.params.id}`, {
+  async function getBookingData() {
+    const res = await fetch(`http://localhost:3000/data/HomeBookingData.json`, {
       // headers: {
       //   AUTHORIZATION: userToken,
       // },
@@ -103,7 +103,7 @@ const HomeBooking = (props) => {
   }
 
   useEffect(() => {
-    fetchData();
+    getBookingData();
   }, []);
 
   const setInputValue = () => {
@@ -111,7 +111,7 @@ const HomeBooking = (props) => {
       method: "POST",
       headers: {
         AUTHORIZATION:
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MzJ9.LJhBmYS_xzjGH1LhaiVHHuCvc8bkmE48flTDPf8uvK8",
+          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MzJ9.LJhBmYS_xzjGH1LhaiVHHuCvc8bkmE48flTDPf8uvK8"
       },
       body: JSON.stringify({
         stay: 1,
@@ -120,22 +120,16 @@ const HomeBooking = (props) => {
         guest_number: String(guestSum),
         price: String(totalPrice),
         creditcard: userName,
-        email: email,
-      }),
+        email: email
+      })
     }).then((res) => res.json());
   };
 
   const handleConfirm = (e) => {
     e.preventDefault();
     setGuestSum(adultCount + childrenCount + infantCount);
-    console.log("게스트!!!", adultCount + childrenCount + infantCount);
-
     setTotalPrice(
       (stay && stay[0].price) * Number(dates) + 165000 + 26400 + 2640
-    );
-    console.log(
-      "가격!!!!!!!!",
-      stay && stay[0].price * Number(dates) + 165000 + 26400 + 2640
     );
     setInputValue();
   };
@@ -421,7 +415,7 @@ const HomeBooking = (props) => {
                         "흥국",
                         "이탈리아",
                         "프랑스",
-                        "베트남",
+                        "베트남"
                       ].map((el, idx) => (
                         <li onClick={(e) => setCountry(e.target.innerText)}>
                           <div className="countryName">{el}</div>
@@ -603,7 +597,7 @@ const HomeBooking = (props) => {
 
 const StyledHomeBooking = styled.div`
   width: 100%;
-  padding-bottom: 80px;
+  padding: 80px 0;
 `;
 
 const Wrapper = styled.div`

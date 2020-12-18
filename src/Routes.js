@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 
 // LINK component
-import HomeBooking from "./Pages/HomeBooking/HomeBooking";
+import HomeBookingContainer from "./Pages/HomeBooking/HomeBookingContainer";
 import HomeDetails from "./Pages/HomeDetails/HomeDetails";
 import HomeList from "./Pages/HomeList/HomeList";
 import Main from "./Pages/Main/Main";
@@ -24,9 +24,16 @@ const Routes = () => {
             {/* <Route path="/" component={Nav} /> */}
             <MainContents>
               <Route path="/main" component={Main} />
-              <Route exact path="/homebooking" component={HomeBooking} />
-              <Route exact path="/homebooking" component={HomeBooking} />
-              <Route exact path="/homebooking/:id" component={HomeBooking} />
+              <Route
+                exact
+                path="/homebooking"
+                component={HomeBookingContainer}
+              />
+              <Route
+                exact
+                path="/homebooking/:id"
+                component={HomeBookingContainer}
+              />
               <Route exact path="/homedetails" component={HomeDetails} />
               <Route exact path="/homedetails/:id" component={HomeDetails} />
               <Route exact path="/homelist" component={HomeList} />

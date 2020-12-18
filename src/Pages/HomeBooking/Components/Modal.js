@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ToggleContent = ({ toggle, content }) => {
+const Modal = ({ toggle, content }) => {
   const [isShown, setIsShown] = useState(false);
   const hide = () => setIsShown(false);
   const show = () => setIsShown(true);
@@ -13,4 +13,4 @@ const ToggleContent = ({ toggle, content }) => {
   );
 };
 
-export default ToggleContent;
+export default Modal;

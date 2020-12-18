@@ -10,7 +10,7 @@ import "./Calendar.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
-  faChevronRight,
+  faChevronRight
 } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
@@ -23,7 +23,7 @@ const Calendar = ({
   initialStartDate,
   initialEndDate,
   bedCounts,
-  bathCounts,
+  bathCounts
 }) => {
   const formedStartDate = initialStartDate
     ? moment(2020 + initialStartDate.slice(0, 2) + initialStartDate.slice(4, 6))
@@ -35,7 +35,7 @@ const Calendar = ({
 
   const [dateRange, setdateRange] = useState({
     startDate: formedStartDate,
-    endDate: formedEndDate,
+    endDate: formedEndDate
   });
 
   const [focus, setFocus] = useState("startDate");
