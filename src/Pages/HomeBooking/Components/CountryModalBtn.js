@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const CountryModalBtn = ({ country }) => {
+const CountryModalBtn = ({ country, show }) => {
   return (
-    <CountryButton>
+    <CountryButton onClick={show}>
       {country}
       <FontAwesomeIcon className="arrowIcon" icon={faChevronDown} />
     </CountryButton>

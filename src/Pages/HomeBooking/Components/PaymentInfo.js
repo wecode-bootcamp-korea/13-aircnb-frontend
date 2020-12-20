@@ -63,11 +63,10 @@ const PaymentInfo = ({ onChange }) => {
         placeholder="주소"
       />
       <Modal
-        toggle={(show) => <CountryModalBtn onClick={show} country={country} />}
-        content={(hide, show) => (
+        toggle={(show) => <CountryModalBtn show={show} country={country} />}
+        content={(hide) => (
           <CountryModalContent
-            onBlur={hide}
-            onFocus={show}
+            hide={hide}
             country={country}
             setCountry={setCountry}
           />
@@ -201,10 +200,5 @@ const EmailInput = styled(Input)`
 `;
 
 const AdressInput = styled(Input)``;
-
-export const EssentialInfoWrapper = styled.div`
-  ${flexSet("space-between", "center")}
-  margin-top: 30px;
-`;
 
 export default PaymentInfo;

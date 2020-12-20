@@ -2,13 +2,13 @@ import React, { useState } from "react";
 
 const Modal = ({ toggle, content }) => {
   const [isShown, setIsShown] = useState(false);
-  const hide = () => setIsShown(false);
-  const show = () => setIsShown(true);
+  const hideModal = () => setIsShown(false);
+  const showModal = () => setIsShown(true);
 
   return (
     <>
-      {toggle(show, isShown)}
-      {isShown && content(hide)}
+      {toggle(showModal, isShown)}
+      {isShown && content(hideModal)}
     </>
   );
 };

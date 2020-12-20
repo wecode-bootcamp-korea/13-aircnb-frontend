@@ -1,19 +1,33 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { flexSet } from "../../../Styles/Theme";
 
-const CountryModalContent = ({ country, setCountry }) => {
+const countryList = [
+  "한국",
+  "미국",
+  "영국",
+  "중국",
+  "체코",
+  "스페인",
+  "프랑스",
+  "베트남",
+  "필리핀",
+];
+
+const CountryModalContent = ({ country, setCountry, hide }) => {
   return (
     <CountryModal>
       <div className="modalBox">
         <div className="modalHeader">
-          <button className="closeBtn">X</button>
+          <button className="closeBtn" onClick={hide}>
+            X
+          </button>
           <span>국가/지역</span>
         </div>
         <ul className="modalContent">
-          {["한국", "미국", "영국", "중국"].map((el, idx) => (
+          {countryList.map((el, idx) => (
             <li onClick={(e) => setCountry(e.target.innerText)}>
               <div className="countryName">{el}</div>
               <FontAwesomeIcon
