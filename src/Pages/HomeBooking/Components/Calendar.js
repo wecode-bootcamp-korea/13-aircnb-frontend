@@ -15,11 +15,11 @@ import {
 import styled from "styled-components";
 
 const Calendar = ({
+  hideModal,
   setCheckinDate,
   setCheckoutDate,
   dates,
   setDates,
-  hide,
   initialStartDate,
   initialEndDate,
   bedCounts,
@@ -59,13 +59,13 @@ const Calendar = ({
     e.preventDefault();
     setCheckinDate(startDate && startDate.format("YYYY-MM-DD"));
     setCheckoutDate(endDate && endDate.format("YYYY-MM-DD"));
-    hide();
+    hideModal();
   };
 
   return (
     <DateRangePickerWrapper>
       <div className="modalBox">
-        <button className="closeBtn" onClick={hide}>
+        <button className="closeBtn" onClick={hideModal}>
           X
         </button>
         <div className="modalHeader">
