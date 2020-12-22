@@ -4,7 +4,7 @@ const theme = {
   primaryColor: "#fe5131",
   subColor: "#59C3C3",
   borderColor: "#ddd",
-  borderSet: "1px solid #ddd"
+  borderSet: "1px solid #ddd",
 };
 
 export const flexSet = (justifyContent, alignItems, flexDirection) => css`

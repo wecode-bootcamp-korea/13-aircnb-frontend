@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useReducer } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { withRouter } from "react-router-dom";
 import moment from "moment";
-import { API_PostBooking, API_GetBooking } from "../../config";
+import { API_PostBooking } from "../../config";
 import styled from "styled-components";
 import Payment from "./Components/Payment";
 import SummaryBox from "./Components/SummaryBox";
@@ -14,7 +14,6 @@ import BookingInfo from "./Components/BookingInfo";
 import TitleArea from "./Components/TitleArea";
 
 const HomeBookingContainer = (props) => {
-  //store 값 호출
   const bookReducer = useSelector(({ bookReducer }) => bookReducer);
   const signReducer = useSelector(({ signReducer }) => signReducer);
   const startDate = bookReducer.startDate;
@@ -26,14 +25,10 @@ const HomeBookingContainer = (props) => {
 
   const [stay, setStay] = useState(null);
 
-  const [checked, setChecked] = useState(false);
-
   const [adultCount, setAdultCount] = useState(adults);
   const [childrenCount, setChildrenCount] = useState(children);
   const [infantCount, setInfantCount] = useState(babies);
   const [guestSum, setGuestSum] = useState(0);
-
-  const [country, setCountry] = useState("한국");
 
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -82,13 +77,13 @@ const HomeBookingContainer = (props) => {
     }
   };
 
-  // Backend API: `${API_GetBooking}/stay/${this.props.match.params.id}`
-  //Mockdata API: "http://localhost:3000/data/HomeBookingData.json"
+  // Server API: `${API_GetBooking}/stay/${this.props.match.params.id}`
+  // Mockdata API: "http://localhost:3000/data/HomeBookingData.json"
   async function getBookingData() {
     const res = await fetch(`http://localhost:3000/data/HomeBookingData.json`, {
-      // headers: {
-      //   AUTHORIZATION: userToken,
-      // },
+      headers: {
+        AUTHORIZATION: userToken,
+      },
     });
     const result = await res.json();
     setStay(result.stay);
@@ -96,14 +91,16 @@ const HomeBookingContainer = (props) => {
 
   useEffect(() => {
     getBookingData();
-  }, []);
+  });
+
+  const testToken =
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MzJ9.LJhBmYS_xzjGH1LhaiVHHuCvc8bkmE48flTDPf8uvK8";
 
   const setInputValue = () => {
     fetch(`${API_PostBooking}reservation/booking`, {
       method: "POST",
       headers: {
-        AUTHORIZATION:
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MzJ9.LJhBmYS_xzjGH1LhaiVHHuCvc8bkmE48flTDPf8uvK8",
+        AUTHORIZATION: testToken,
       },
       body: JSON.stringify({
         stay: 1,
